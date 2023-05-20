@@ -1,0 +1,130 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Cashier\Assets\Icons\arrow.png" />
+    <None Remove="Cashier\Assets\Icons\backX.png" />
+    <None Remove="Cashier\Assets\Icons\card_card.png" />
+    <None Remove="Cashier\Assets\Icons\cashier.jpg" />
+    <None Remove="Cashier\Assets\Icons\cashier_image.png" />
+    <None Remove="Cashier\Assets\Icons\cashier_panel_image.png" />
+    <None Remove="Cashier\Assets\Icons\client_image.png" />
+    <None Remove="Cashier\Assets\Icons\exchange_image.png" />
+    <None Remove="Cashier\Assets\Icons\exit_image.png" />
+    <None Remove="Cashier\Assets\Icons\forward.png" />
+    <None Remove="Cashier\Assets\Icons\globe.png" />
+    <None Remove="Cashier\Assets\Icons\history_of_sale_image.png" />
+    <None Remove="Cashier\Assets\Icons\icon.ico" />
+    <None Remove="Cashier\Assets\Icons\percent.png" />
+    <None Remove="Cashier\Assets\Icons\plus.png" />
+    <None Remove="Cashier\Assets\Icons\product_image.png" />
+    <None Remove="Cashier\Assets\Icons\put_money_image.png" />
+    <None Remove="Cashier\Assets\Icons\red_X.png" />
+    <None Remove="Cashier\Assets\Icons\return_image.png" />
+    <None Remove="Cashier\Assets\Icons\search.png" />
+    <None Remove="Cashier\Assets\Icons\setting_image.png" />
+    <None Remove="Cashier\Assets\Icons\surface.png" />
+    <None Remove="Cashier\Assets\Icons\trash.png" />
+    <None Remove="Cashier\Assets\Icons\Vector.png" />
+    <None Remove="Cashier\Assets\Icons\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Cashier\Assets\Icons\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\backX.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\card_card.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\cashier.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\cashier_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\cashier_panel_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\client_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\exchange_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\exit_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\forward.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\globe.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\history_of_sale_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\percent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\product_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\put_money_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\red_X.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\return_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\setting_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\surface.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\trash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\Vector.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\X.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cashier\Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

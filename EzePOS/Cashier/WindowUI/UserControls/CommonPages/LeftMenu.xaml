@@ -1,0 +1,231 @@
+﻿<UserControl x:Class="EzePOS.Cashier.WindowUI.UserControls.CommonPages.LeftMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="WithoutEvent" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Padding="5 0 5 0" Name="border" BorderBrush="#F0F5F3" BorderThickness="0 0 0 1">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background"  Value="#F0F5F3" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="WithoutEvent2" TargetType="Button">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Padding="5 0 5 0" Name="border" BorderBrush="#DCE1DF" BorderThickness="0 0 0 1">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background"  Value="#DCE1DF" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="button2" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="345"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#FFFFFF" BorderBrush="#EBEBEB" BorderThickness="0 0 0 0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.4"/>
+            </Border.Effect>
+            <Grid>
+                <StackPanel Margin="23 23 0 0" HorizontalAlignment="Left">
+                    <Border Margin="0 0 0 34"  Background="#D9D9D9" Width="288" Height="54">
+                        <TextBlock Text="Logo" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <Grid x:Name="button_1_background_color">
+                        <Button Click="btn_1_click" Height="60" Style="{StaticResource WithoutEvent}">
+                            <Grid>
+                                <Border BorderBrush="#E6EBE9" BorderThickness="1" Background="#F0F5F3" CornerRadius="3" Height="35" Width="35" HorizontalAlignment="Left" >
+                                    <Image Source="/Cashier/Assets/Icons/cashier_image.png"
+                                        Width="25"/>
+                                </Border>
+                                <TextBlock Margin="50 0 0 0" Text="Kassa" VerticalAlignment="Center" FontSize="16"/>
+                                <Image x:Name="cash_image_back" Visibility="Hidden" Source="/Cashier/Assets/Icons/Vector.png"
+                                    HorizontalAlignment="Right"
+                                    Width="8.5" Height="12.5"/>
+                                <Image x:Name="cash_image_forward" Source="/Cashier/Assets/Icons/forward.png"
+                                    HorizontalAlignment="Right"
+                                    Width="8.5" Height="12.5"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                    <Grid x:Name="button_2_background_color">
+                        <Button Click="btn_2_click" Style="{StaticResource WithoutEvent}" Height="60">
+                            <Grid Background="Transparent">
+                                <Border BorderBrush="#E6EBE9" BorderThickness="1" Background="#F0F5F3" CornerRadius="3" Height="35" Width="35" HorizontalAlignment="Left" >
+                                    <Image Source="/Cashier/Assets/Icons/product_image.png"
+                                        Width="25"/>
+                                </Border>
+                                <TextBlock Text="Mahsulotlar" Margin="50 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+
+                    <Grid x:Name="button_4_background_color">
+                        <Button Click="btn_4_click" Style="{StaticResource WithoutEvent}" Height="60">
+                            <Grid>
+                                <Border BorderBrush="#E6EBE9" BorderThickness="1" Background="#F0F5F3" CornerRadius="3" Height="35" Width="35" HorizontalAlignment="Left" >
+                                    <Image Source="/Cashier/Assets/Icons/client_image.png"
+                                        Width="25"/>
+                                </Border>
+                                <TextBlock Text="Klientlar" Margin="50 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                    <Grid x:Name="button_5_background_color">
+                        <Button Click="btn_5_click" Style="{StaticResource WithoutEvent}" Height="60">
+                            <Grid>
+                                <Border BorderBrush="#E6EBE9" BorderThickness="1" Background="#F0F5F3" CornerRadius="3" Height="35" Width="35" HorizontalAlignment="Left" >
+                                    <Image Source="/Cashier/Assets/Icons/setting_image.png"
+                                        Width="25"/>
+                                </Border>
+                                <TextBlock Text="Sozlamalar" Margin="50 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                    <Grid x:Name="button_6_background_color">
+                        <Button Click="btn_6_click" Style="{StaticResource WithoutEvent}" Height="60">
+                            <Grid>
+                                <Border BorderBrush="#E6EBE9" BorderThickness="1" Background="#F0F5F3" CornerRadius="3" Height="35" Width="35" HorizontalAlignment="Left" >
+                                    <Image Source="/Cashier/Assets/Icons/exit_image.png"
+                                        Width="25"/>
+                                </Border>
+                                <TextBlock Text="Dasturdan chiqish" Margin="50 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1" >
+            <Button x:Name="first_part" Background="Black" Opacity="0.1" Style="{StaticResource button2}" Click="Button_Click" HorizontalAlignment="Stretch" >
+
+            </Button>
+            <Grid x:Name="second_part" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="262"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Visibility="Visible">
+                    <Border Background="#F0F5F3">
+                        <Grid>
+                            <StackPanel Margin="0 23 0 0" HorizontalAlignment="Center" Width="190">
+                                <Border  Margin="0 0 0 34"  Background="Transparent"  Height="54">
+                                </Border>
+                                <Grid x:Name="button_1_right">
+                                    <Button Click="btn_right_1_click" Height="60" Style="{StaticResource WithoutEvent2}">
+                                        <Grid>
+                                            <Image Source="/Cashier/Assets/Icons/cashier_panel_image.png"
+                                                Width="26" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                                            <TextBlock Margin="36 0 0 0" Text="Sotuv Paneli" VerticalAlignment="Center" FontSize="14"/>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+
+                                <Grid x:Name="button_2_right">
+                                    <Button Click="btn_right_2_click" Style="{StaticResource WithoutEvent2}" Height="60">
+                                        <Grid Background="Transparent">
+                                            <Image Source="/Cashier/Assets/Icons/history_of_sale_image.png"
+                                                Width="26" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                                            <TextBlock Text="Sotuv Tarixi" Margin="36 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+
+                                <Grid x:Name="button_3_right">
+                                    <Button Click="btn_right_3_click" Style="{StaticResource WithoutEvent2}" Height="60">
+                                        <Grid>
+                                            <Image Source="/Cashier/Assets/Icons/return_image.png"
+                                                Width="26" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                                            <TextBlock Text="Qaytarish" Margin="36 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+
+                                <Grid x:Name="button_4_right">
+                                    <Button Click="btn_right_4_click" Style="{StaticResource WithoutEvent2}" Height="60">
+                                        <Grid>
+                                            <Image Source="/Cashier/Assets/Icons/put_money_image.png"
+                                                Width="26" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                                            <TextBlock Margin="36 0 0 0"  VerticalAlignment="Center" FontSize="14">
+                                            Kassaga pul
+                                            <LineBreak />
+                                            qo'yish/olish</TextBlock>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+
+                                <Grid x:Name="button_5_right">
+                                    <Button Click="btn_right_5_click" Style="{StaticResource WithoutEvent2}" Height="60">
+                                        <Grid>
+                                            <Image Source="/Cashier/Assets/Icons/exchange_image.png"
+                                            Width="26" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                                            <TextBlock Text="Qarzlar" Margin="36 0 0 0"  VerticalAlignment="Center" FontSize="14"/>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+                                
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button Style="{StaticResource button2}" Background="Black" Opacity="0.1" Click="Button_Click_1"  HorizontalAlignment="Stretch">
+
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

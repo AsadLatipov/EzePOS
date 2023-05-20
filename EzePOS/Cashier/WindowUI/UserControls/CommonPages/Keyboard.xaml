@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="EzePOS.Cashier.WindowUI.UserControls.CommonPages.Keyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
+             mc:Ignorable="d" 
+             d:DesignHeight="280" Background="White" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="btnKeyboard" TargetType="Button">
+                <Setter Property="Foreground" Value="#2E3457"/>
+                <Setter Property="Background" Value="#EEF1FF"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="Width" Value="85"/>
+                <Setter Property="Height" Value="60"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="BorderThickness" Value="0.6"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderBrush" Value="#CDD9DF"/>
+            </Style>
+            <Style x:Key="btnCalc" TargetType="Button">
+                <Setter Property="Width" Value="85"/>
+                <Setter Property="Height" Value="60"/>
+                <Setter Property="Background" Value="#EEF1FF"/>
+                <Setter Property="BorderBrush" Value="#CDD9DF"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="BorderThickness" Value="0.6"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="btn_x" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#EEF1FF"/>
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="Width" Value="25"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Margin" Value="0 0 20 0"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                <Image Source="/Assets/Icons/red_cross.png"
+                                   Width="15"
+                                   Height="15"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#558485" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#EEF1FF" Duration="0:0:0.4"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="change_lang_btn" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#0C7C80"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter Property="Background" Value="#0C7C80"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Grid Background="Transparent">
+                                    <ContentPresenter></ContentPresenter>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Margin="15">
+            <DockPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Button x:Name="btnQ" Content="Q" Style="{StaticResource btnKeyboard}" Click="btnQ_Click"/>
+                        <Button x:Name="btnW" Content="W" Style="{StaticResource btnKeyboard}" Click="btnW_Click"/>
+                        <Button x:Name="btnE" Content="E" Style="{StaticResource btnKeyboard}" Click="btnE_Click"/>
+                        <Button x:Name="btnZZ" Content="Z" Style="{StaticResource btnKeyboard}" Click="btnZZ_Click"/>
+                        <Button x:Name="btnR" Content="R" Style="{StaticResource btnKeyboard}" Click="btnR_Click"/>
+                        <Button x:Name="btnT" Content="T" Style="{StaticResource btnKeyboard}" Click="btnT_Click"/>
+                        <Button x:Name="btnY" Content="Y" Style="{StaticResource btnKeyboard}" Click="btnY_Click"/>
+                        <Button x:Name="btnU" Content="U" Style="{StaticResource btnKeyboard}" Click="btnU_Click"/>
+                        <Button x:Name="btnI" Content="I" Style="{StaticResource btnKeyboard}" Click="btnI_Click"/>
+                        <Button x:Name="btnO" Content="O" Style="{StaticResource btnKeyboard}" Click="btnO_Click"/>
+                        <Button x:Name="btnP" Content="P" Style="{StaticResource btnKeyboard}" Click="btnP_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="95,0,0,0">
+                        <Button x:Name="btnA" Content="A" Style="{StaticResource btnKeyboard}" Click="btnA_Click"/>
+                        <Button x:Name="btnS" Content="S" Style="{StaticResource btnKeyboard}" Click="btnS_Click"/>
+                        <Button x:Name="btnD" Content="D" Style="{StaticResource btnKeyboard}" Click="btnD_Click"/>
+                        <Button x:Name="btnF" Content="F" Style="{StaticResource btnKeyboard}" Click="btnF_Click"/>
+                        <Button x:Name="btnG" Content="G" Style="{StaticResource btnKeyboard}" Click="btnG_Click"/>
+                        <Button x:Name="btnH" Content="H" Style="{StaticResource btnKeyboard}" Click="btnH_Click"/>
+                        <Button x:Name="btnJ" Content="J" Style="{StaticResource btnKeyboard}" Click="btnJ_Click"/>
+                        <Button x:Name="btnK" Content="K" Style="{StaticResource btnKeyboard}" Click="btnK_Click"/>
+                        <Button x:Name="btnL" Content="L" Style="{StaticResource btnKeyboard}" Click="btnL_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="180,0,0,0">
+                        <Button x:Name="btnZ" Content="Z" Style="{StaticResource btnKeyboard}" Click="btnZ_Click"/>
+                        <Button x:Name="btnX" Content="X" Style="{StaticResource btnKeyboard}" Click="btnX_Click"/>
+                        <Button x:Name="btnC" Content="C" Style="{StaticResource btnKeyboard}" Click="btnC_Click"/>
+                        <Button x:Name="btnV" Content="V" Style="{StaticResource btnKeyboard}" Click="btnV_Click"/>
+                        <Button x:Name="btnB" Content="B" Style="{StaticResource btnKeyboard}" Click="btnB_Click"/>
+                        <Button x:Name="btnN" Content="N" Style="{StaticResource btnKeyboard}" Click="btnN_Click"/>
+                        <Button x:Name="btnM" Content="M" Style="{StaticResource btnKeyboard}" Click="btnM_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="220,0,0,0">
+                        <Button x:Name="btnSpace"
+                                Width="430"
+                                Content=" "
+                                Height="60"
+                                Background="#EEF1FF"
+                                BorderBrush="#CDD9DF"
+                                BorderThickness="1,1,1,1" 
+                                Click="btnSpace_Click"/>
+
+                        <Button Width="85"
+                                        Height="60"
+                                        Padding="0,0,0,0"
+                                        x:Name="changeLang"
+                                        Style="{StaticResource change_lang_btn}"
+                                        Click="changeLang_Click"
+                                        BorderBrush="#CDD9DF"
+                                        BorderThickness="1,1,1,1"
+                                        Background="#0C7C80">
+                            <StackPanel VerticalAlignment="Center">
+                                <Image Source="/Cashier/Assets/Icons/globe.png" 
+                                           Width="20"
+                                           Height="20"/>
+                                <TextBlock Text="RU"
+                                               x:Name="lang"
+                                                   Foreground="White"
+                                                   Margin="0,0,0,0"
+                                                   FontSize="15"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="85,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btn7" Content="7" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn7_Click"/>
+                        <Button x:Name="btn8" Content="8" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn8_Click"/>
+                        <Button x:Name="btn9" Content="9" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn9_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btn4" Content="4" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn4_Click"/>
+                        <Button x:Name="btn5" Content="5" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn5_Click"/>
+                        <Button x:Name="btn6" Content="6" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn6_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btn1" Content="1" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn1_Click"/>
+                        <Button x:Name="btn2" Content="2" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn2_Click"/>
+                        <Button x:Name="btn3" Content="3" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn3_Click"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnDot" Content="." Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btnDot_Click"/>
+                        <Button x:Name="btn0" Content="0" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn0_Click"/>
+                        <Button x:Name="btnBackspace" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btnBackspace_Click">
+                            <Image Source="/Cashier/Assets/Icons/backX.png"
+                                       Width="18"
+                                       Height="18"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

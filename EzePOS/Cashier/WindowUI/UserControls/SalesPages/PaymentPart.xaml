@@ -1,0 +1,705 @@
+﻿<UserControl x:Class="EzePOS.Cashier.WindowUI.UserControls.SalesPages.PaymentPart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.SalesPages"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="discount_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Width" Value="160"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock VerticalAlignment="Center"
+                                           FontSize="23"
+                                           Foreground="#0C7C80"
+                                           Text="Chegirma/Karta"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="client_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#1689DD"/>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="Mijoz"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="cash_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    x:Name="total_btn_text"
+                                    Foreground="White"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="back_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#E8F8F3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    Text="Orqaga"
+                                    Foreground="#434A5E"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="submit_card_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    Text="Yechib olindi"
+                                    Foreground="White"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+
+
+            <Style x:Key="card_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#1689DD"/>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="Karta"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="submit_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="To'lov"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+            <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#E7F2F2"/>
+                <Setter Property="Height" Value="38"/>
+                <Setter Property="Width" Value="38"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <Image Source="/Cashier/Assets/Icons/X.png"
+                                   Width="15"
+                                   Height="15"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="btnCalc" TargetType="Button">
+                <Setter Property="Width" Value="149"/>
+                <Setter Property="Height" Value="80"/>
+                <Setter Property="Background" Value="#EEF1FF"/>
+                <Setter Property="BorderBrush" Value="#CDD9DF"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontSize" Value="35"/>
+                <Setter Property="BorderThickness" Value="0.6"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="#F8F9FE" />
+                <Setter Property="Padding" Value="0 0 0 0"/>
+                <Setter Property="Margin" Value="0 0 0 0"/>
+                <Setter Property="Foreground" Value="#9BB2B3" />
+                <Setter Property="BorderThickness" Value="2px"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0.6" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+            <Style x:Key="HeaderSearchStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="#F8F9FE" />
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="Foreground" Value="#727272" />
+                <Setter Property="BorderThickness" Value="2px"/>
+                <Setter Property="BorderBrush" Value="#FCFCFC"/>
+                <Setter Property="BorderThickness" Value="0.6" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="MinHeight" Value="5" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+            <Style x:Key="datagridrow" TargetType="{x:Type DataGridRow}">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0 1 0 0"/>
+                <Setter Property="BorderBrush" Value="#E8EBFA"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#C3C3C3"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+
+                </Style.Triggers>
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                </Style.Resources>
+
+            </Style>
+            <Style x:Key="datagridCell" TargetType="{x:Type DataGridCell}">
+                <Setter Property="Margin" Value="0 0 0 0"/>
+
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#C3C3C3"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+                </Style.Triggers>
+
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                </Style.Resources>
+
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Background="Black" Opacity="0.1">
+        </Grid>
+        <Border CornerRadius="10" Width="550" HorizontalAlignment="Right" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Opacity="1"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderThickness="0 0 0 1" BorderBrush="#D2D7D5">
+                    <Grid  Grid.Row="0">
+
+                        <Grid Margin="0 12">
+                            <Button HorizontalAlignment="Left" Style="{StaticResource client_btn}" Margin="50 0 0 0" x:Name="client_btn" Click="client_btn_Click" />
+                            <Button Background="Transparent"
+                                    FontSize="23"
+                                    HorizontalAlignment="Right"
+                                    Foreground="#1689DD"
+                                    Content="Chegirma"
+                                    BorderThickness="0"
+                                    Cursor="Hand" Width="160"
+                                    x:Name="discounts_btn" Click="discounts_btn_Click"
+                                    Margin="0 0 60 0"/>
+                            <Button Background="Transparent" Cursor="Hand" Visibility="Hidden" x:Name="btn_x" Click="btn_x_Click" BorderBrush="Transparent" Height="30" Width="30" Margin="70 0 0 0">
+                                <Image Width="20" Height="20" Source="/Cashier/Assets/Icons/red_X.png"/>
+                            </Button>
+                        </Grid>
+                        <Button HorizontalAlignment="Right" Style="{StaticResource btn_cancel}" x:Name="btn_cancel" Click="btn_cancel_Click" Margin="0 0 20 0"/>
+
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2">
+                    <StackPanel Margin="50 0">
+                        <Grid Margin="0 20 0 0">
+                            <Button Content="Karta"
+                                    Background="#1689DD"
+                                    Width="160"
+                                    Style="{StaticResource card_btn}"
+                                    x:Name="card_btn"
+                                    Click="card_btn_Click"
+                                    Height="50"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left"
+                                    Foreground="White"
+                                    FontSize="25">
+                            </Button>
+                            <Button HorizontalAlignment="Right"
+                                    x:Name="total_btn"
+                                    Style="{StaticResource cash_btn}"
+                                    Click="total_btn_Click"
+                                    Cursor="Hand"
+                                    Width="230"
+                                    Foreground="White"
+                                    FontSize="25"/>
+                        </Grid>
+
+                        <Grid>
+                            <StackPanel Visibility="Visible" x:Name="withoutCard_grid">
+                                <Grid Margin="0 20 0 0">
+                                    <TextBlock Text="Naqd"
+                                               FontSize="20"
+                                               HorizontalAlignment="Left"
+                                               Foreground="#969B99"/>
+
+                                    <Button HorizontalAlignment="Right"
+                                            Content="+ Karta"
+                                            x:Name="addWithCardPart_btn"
+                                            Click="addWithCardPart_btn_Click"
+                                            Foreground="#1689DD"
+                                            FontSize="20"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand"/>
+
+                                </Grid>
+
+                                <TextBox Margin="0 20 0 0"
+                                         Height="60"
+                                         TextChanged="withoutcard_txt_TextChanged"
+                                         x:Name="withoutcard_txt"
+                                         VerticalContentAlignment="Center"
+                                         Padding="20 0"
+                                         FontSize="20"/>
+                            </StackPanel>
+
+                            <StackPanel Visibility="Hidden" x:Name="withCard_grid">
+                                <Grid Margin="0 20 0 0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Naqd" Grid.Column="0"
+                                                   FontSize="20"
+                                                   HorizontalAlignment="Left"
+                                                   Foreground="#969B99"/>
+
+                                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+
+                                            <TextBlock Text="Karta" Grid.Column="0"
+                                                   FontSize="20"
+                                                   HorizontalAlignment="Left"
+                                                   Foreground="#969B99"/>
+
+                                            <Button HorizontalAlignment="Right"
+                                                    Content="X"
+                                                    Margin="10 0 0 0"
+                                                    Foreground="red"
+                                                    FontSize="20"
+                                                    x:Name="withCard_cancel_btn"
+                                                    Click="withCard_cancel_btn_Click"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Cursor="Hand"/>
+                                        </StackPanel>
+
+                                    </Grid>
+
+
+                                </Grid>
+
+                                <Grid>
+                                    <TextBox Margin="0 20 0 0"
+                                             Height="60"
+                                             Width="210"
+                                             GotFocus="withCard_cash_text_GotFocus"
+                                             TextChanged="withCard_cash_text_TextChanged"
+                                             x:Name="withCard_cash_text"
+                                             HorizontalAlignment="Left"
+                                             VerticalContentAlignment="Center"
+                                             Padding="20 0"
+                                             FontSize="20"/>
+
+                                    <TextBox Margin="0 20 0 0"
+                                             Height="60"
+                                             GotFocus="withCard_card_text_GotFocus"
+                                             x:Name="withCard_card_text"
+                                             Width="210"
+                                             TextChanged="withCard_card_text_TextChanged"
+                                             HorizontalAlignment="Right"
+                                             VerticalContentAlignment="Center"
+                                             Padding="20 0"
+                                             FontSize="20"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+
+
+
+                        <Grid Margin="0 20 0 0">
+                            <TextBlock HorizontalAlignment="Left"
+                                       Text="Qaytim"
+                                       Foreground="#969B99"
+                                       FontSize="20"/>
+
+                            <TextBlock HorizontalAlignment="Right"
+                                       Text="0"
+                                       x:Name="change_text"
+                                       Foreground="#969B99"
+                                       FontSize="20"/>
+                        </Grid>
+
+                        <Border Margin="0 20 0 0" BorderBrush="#CDD9DF" CornerRadius="3" BorderThickness="3">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btn7" Content="7" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn7_Click"/>
+                                    <Button x:Name="btn8" Content="8" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn8_Click"/>
+                                    <Button x:Name="btn9" Content="9" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn9_Click"/>
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btn4" Content="4" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn4_Click"/>
+                                    <Button x:Name="btn5" Content="5" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn5_Click"/>
+                                    <Button x:Name="btn6" Content="6" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn6_Click"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btn1" Content="1" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn1_Click"/>
+                                    <Button x:Name="btn2" Content="2" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn2_Click"/>
+                                    <Button x:Name="btn3" Content="3" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn3_Click"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnDot" Content="." Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btnDot_Click"/>
+                                    <Button x:Name="btn0" Content="0" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btn0_Click"/>
+                                    <Button x:Name="btnBackspace" Style="{StaticResource btnCalc}" BorderThickness="1,1,1,1" Click="btnBackspace_Click">
+                                        <Image Source="/Cashier/Assets/Icons/backX.png"
+                                               Width="35"
+                                               Height="35"/>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+
+                        <Button  
+                                Foreground="White"
+                                Margin="0 20 0 0"
+                                Height="60"
+                                Style="{StaticResource submit_btn}"
+                                x:Name="submit_btn"
+                                Click="submit_btn_Click"
+                                FontSize="22"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Margin="250 55 50 0" Visibility="Hidden" x:Name="discounts_grid" Grid.Row="0" Grid.RowSpan="2">
+                    <Border CornerRadius="10" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="1"/>
+                        </Border.Effect>
+                        <StackPanel Margin="20 10 0 0" HorizontalAlignment="Stretch">
+                            <Button Cursor="Hand" x:Name="discount_btn" Click="discount_btn_Click" Margin="0 0 0 15" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Cashier/Assets/Icons/percent.png"/>
+                                    <TextBlock Margin="15 0 0 0"
+                                               Text="Chegirma"
+                                               FontSize="22"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Cursor="Hand" x:Name="ten_btn" Click="ten_btn_Click" Margin="0 0 0 15" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Cashier/Assets/Icons/percent.png"/>
+                                    <TextBlock Margin="15 0 0 0"
+                                               Text="10"
+                                               FontSize="22"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Cursor="Hand" x:Name="fifteen_btn" Click="fifteen_btn_Click" Margin="0 0 0 15" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Cashier/Assets/Icons/percent.png"/>
+                                    <TextBlock Margin="15 0 0 0"
+                                           Text="15"
+                                           FontSize="22"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Cursor="Hand" x:Name="twenty_btn" Click="twenty_btn_Click" Margin="0 0 0 15" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <Image Source="/Cashier/Assets/Icons/percent.png"/>
+                                    <TextBlock Margin="15 0 0 0"
+                                                Text="20"
+                                                FontSize="22"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" x:Name="client_grid" Margin="10 60 10 200">
+                    <Border Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="1"/>
+                        </Border.Effect>
+                    </Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="18*"/>
+                            <RowDefinition Height="82*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#F0F5F3">
+                            <TextBlock Text="Mijozni tanlang"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontSize="25" Margin="20 0 0 0"/>
+                            <Button Click="client_cancel_back_btn_Click" x:Name="client_cancel_back_btn" HorizontalAlignment="Right"
+                                    Width="45" Height="45"
+                                    Margin="0 0 20 0">
+                                <Image Source="/Cashier/Assets/Icons/X.png"/>
+                            </Button>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Margin="25 0 25 0">
+                            <TextBlock Text="Mijoz ism va familyasi" Foreground="#969B99"
+                                       FontSize="20" Margin="0 20 0 0"/>
+                            <Border Margin="0 10 0 0">
+                                <Grid>
+                                    <TextBox GotFocus="client_name_GotFocus" FontSize="22" Padding="10 0 0 0" VerticalContentAlignment="Center" x:Name="client_name" HorizontalAlignment="Stretch" Height="60" />
+                                    <Button Click="ClientsList_Click" HorizontalAlignment="Right" Margin="0 0 10 0" Width="40" Height="40" Background="Transparent" BorderThickness="0">
+                                        <Image Source="/Cashier/Assets/Icons/client_list.png"/>
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Text="Telfon raqami" Foreground="#969B99"
+                                       FontSize="20" Margin="0 20 0 0"/>
+                            <Border Margin="0 10 0 0">
+                                <Grid>
+                                    <TextBox GotFocus="client_number_GotFocus" FontSize="22" x:Name="client_number" Padding="10 0 0 0"  VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Height="60" />
+                                </Grid>
+                            </Border>
+
+                            <Button Margin="0 20 0 0" Background="#34944F"
+                                    FontSize="25" Content="Saqlash" Foreground="White" Height="60">
+                            </Button>
+                            <Button Margin="0 20 0 0" Background="red" Visibility="Hidden"
+                                    FontSize="25" Content="Mijozni savdodan olish" x:Name="removeClient_btn" Click="removeClient_btn_Click"  Foreground="White" Height="60">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" x:Name="clients_list_grid" Margin="0 0 0 0">
+                    <Border Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="1"/>
+                        </Border.Effect>
+                    </Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*"/>
+                            <RowDefinition Height="92*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#F0F5F3">
+                            <TextBlock Text="Mijozni tanlang"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontSize="25" Margin="20 0 0 0"/>
+                            <Button HorizontalAlignment="Right"
+                                    x:Name="clients_list_cancel_btn"
+                                    Click="clients_list_cancel_btn_Click"
+                                    Width="45" Height="45"
+                                    Margin="0 0 20 0">
+                                <Image Source="/Cashier/Assets/Icons/X.png"/>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90*"/>
+                                <RowDefinition Height="10*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <DataGrid x:Name="dataGrid"
+                                            AutoGenerateColumns="False"
+                                            ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+                                            Foreground="#9BB2B3"
+                                            RowStyle="{StaticResource datagridrow}"
+                                            VerticalScrollBarVisibility="Hidden"
+                                            HeadersVisibility="Column"
+                                            GridLinesVisibility="None"
+                                            CellStyle="{StaticResource datagridCell}"
+                                            CanUserResizeColumns="False"
+                                            CanUserResizeRows="False"
+                                            BorderBrush="Transparent"
+                                            CanUserSortColumns = "True" 
+                                            CanUserAddRows="False"
+                                            IsReadOnly="True"
+                                            FontWeight="Medium"
+                                            VerticalGridLinesBrush="Transparent">
+
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/Cashier/Assets/Icons/User.png" Margin="5 0 10 0"/>
+                                                                <TextBlock Text="{Binding FullName}" Foreground="#434A5E" FontSize="22"/>
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="/Cashier/Assets/Icons/phone.png" Margin="10 0 10 0"/>
+                                                                <TextBlock Text="{Binding PhoneNumber}" Foreground="#969B99" FontSize="22"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+
+                            <Button Grid.Row="1" Click="Button_Click" Content="Tanlash" Background="#34944F"
+                                    Foreground="White" FontSize="24" Margin="45 10"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Visible" x:Name="card_confirmation" Margin="10 200 10 200">
+                    <Border CornerRadius="10" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" Opacity="1"/>
+                        </Border.Effect>
+                    </Border>
+                    <Grid>
+                        <StackPanel Margin="0 40 0 0">
+                            <Border HorizontalAlignment="Center" Padding="30" CornerRadius="50" Background="#F0F5F3">
+                                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Cashier/Assets/Icons/card_card.png" Width="40" Height="40"/>
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center" FontSize="25"
+                                       Foreground="#434A5E"
+                                       Text="Plastikdan yechib olinishi"/>
+
+                            <TextBlock HorizontalAlignment="Center" FontSize="25"
+                                       Foreground="#434A5E"
+                                       Text="Kerak bo'lgan summa"/>
+
+                            <TextBlock HorizontalAlignment="Center" FontSize="25"
+                                       Foreground="#0C7C80"
+                                       Text=""
+                                       x:Name="card_amount_text"/>
+
+                            <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button  Style="{StaticResource back_btn}"
+                                        x:Name="cancel_btn_withcard"
+                                        Click="cancel_btn_withcard_Click"
+                                        Width="130" Height="55" Margin="0 0 20 0"/>
+
+                                <Button 
+                                        Width="230" Height="55"
+                                        Style="{StaticResource submit_card_btn}"
+                                        Click="submit_btn_withcard_Click"
+                                        x:Name="submit_btn_withcard"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>
