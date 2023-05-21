@@ -868,73 +868,73 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
         }
 
 
-        //public void RemoveClient()
-        //{
+        public void RemoveClient()
+        {
 
-        //    if (currentPage == 1)
-        //    {
-        //        page1ClientExist = false;
-        //        page1Client = new ClientModel();
-        //    }
-        //    else if (currentPage == 2)
-        //    {
-        //        page2ClientExist = false;
-        //        page2Client = new ClientModel();
-        //    }
-        //    else if (currentPage == 3)
-        //    {
-        //        page3ClientExist = false;
-        //        page3Client = new ClientModel();
-        //    }
-        //    else if (currentPage == 4)
-        //    {
-        //        page4ClientExist = false;
-        //        page4Client = new ClientModel();
-        //    }
-        //    else if (currentPage == 5)
-        //    {
-        //        page5ClientExist = false;
-        //        page5Client = new ClientModel();
-        //    }
+            if (currentPage == 1)
+            {
+                page1ClientExist = false;
+                page1Client = new ClientModel();
+            }
+            else if (currentPage == 2)
+            {
+                page2ClientExist = false;
+                page2Client = new ClientModel();
+            }
+            else if (currentPage == 3)
+            {
+                page3ClientExist = false;
+                page3Client = new ClientModel();
+            }
+            else if (currentPage == 4)
+            {
+                page4ClientExist = false;
+                page4Client = new ClientModel();
+            }
+            else if (currentPage == 5)
+            {
+                page5ClientExist = false;
+                page5Client = new ClientModel();
+            }
 
-        //    ChooseBtn(currentPage);
+            ChooseBtn(currentPage);
 
-        //}
+        }
 
-        //public void AddClient(ClientModel client)
-        //{
-        //    if (client != null)
-        //    {
-        //        if (currentPage == 1)
-        //        {
-        //            page1ClientExist = true;
-        //            page1Client = client;
-        //        }
-        //        else if (currentPage == 2)
-        //        {
-        //            page2ClientExist = true;
-        //            page2Client = client;
-        //        }
-        //        else if (currentPage == 3)
-        //        {
-        //            page3ClientExist = true;
-        //            page3Client = client;
-        //        }
-        //        else if (currentPage == 4)
-        //        {
-        //            page4ClientExist = true;
-        //            page4Client = client;
-        //        }
-        //        else if (currentPage == 5)
-        //        {
-        //            page5ClientExist = true;
-        //            page5Client = client;
-        //        }
+        public void AddClient(ClientModel client)
+        {
+            if (client != null)
+            {
+                if (currentPage == 1)
+                {
+                    page1ClientExist = true;
+                    page1Client = client;
+                }
+                else if (currentPage == 2)
+                {
+                    page2ClientExist = true;
+                    page2Client = client;
+                }
+                else if (currentPage == 3)
+                {
+                    page3ClientExist = true;
+                    page3Client = client;
+                }
+                else if (currentPage == 4)
+                {
+                    page4ClientExist = true;
+                    page4Client = client;
+                }
+                else if (currentPage == 5)
+                {
+                    page5ClientExist = true;
+                    page5Client = client;
+                }
 
-        //        ChooseBtn(currentPage);
-        //    }
+                ChooseBtn(currentPage);
+            }
 
-        //}
+        }
 
         private void page1_button_Click(object sender, RoutedEventArgs e)
         {

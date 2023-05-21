@@ -6,22 +6,69 @@
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="back_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#E8F8F3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    Text="Yo'q"
+                                    Foreground="#434A5E"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="submit_card_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    Text="Ha"
+                                    Foreground="White"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid Opacity="0.1" Background="Black">
             
         </Grid>
-        <Border Height="450" Width="500" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+        <Border CornerRadius="10" Height="400" Width="500" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Opacity="1"/>
             </Border.Effect>
-            <Grid>
-                <Image Source="/Cashier/Assets/Icons/surface.png" Width="180" Margin="0 50 0 0" VerticalAlignment="Top"/>
-                <TextBlock Text="Check chiqarilsinmi?" VerticalAlignment="Bottom" Margin="10 0 0 100" FontSize="25" HorizontalAlignment="Center"/>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 30" Orientation="Horizontal">
-                    <Button Content="Ha" Click="Button_Click" Width="100" Height="40" FontSize="20" Margin="0 0 20 0"/>
-                    <Button Content="Yo'q" Width="100" Click="Button_Click_1" Height="40" FontSize="20"/>
+            <StackPanel>
+                <Image Source="/Cashier/Assets/Icons/surface.png" Width="150" Margin="0 40 0 0" VerticalAlignment="Top"/>
+                <TextBlock Text="Chek chiqarilsinmi?" VerticalAlignment="Bottom" Margin="10 20 0 0" FontSize="30" FontWeight="SemiBold"  HorizontalAlignment="Center"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 50 0 30" Orientation="Horizontal">
+                    <Button Style="{StaticResource back_btn}" Content="Yo'q" Width="150" Click="Button_Click_1" Height="60" FontSize="20" Margin="0 0 20 0"/>
+                    <Button Style="{StaticResource submit_card_btn}" Content="Ha" Click="Button_Click" Width="150" Height="60" FontSize="20" />
                 </StackPanel>
-            </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 

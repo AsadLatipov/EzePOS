@@ -96,7 +96,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
             <Style x:Key="submit_card_btn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#09C5A3"/>
                 <Setter Property="BorderThickness" Value="0"/>
@@ -119,8 +118,6 @@
                 </Setter>
 
             </Style>
-
-
             <Style x:Key="card_btn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#1689DD"/>
                 <Setter Property="Width" Value="150"/>
@@ -166,6 +163,50 @@
                 </Setter>
 
             </Style>
+            <Style x:Key="submit_client_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="Saqlash"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="remove_client_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="red"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="Mijozni savdodan olish"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#E7F2F2"/>
                 <Setter Property="Height" Value="38"/>
@@ -524,7 +565,7 @@
                     </Border>
                 </StackPanel>
 
-                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" x:Name="client_grid" Margin="10 60 10 200">
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Visible" x:Name="client_grid" Margin="10 60 10 200">
                     <Border Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="20" Opacity="1"/>
@@ -538,13 +579,15 @@
 
                         <Grid Grid.Row="0" Background="#F0F5F3">
                             <TextBlock Text="Mijozni tanlang"
+                                       FontWeight="SemiBold"
                                        HorizontalAlignment="Left"
+                                       Foreground="#434A5E"
                                        VerticalAlignment="Center"
                                        FontSize="25" Margin="20 0 0 0"/>
                             <Button Click="client_cancel_back_btn_Click" x:Name="client_cancel_back_btn" HorizontalAlignment="Right"
                                     Width="45" Height="45"
-                                    Margin="0 0 20 0">
-                                <Image Source="/Cashier/Assets/Icons/X.png"/>
+                                    Margin="0 0 20 0" Style="{StaticResource btn_cancel}">
+                                
                             </Button>
                         </Grid>
 
@@ -568,11 +611,12 @@
                                 </Grid>
                             </Border>
 
-                            <Button Margin="0 20 0 0" Background="#34944F"
-                                    FontSize="25" Content="Saqlash" Foreground="White" Height="60">
+                            <Button Margin="0 20 0 0" Cursor="Hand" Style="{StaticResource remove_client_btn}" Visibility="Hidden"
+                                    FontSize="25" x:Name="removeClient_btn" Click="removeClient_btn_Click"  Foreground="White" Height="60">
                             </Button>
-                            <Button Margin="0 20 0 0" Background="red" Visibility="Hidden"
-                                    FontSize="25" Content="Mijozni savdodan olish" x:Name="removeClient_btn" Click="removeClient_btn_Click"  Foreground="White" Height="60">
+                            <Button Margin="0 20 0 0"
+                                    Style="{StaticResource submit_client_btn}"
+                                    FontSize="25" x:Name="add_client_btn" Foreground="White" Height="60">
                             </Button>
                         </StackPanel>
                     </Grid>
@@ -599,8 +643,8 @@
                                     x:Name="clients_list_cancel_btn"
                                     Click="clients_list_cancel_btn_Click"
                                     Width="45" Height="45"
-                                    Margin="0 0 20 0">
-                                <Image Source="/Cashier/Assets/Icons/X.png"/>
+                                    Margin="0 0 20 0"
+                                    Style="{StaticResource btn_cancel}">
                             </Button>
                         </Grid>
 
@@ -653,13 +697,14 @@
                                 </DataGrid>
                             </Grid>
 
-                            <Button Grid.Row="1" Click="Button_Click" Content="Tanlash" Background="#34944F"
+                            <Button Grid.Row="1" Click="Button_Click"
+                                    Style="{StaticResource submit_client_btn}"
                                     Foreground="White" FontSize="24" Margin="45 10"/>
                         </Grid>
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Visible" x:Name="card_confirmation" Margin="10 200 10 200">
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" x:Name="card_confirmation" Margin="10 200 10 200">
                     <Border CornerRadius="10" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="20" Opacity="1"/>

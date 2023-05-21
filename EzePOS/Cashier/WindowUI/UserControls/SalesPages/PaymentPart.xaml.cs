@@ -552,25 +552,27 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    var client = dataGrid.SelectedItem as ClientModel;
-            //    if (client != null)
-            //    {
-            //        var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            try
+            {
+                var client = dataGrid.SelectedItem as ClientModel;
+                if (client != null)
+                {
+                    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            //        clients_list_grid.Visibility = Visibility.Hidden;
-            //        client_grid.Visibility = Visibility.Hidden;
-            //        client_name.Text = "";
-            //        client_number.Text = "";
+                    clients_list_grid.Visibility = Visibility.Hidden;
+                    client_grid.Visibility = Visibility.Hidden;
+                    client_name.Text = "";
+                    client_number.Text = "";
 
-            //        targetWindow.dashboard.cash_navbar.AddClient(client);
-            //    }
-            //}
-            //catch
-            //{
+                    targetWindow.dashboard.cash_navbar.AddClient(client);
 
-            //}
+                    removeClient_btn.Visibility = Visibility.Visible;
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         public void ChangeButtonText(string newText)
@@ -594,21 +596,22 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
         private void removeClient_btn_Click(object sender, RoutedEventArgs e)
         {
-            
-            //try
-            //{
-            //    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            //    clients_list_grid.Visibility = Visibility.Hidden;
-            //    client_grid.Visibility = Visibility.Hidden;
-            //    client_name.Text = "";
-            //    client_number.Text = "";
-            //    targetWindow.dashboard.cash_navbar.RemoveClient();
-            //}
-            //catch
-            //{
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            //}
+                clients_list_grid.Visibility = Visibility.Hidden;
+                client_grid.Visibility = Visibility.Hidden;
+                client_name.Text = "";
+                client_number.Text = "";
+                targetWindow.dashboard.cash_navbar.RemoveClient();
+                removeClient_btn.Visibility = Visibility.Hidden;
+            }
+            catch
+            {
+
+            }
         }
     }
 }
