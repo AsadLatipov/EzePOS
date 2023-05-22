@@ -79,7 +79,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
         private void btnDot_Click(object sender, RoutedEventArgs e)
         {
-            Write(btnDot);
         }
 
         private void btn0_Click(object sender, RoutedEventArgs e)
@@ -565,8 +564,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                     client_number.Text = "";
 
                     targetWindow.dashboard.cash_navbar.AddClient(client);
+                    debt_btn.Visibility = Visibility.Visible;
 
                     removeClient_btn.Visibility = Visibility.Visible;
+
                 }
             }
             catch

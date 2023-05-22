@@ -141,6 +141,28 @@
                 </Setter>
 
             </Style>
+            <Style x:Key="debt_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="12" BorderThickness="2" x:Name="Border" BorderBrush="#1689DD" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="#1689DD"
+                                    Text="Nasiga berish"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
             <Style x:Key="submit_btn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#09C5A3"/>
                 <Setter Property="BorderThickness" Value="0"/>
@@ -184,7 +206,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
             <Style x:Key="remove_client_btn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="red"/>
                 <Setter Property="BorderThickness" Value="0"/>
@@ -206,7 +227,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
             <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#E7F2F2"/>
                 <Setter Property="Height" Value="38"/>
@@ -230,8 +250,8 @@
                 </Setter>
             </Style>
             <Style x:Key="btnCalc" TargetType="Button">
-                <Setter Property="Width" Value="149"/>
-                <Setter Property="Height" Value="80"/>
+                <Setter Property="Width" Value="147"/>
+                <Setter Property="Height" Value="70"/>
                 <Setter Property="Background" Value="#EEF1FF"/>
                 <Setter Property="BorderBrush" Value="#CDD9DF"/>
                 <Setter Property="FontWeight" Value="Regular"/>
@@ -349,7 +369,7 @@
 
                 <Grid Grid.Row="2">
                     <StackPanel Margin="50 0">
-                        <Grid Margin="0 20 0 0">
+                        <Grid Margin="0 15 0 0">
                             <Button Content="Karta"
                                     Background="#1689DD"
                                     Width="160"
@@ -371,10 +391,19 @@
                                     Foreground="White"
                                     FontSize="25"/>
                         </Grid>
+                        <Button  
+                                Foreground="White"
+                                Margin="0 20 0 0"
+                                Height="50"
+                                Visibility="Collapsed"
+                                x:Name="debt_btn"
+                                Style="{StaticResource debt_btn}"
+                                Click="submit_btn_Click"
+                                FontSize="22"/>
 
                         <Grid>
                             <StackPanel Visibility="Visible" x:Name="withoutCard_grid">
-                                <Grid Margin="0 20 0 0">
+                                <Grid Margin="0 15 0 0">
                                     <TextBlock Text="Naqd"
                                                FontSize="20"
                                                HorizontalAlignment="Left"
@@ -392,7 +421,7 @@
 
                                 </Grid>
 
-                                <TextBox Margin="0 20 0 0"
+                                <TextBox Margin="0 15 0 0"
                                          Height="60"
                                          TextChanged="withoutcard_txt_TextChanged"
                                          x:Name="withoutcard_txt"
@@ -402,7 +431,7 @@
                             </StackPanel>
 
                             <StackPanel Visibility="Hidden" x:Name="withCard_grid">
-                                <Grid Margin="0 20 0 0">
+                                <Grid Margin="0 15 0 0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -432,14 +461,11 @@
                                                     BorderThickness="0"
                                                     Cursor="Hand"/>
                                         </StackPanel>
-
                                     </Grid>
-
-
                                 </Grid>
 
                                 <Grid>
-                                    <TextBox Margin="0 20 0 0"
+                                    <TextBox Margin="0 15 0 0"
                                              Height="60"
                                              Width="210"
                                              GotFocus="withCard_cash_text_GotFocus"
@@ -450,7 +476,7 @@
                                              Padding="20 0"
                                              FontSize="20"/>
 
-                                    <TextBox Margin="0 20 0 0"
+                                    <TextBox Margin="0 15 0 0"
                                              Height="60"
                                              GotFocus="withCard_card_text_GotFocus"
                                              x:Name="withCard_card_text"
@@ -466,7 +492,7 @@
 
 
 
-                        <Grid Margin="0 20 0 0">
+                        <Grid Margin="0 15 0 0">
                             <TextBlock HorizontalAlignment="Left"
                                        Text="Qaytim"
                                        Foreground="#969B99"
@@ -508,7 +534,6 @@
                                 </StackPanel>
                             </StackPanel>
                         </Border>
-
 
                         <Button  
                                 Foreground="White"
@@ -565,8 +590,8 @@
                     </Border>
                 </StackPanel>
 
-                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Visible" x:Name="client_grid" Margin="10 60 10 200">
-                    <Border Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+                <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" x:Name="client_grid" Margin="10 60 10 200">
+                    <Border Background="White" CornerRadius="10" BorderBrush="#D2D7D5" BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="20" Opacity="1"/>
                         </Border.Effect>

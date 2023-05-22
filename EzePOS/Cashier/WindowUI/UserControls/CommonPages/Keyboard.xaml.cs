@@ -534,5 +534,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 lang.Text = "RU";
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+        }
     }
 }

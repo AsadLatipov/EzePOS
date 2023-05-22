@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Cashier\Assets\Icons\arrow.png" />
+    <None Remove="Cashier\Assets\Icons\arrow_left.png" />
     <None Remove="Cashier\Assets\Icons\backX.png" />
     <None Remove="Cashier\Assets\Icons\card_card.png" />
     <None Remove="Cashier\Assets\Icons\cashier.jpg" />
@@ -39,6 +40,9 @@
 
   <ItemGroup>
     <Content Include="Cashier\Assets\Icons\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\arrow_left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\backX.png">

@@ -159,10 +159,13 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                             //targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Height = 50;
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Visible;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                         }
                         else
                         {
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Collapsed;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Hidden;
                         }
 
                         //}
@@ -208,14 +211,13 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                             //targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Height = 50;
-
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Visible;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                         }
                         else
                         {
-
-
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Collapsed;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Hidden;
                         }
 
                         //}
@@ -260,12 +262,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                             //targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Height = 50;
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Visible;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                         }
                         else
                         {
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Collapsed;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Hidden;
                         }
-
                         //}
 
                         break;
@@ -307,11 +311,13 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                             //targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Height = 50;
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Visible;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                         }
                         else
                         {
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Collapsed;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Hidden;
                         }
 
                         //}
@@ -355,12 +361,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                             //targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Visibility = Visibility.Visible;
                             targetWindow.dashboard.salesPanel.client_show_stack.Height = 50;
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Visible;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Visible;
                         }
                         else
                         {
-
+                            targetWindow.dashboard.paymentpart.debt_btn.Visibility = Visibility.Collapsed;
+                            targetWindow.dashboard.paymentpart.removeClient_btn.Visibility = Visibility.Hidden;
                         }
-
                         //}
 
                         break;
