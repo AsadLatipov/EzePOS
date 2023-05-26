@@ -1,20 +1,10 @@
 ﻿using EzePOS.Business.Helper;
 using EzePOS.Business.Models;
 using EzePOS.Cashier.WindowUI.Windows;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 {
@@ -97,6 +87,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                     {
                         withCard_cash_text.Text += button.Content.ToString();
                     }
+                    else if (withDebtGotFocus)
+                    {
+                        withDebt_cash_text.Text += button.Content.ToString();
+                    }
                     else if (withCardGotFocus)
                     {
                         withCard_card_text.Text += button.Content.ToString();
@@ -104,7 +98,22 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 }
                 else
                 {
-                    withoutcard_txt.Text += button.Content.ToString();
+                    if (isDebtInvolved)
+                    {
+                        if (withDebtGotFocus)
+                        {
+                            withDebt_cash_text.Text += button.Content.ToString();
+
+                        }
+                        else if (withMainCashGotFocus)
+                        {
+                            withoutcard_txt.Text += button.Content.ToString();
+                        }
+                    }
+                    else
+                    {
+                        withoutcard_txt.Text += button.Content.ToString();
+                    }
 
                     //withoutcard_txt.Text = double.Parse(withoutcard_txt.Text.Replace(" ", "")).Amount();
 
@@ -131,6 +140,13 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                             withCard_cash_text.Text = withCard_cash_text.Text.Remove(withCard_cash_text.Text.Length - 1);
                         }
                     }
+                    else if (withDebtGotFocus)
+                    {
+                        if (withDebt_cash_text.Text != "" && withDebt_cash_text.Text != null)
+                        {
+                            withDebt_cash_text.Text = withDebt_cash_text.Text.Remove(withDebt_cash_text.Text.Length - 1);
+                        }
+                    }
                     else if (withCardGotFocus)
                     {
                         if (withCard_card_text.Text != "" && withCard_card_text.Text != null)
@@ -141,16 +157,36 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 }
                 else
                 {
-                    if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                    if (isDebtInvolved)
                     {
-                        withoutcard_txt.Text = withoutcard_txt.Text.Remove(withoutcard_txt.Text.Length - 1);
+                        if (withDebtGotFocus)
+                        {
+                            if (withDebt_cash_text.Text != "" && withDebt_cash_text.Text != null)
+                            {
+                                withDebt_cash_text.Text = withDebt_cash_text.Text.Remove(withDebt_cash_text.Text.Length - 1);
+                            }
+                        }
+                        else if (withMainCashGotFocus)
+                        {
+                            if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                            {
+                                withoutcard_txt.Text = withoutcard_txt.Text.Remove(withoutcard_txt.Text.Length - 1);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                        {
+                            withoutcard_txt.Text = withoutcard_txt.Text.Remove(withoutcard_txt.Text.Length - 1);
 
-                        //if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
-                        //{
-                        //    withoutcard_txt.Text = double.Parse(withoutcard_txt.Text.Replace(" ", "")).Amount();
-                        //}
-                        //withoutcard_txt.Focus();
-                        //withoutcard_txt.CaretIndex = withoutcard_txt.Text.Length;
+                            //if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                            //{
+                            //    withoutcard_txt.Text = double.Parse(withoutcard_txt.Text.Replace(" ", "")).Amount();
+                            //}
+                            //withoutcard_txt.Focus();
+                            //withoutcard_txt.CaretIndex = withoutcard_txt.Text.Length;
+                        }
                     }
                 }
             }
@@ -312,9 +348,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 {
                     double cash = double.Parse(string.IsNullOrEmpty(withCard_cash_text.Text) ? "0" : withCard_cash_text.Text.Replace(" ", ""));
                     double card = double.Parse(string.IsNullOrEmpty(withCard_card_text.Text) ? "0" : withCard_card_text.Text.Replace(" ", ""));
+                    double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
                     double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
 
-                    double total = cash + card;
+                    double total = cash + card + debt;
                     if (total >= totalAmount)
                     {
                         CloseAllPaymentStuffs();
@@ -324,17 +362,18 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 }
                 else
                 {
-                    double amount = double.Parse(withoutcard_txt.Text.Replace(" ", ""));
 
-                    if (amount >= double.Parse(GetButtonText().Replace(" ", "")))
+                    double cash = double.Parse(string.IsNullOrEmpty(withoutcard_txt.Text) ? "0" : withoutcard_txt.Text.Replace(" ", ""));
+                    double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
+                    double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
+
+                    double total = cash + debt;
+                    if (total >= totalAmount)
                     {
                         CloseAllPaymentStuffs();
                         targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
                         targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-
                     }
                 }
             }
@@ -365,6 +404,12 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             discounts_btn.Content = "Chegirma";
             ChangeButtonText(TotalAmount.Amount());
             btn_x.Visibility = Visibility.Hidden;
+            isDebtInvolved = false;
+
+
+            debt_btn.Visibility = Visibility.Visible;
+            withDebt_grid.Visibility = Visibility.Collapsed;
+            withDebt_cash_text.Text = "";
 
         }
 
@@ -372,28 +417,71 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         {
             try
             {
-                if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                if (isDebtInvolved)
                 {
-                    withoutcard_txt.Text = double.Parse(withoutcard_txt.Text.Replace(" ", "")).Amount();
+                    double cash = double.Parse(string.IsNullOrEmpty(withoutcard_txt.Text) ? "0" : withoutcard_txt.Text.Replace(" ", ""));
+                    double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
 
-                    double amount = double.Parse(withoutcard_txt.Text.Replace(" ", ""));
+                    double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
 
-                    if (amount > double.Parse(GetButtonText().Replace(" ", "")))
+                    double total = cash + debt;
+
+                    if (cash == 0)
                     {
-                        change_text.Text = (amount - double.Parse(GetButtonText().Replace(" ", ""))).Amount();
+                        withoutcard_txt.Text = "";
+                    }
+                    else
+                    {
+                        withoutcard_txt.Text = cash.Amount();
+                    }
+                    if (debt == 0)
+                    {
+                        withDebt_cash_text.Text = "";
+                    }
+                    else
+                    {
+                        withDebt_cash_text.Text = debt.Amount();
+                    }
+
+                   
+
+                    if (total > totalAmount)
+                    {
+                        change_text.Text = (total - totalAmount).Amount();
                     }
                     else
                     {
                         change_text.Text = "0";
                     }
+
+                    withoutcard_txt.Focus();
+                    withoutcard_txt.CaretIndex = withoutcard_txt.Text.Length;
                 }
                 else
                 {
-                    change_text.Text = "0";
-                }
+                    if (withoutcard_txt.Text != "" && withoutcard_txt.Text != null)
+                    {
+                        withoutcard_txt.Text = double.Parse(withoutcard_txt.Text.Replace(" ", "")).Amount();
 
-                withoutcard_txt.Focus();
-                withoutcard_txt.CaretIndex = withoutcard_txt.Text.Length;
+                        double amount = double.Parse(withoutcard_txt.Text.Replace(" ", ""));
+
+                        if (amount > double.Parse(GetButtonText().Replace(" ", "")))
+                        {
+                            change_text.Text = (amount - double.Parse(GetButtonText().Replace(" ", ""))).Amount();
+                        }
+                        else
+                        {
+                            change_text.Text = "0";
+                        }
+                    }
+                    else
+                    {
+                        change_text.Text = "0";
+                    }
+
+                    withoutcard_txt.Focus();
+                    withoutcard_txt.CaretIndex = withoutcard_txt.Text.Length;
+                }
             }
             catch
             {
@@ -438,9 +526,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             {
                 double cash = double.Parse(string.IsNullOrEmpty(withCard_cash_text.Text) ? "0" : withCard_cash_text.Text.Replace(" ", ""));
                 double card = double.Parse(string.IsNullOrEmpty(withCard_card_text.Text) ? "0" : withCard_card_text.Text.Replace(" ", ""));
+                double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
                 double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
 
-                double total = cash + card;
+                double total = cash + card + debt;
 
                 if (cash == 0)
                 {
@@ -449,6 +539,15 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 else
                 {
                     withCard_cash_text.Text = cash.Amount();
+                }
+                if(debt == 0)
+                {
+                    withDebt_cash_text.Text = "";
+                }
+                else
+                {
+                    withDebt_cash_text.Text = debt.Amount();
+
                 }
 
                 if (card == 0)
@@ -484,9 +583,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             {
                 double card = double.Parse(string.IsNullOrEmpty(withCard_card_text.Text) ? "0" : withCard_card_text.Text.Replace(" ", ""));
                 double cash = double.Parse(string.IsNullOrEmpty(withCard_cash_text.Text) ? "0" : withCard_cash_text.Text.Replace(" ", ""));
+                double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
                 double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
 
-                double total = cash + card;
+                double total = cash + card + debt;
 
                 if (cash == 0)
                 {
@@ -495,6 +596,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 else
                 {
                     withCard_cash_text.Text = cash.Amount();
+                }
+                if(debt == 0)
+                {
+                    withDebt_cash_text.Text = "";
+                }
+                else
+                {
+                    withDebt_cash_text.Text = debt.Amount();
                 }
 
                 if (card == 0)
@@ -536,17 +645,29 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
         bool withCardGotFocus = false;
         bool withCashGotFocus = false;
+        bool withDebtGotFocus = false;
+        bool withMainCashGotFocus = false;
 
         private void withCard_cash_text_GotFocus(object sender, RoutedEventArgs e)
         {
             withCashGotFocus = true;
             withCardGotFocus = false;
+            withDebtGotFocus = false;
         }
 
         private void withCard_card_text_GotFocus(object sender, RoutedEventArgs e)
         {
-            withCashGotFocus = false;
             withCardGotFocus = true;
+            withCashGotFocus = false;
+            withDebtGotFocus = false;
+
+        }
+        private void withDebt_cash_text_GotFocus(object sender, RoutedEventArgs e)
+        {
+            withDebtGotFocus = true;
+            withCashGotFocus = false;
+            withCardGotFocus = false;
+            withMainCashGotFocus = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -608,11 +729,158 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 client_number.Text = "";
                 targetWindow.dashboard.cash_navbar.RemoveClient();
                 removeClient_btn.Visibility = Visibility.Hidden;
+
+                withDebt_grid.Visibility = Visibility.Collapsed;
+                withDebt_cash_text.Text = "";
+                isDebtInvolved = false;
+                object aa = null;
+                TextChangedEventArgs temp = null;
+                if (withCard)
+                {
+
+                    withDebt_cash_text_TextChanged(aa, temp);
+                }
+                else
+                {
+                    withoutcard_txt_TextChanged(aa, temp);
+
+                }
             }
             catch
             {
 
             }
+        }
+
+        private void withDebt_cancel_btn_Click(object sender, RoutedEventArgs e)
+        {
+            debt_btn.Visibility = Visibility.Visible;
+            withDebt_grid.Visibility = Visibility.Collapsed;
+            withDebt_cash_text.Text = "";
+            isDebtInvolved = false;
+            object aa = null;
+            TextChangedEventArgs temp = null;
+            if (withCard)
+            {
+                
+                withDebt_cash_text_TextChanged(aa, temp);
+            }
+            else
+            {
+                withoutcard_txt_TextChanged(aa, temp);
+
+            }
+        }
+
+        private void withDebt_cash_text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (withCard)
+                {
+                    double card = double.Parse(string.IsNullOrEmpty(withCard_card_text.Text) ? "0" : withCard_card_text.Text.Replace(" ", ""));
+                    double cash = double.Parse(string.IsNullOrEmpty(withCard_cash_text.Text) ? "0" : withCard_cash_text.Text.Replace(" ", ""));
+                    double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
+                    double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
+
+                    double total = cash + card + debt;
+
+                    if (cash == 0)
+                    {
+                        withCard_cash_text.Text = "";
+                    }
+                    else
+                    {
+                        withCard_cash_text.Text = cash.Amount();
+                    }
+                    if (debt == 0)
+                    {
+                        withDebt_cash_text.Text = "";
+                    }
+                    else
+                    {
+                        withDebt_cash_text.Text = debt.Amount();
+                    }
+
+                    if (card == 0)
+                    {
+                        withCard_card_text.Text = "";
+                    }
+                    else
+                    {
+                        withCard_card_text.Text = card.Amount();
+                    }
+
+                    if (total > totalAmount)
+                    {
+                        change_text.Text = (total - totalAmount).Amount();
+                    }
+                    else
+                    {
+                        change_text.Text = "0";
+                    }
+
+                    withDebt_cash_text.Focus();
+                    withDebt_cash_text.CaretIndex = withDebt_cash_text.Text.Length;
+                }
+                else
+                {
+                    double cash = double.Parse(string.IsNullOrEmpty(withoutcard_txt.Text) ? "0" : withoutcard_txt.Text.Replace(" ", ""));
+                    double debt = double.Parse(string.IsNullOrEmpty(withDebt_cash_text.Text) ? "0" : withDebt_cash_text.Text.Replace(" ", ""));
+
+                    double totalAmount = double.Parse(string.IsNullOrEmpty(GetButtonText()) ? "0" : GetButtonText().Replace(" ", ""));
+
+                    double total = cash + debt;
+
+                    if (cash == 0)
+                    {
+                        withCard_cash_text.Text = "";
+                    }
+                    else
+                    {
+                        withCard_cash_text.Text = cash.Amount();
+                    }
+                    if (debt == 0)
+                    {
+                        withDebt_cash_text.Text = "";
+                    }
+                    else
+                    {
+                        withDebt_cash_text.Text = debt.Amount();
+                    }
+                    if (total > totalAmount)
+                    {
+                        change_text.Text = (total - totalAmount).Amount();
+                    }
+                    else
+                    {
+                        change_text.Text = "0";
+                    }
+
+                    withDebt_cash_text.Focus();
+                    withDebt_cash_text.CaretIndex = withDebt_cash_text.Text.Length;
+                }
+                
+            }
+            catch
+            {
+
+            }
+        }
+
+        bool isDebtInvolved = false;
+        private void debt_btn_Click(object sender, RoutedEventArgs e)
+        {
+            withDebt_grid.Visibility = Visibility.Visible;
+            debt_btn.Visibility = Visibility.Collapsed;
+            isDebtInvolved = true;
+        }
+
+        private void withoutcard_txt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            withMainCashGotFocus = true;
+            withDebtGotFocus = false;
         }
     }
 }

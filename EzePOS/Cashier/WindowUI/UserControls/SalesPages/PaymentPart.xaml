@@ -398,8 +398,52 @@
                                 Visibility="Collapsed"
                                 x:Name="debt_btn"
                                 Style="{StaticResource debt_btn}"
-                                Click="submit_btn_Click"
+                                Click="debt_btn_Click"
                                 FontSize="22"/>
+                        <StackPanel Visibility="Collapsed" x:Name="withDebt_grid">
+                            
+                            <Grid Margin="0 5 0 0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+
+                                        <TextBlock Text="Nasiya" Grid.Column="0"
+                                                   FontSize="20"
+                                                   HorizontalAlignment="Left"
+                                                   Foreground="#969B99"/>
+
+                                        <Button HorizontalAlignment="Right"
+                                                    Content="X"
+                                                    Margin="10 0 0 0"
+                                                    Foreground="red"
+                                                    FontSize="20"
+                                                    x:Name="withDebt_cancel_btn"
+                                                    Click="withDebt_cancel_btn_Click"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Cursor="Hand"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <Grid>
+                                <TextBox Margin="0 5 0 0"
+                                             Height="50"
+                                             Width="210"
+                                             x:Name="withDebt_cash_text"
+                                             GotFocus="withDebt_cash_text_GotFocus"
+                                             TextChanged="withDebt_cash_text_TextChanged"
+                                             HorizontalAlignment="Left"
+                                             VerticalContentAlignment="Center"
+                                             Padding="20 0"
+                                             FontSize="20"/>
+                            </Grid>
+                        </StackPanel>
+
 
                         <Grid>
                             <StackPanel Visibility="Visible" x:Name="withoutCard_grid">
@@ -422,7 +466,8 @@
                                 </Grid>
 
                                 <TextBox Margin="0 15 0 0"
-                                         Height="60"
+                                         Height="50"
+                                         GotFocus="withoutcard_txt_GotFocus"
                                          TextChanged="withoutcard_txt_TextChanged"
                                          x:Name="withoutcard_txt"
                                          VerticalContentAlignment="Center"
@@ -465,8 +510,8 @@
                                 </Grid>
 
                                 <Grid>
-                                    <TextBox Margin="0 15 0 0"
-                                             Height="60"
+                                    <TextBox Margin="0 10 0 0"
+                                             Height="50"
                                              Width="210"
                                              GotFocus="withCard_cash_text_GotFocus"
                                              TextChanged="withCard_cash_text_TextChanged"
@@ -476,8 +521,8 @@
                                              Padding="20 0"
                                              FontSize="20"/>
 
-                                    <TextBox Margin="0 15 0 0"
-                                             Height="60"
+                                    <TextBox Margin="0 10 0 0"
+                                             Height="50"
                                              GotFocus="withCard_card_text_GotFocus"
                                              x:Name="withCard_card_text"
                                              Width="210"
