@@ -1,6 +1,7 @@
 ﻿using EzePOS.Business.Helper;
 using EzePOS.Business.Models;
 using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -312,13 +313,13 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             clients_list_grid.Visibility = Visibility.Visible;
             targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
 
-            List<ClientModel> clients = new List<ClientModel>();
+            List<Client> clients = new List<Client>();
 
-            clients.Add(new ClientModel { Id = 1, FirstName = "Asadbek", LastName = "Latipov", PhoneNumber = "+998913561310" });
-            clients.Add(new ClientModel { Id = 2, FirstName = "Ahmadjon", LastName = "Sirojiddinov", PhoneNumber = "+998913561310" });
-            clients.Add(new ClientModel { Id = 3, FirstName = "Qosim", LastName = "Qosimov", PhoneNumber = "+998913561310" });
-            clients.Add(new ClientModel { Id = 4, FirstName = "Umar", LastName = "Fozilov", PhoneNumber = "+998913561310" });
-            clients.Add(new ClientModel { Id = 5, FirstName = "Madina", LastName = "Abdullayeva", PhoneNumber = "+998913561310" });
+            clients.Add(new Client { Id = 1, FullName = "Asadbek Latipov", PhoneNumber = "+998913561310" });
+            clients.Add(new Client { Id = 2, FullName = "Ahmadjon Sirojiddinov", PhoneNumber = "+998913561310" });
+            clients.Add(new Client { Id = 3, FullName = "Qosim Qosimov", PhoneNumber = "+998913561310" });
+            clients.Add(new Client { Id = 4, FullName = "Umar Fozilov", PhoneNumber = "+998913561310" });
+            clients.Add(new Client { Id = 5, FullName = "Madina Abdullayeva", PhoneNumber = "+998913561310" });
 
 
             dataGrid.ItemsSource = clients;
@@ -674,7 +675,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         {
             try
             {
-                var client = dataGrid.SelectedItem as ClientModel;
+                var client = dataGrid.SelectedItem as Client;
                 if (client != null)
                 {
                     var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;

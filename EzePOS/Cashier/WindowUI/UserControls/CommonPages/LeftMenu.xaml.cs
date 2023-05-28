@@ -39,15 +39,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             BackgrounColorChangeButton(2);
             //ChangePage(2);
         }
-        private void btn_3_click(object sender, RoutedEventArgs e)
-        {
-            BackgrounColorChangeButton(3);
-            //ChangePage(3);
-        }
+     
         private void btn_4_click(object sender, RoutedEventArgs e)
         {
             BackgrounColorChangeButton(4);
-            //ChangePage(4);
+            ChangePage(4);
         }
         private void btn_5_click(object sender, RoutedEventArgs e)
         {
@@ -60,12 +56,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             //CurrentPage = 6;
         }
 
-
-
         private void btn_right_1_click(object sender, RoutedEventArgs e)
         {
             BackgrounColorChangeButtonRight(1);
-            //ChangePage(1.1);
+            ChangePage(1.1);
         }
         private void btn_right_2_click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +84,157 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             BackgrounColorChangeButtonRight(6);
             //ChangePage(1.6);
         }
-      
+        public void ChangePage(double pageId)
+        {
+            var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+            targetWindow.dashboard.salesPanel.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.products.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.debts.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.returnPage.Visibility = Visibility.Hidden;
+            targetWindow.dashboard.clients.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.history.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
+            //targetWindow.dashboard.discount.Visibility = Visibility.Hidden;
+
+            switch (pageId)
+            {
+                case 1.1:
+                    targetWindow.dashboard.page_name.Text = "Kassa";
+                    targetWindow.dashboard.salesPanel.Visibility = Visibility.Visible;
+                    CurrentPage = 1.1;
+                    ChangeNavBar(1);
+                    break;
+
+                case 1.2:
+                    targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
+                    //targetWindow.dashboard.history.Visibility = Visibility.Visible;
+                    CurrentPage = 1.2;
+                    ChangeNavBar(5);
+                    break;
+
+                case 1.3:
+                    targetWindow.dashboard.page_name.Text = "Qaytarish";
+                    //targetWindow.dashboard.returnPage.Visibility = Visibility.Visible;
+                    CurrentPage = 1.3;
+                    ChangeNavBar(3);
+                    break;
+
+
+                case 1.4:
+                    //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
+                    //targetWindow.dashboard.history.Visibility = Visibility.Visible;
+                    CurrentPage = 1.2;
+                    ChangeNavBar(5);
+                    //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
+                    BackgrounColorChangeButtonRight(2);
+                    break;
+
+                case 1.5:
+                    break;
+
+
+
+                case 1.6:
+                    targetWindow.dashboard.page_name.Text = "Nasiyalar";
+                    //targetWindow.dashboard.debts.Visibility = Visibility.Visible;
+                    ChangeNavBar(2);
+                    CurrentPage = 1.6;
+                    break;
+
+
+
+                case 2:
+                    targetWindow.dashboard.page_name.Text = "Mahsulotlar";
+                    //targetWindow.dashboard.products.Visibility = Visibility.Visible;
+                    CurrentPage = 2;
+                    ChangeNavBar(1);
+                    break;
+
+                case 3:
+                    targetWindow.dashboard.page_name.Text = "Chegirma";
+                    //targetWindow.dashboard.discount.Visibility = Visibility.Visible;
+                    CurrentPage = 3;
+                    ChangeNavBar(2);
+                    break;
+
+                case 4:
+                    targetWindow.dashboard.page_name.Text = "Klientlar";
+                    targetWindow.dashboard.clients.Visibility = Visibility.Visible;
+                    CurrentPage = 4;
+                    ChangeNavBar(3);
+                    break;
+
+
+                case 5:
+                    break;
+
+                //CloseTheShift
+                case 6:
+
+                    targetWindow.dashboard.page_name.Text = "Smenani yopish";
+                    //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Visible;
+                    CurrentPage = 6;
+                    ChangeNavBar(4);
+                    break;
+
+                default:
+                    break;
+            }
+            targetWindow.dashboard.leftMenu.Visibility = Visibility.Hidden;
+            second_part.Visibility = Visibility.Hidden;
+            first_part.Visibility = Visibility.Visible;
+            cashButtonChecker = false;
+
+            cash_image_forward.Visibility = Visibility.Visible;
+            cash_image_back.Visibility = Visibility.Hidden;
+        }
+
+        public void ChangeNavBar(int id)
+        {
+            var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+            if (id == 1)
+            {
+                targetWindow.dashboard.cash_navbar.Visibility = Visibility.Visible;
+                targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
+            }
+            else if (id == 2)
+            {
+                targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Visible;
+                targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
+
+            }
+            else if (id == 3)
+            {
+                targetWindow.dashboard.search_navbar.Visibility = Visibility.Visible;
+                targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
+            }
+            else if (id == 4)
+            {
+                //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Visible;
+                targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+            }
+            else if (id == 5)
+            {
+                //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+            }
+        }
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;

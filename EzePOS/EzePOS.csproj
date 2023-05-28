@@ -16,8 +16,10 @@
     <None Remove="Cashier\Assets\Icons\cashier_panel_image.png" />
     <None Remove="Cashier\Assets\Icons\client_image.png" />
     <None Remove="Cashier\Assets\Icons\client_list.png" />
+    <None Remove="Cashier\Assets\Icons\edit.png" />
     <None Remove="Cashier\Assets\Icons\exchange_image.png" />
     <None Remove="Cashier\Assets\Icons\exit_image.png" />
+    <None Remove="Cashier\Assets\Icons\filter.png" />
     <None Remove="Cashier\Assets\Icons\forward.png" />
     <None Remove="Cashier\Assets\Icons\globe.png" />
     <None Remove="Cashier\Assets\Icons\history_of_sale_image.png" />
@@ -27,6 +29,7 @@
     <None Remove="Cashier\Assets\Icons\plus.png" />
     <None Remove="Cashier\Assets\Icons\product_image.png" />
     <None Remove="Cashier\Assets\Icons\put_money_image.png" />
+    <None Remove="Cashier\Assets\Icons\red_trash.png" />
     <None Remove="Cashier\Assets\Icons\red_X.png" />
     <None Remove="Cashier\Assets\Icons\return_image.png" />
     <None Remove="Cashier\Assets\Icons\search.png" />
@@ -66,10 +69,16 @@
     <Content Include="Cashier\Assets\Icons\client_list.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Cashier\Assets\Icons\edit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cashier\Assets\Icons\exchange_image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\exit_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\filter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\forward.png">
@@ -97,6 +106,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\put_money_image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\red_trash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\red_X.png">

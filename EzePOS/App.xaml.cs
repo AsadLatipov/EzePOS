@@ -60,6 +60,8 @@ namespace EzePOS
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IClientService, ClientService>();
+
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

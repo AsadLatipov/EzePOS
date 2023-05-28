@@ -6,6 +6,7 @@ using System.Windows.Media;
 using EzePOS.Business.Helper;
 using EzePOS.Business.Models;
 using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Entities;
 
 namespace EzePOS.Cashier.WindowUI.UserControls.Navs
 {
@@ -22,31 +23,31 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
         //public DiscountCard card1card = new DiscountCard();
         public List<ShopModel> page1Items = new List<ShopModel>();
         //public bool page1Card = false;
-        public ClientModel page1Client = new ClientModel();
+        public Client page1Client = new Client();
         public bool page1ClientExist = false;
 
         //public DiscountCard card2card = new DiscountCard();
         public List<ShopModel> page2Items = new List<ShopModel>();
         //public bool page2Card = false;
-        public ClientModel page2Client = new ClientModel();
+        public Client page2Client = new Client();
         public bool page2ClientExist = false;
 
         //public DiscountCard card3card = new DiscountCard();
         public List<ShopModel> page3Items = new List<ShopModel>();
         //public bool page3Card = false;
-        public ClientModel page3Client = new ClientModel();
+        public Client page3Client = new Client();
         public bool page3ClientExist = false;
 
         //public DiscountCard card4card = new DiscountCard();
         public List<ShopModel> page4Items = new List<ShopModel>();
         //public bool page4Card = false;
-        public ClientModel page4Client = new ClientModel();
+        public Client page4Client = new Client();
         public bool page4ClientExist = false;
 
         //public DiscountCard card5card = new DiscountCard();
         public List<ShopModel> page5Items = new List<ShopModel>();
         //public bool page5Card = false;
-        public ClientModel page5Client = new ClientModel();
+        public Client page5Client = new Client();
         public bool page5ClientExist = false;
         public int currentPage = 1;
 
@@ -465,7 +466,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                     //card5card = new DiscountCard();
                     //page5Card = false;
                     page5Items = new List<ShopModel>();
-                    page5Client = new ClientModel();
+                    page5Client = new Client();
                     page5ClientExist = false;
 
                     l = 4;
@@ -501,7 +502,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card4card = new DiscountCard();
                         //page4Card = false;
                         page4Items = new List<ShopModel>();
-                        page4Client = new ClientModel();
+                        page4Client = new Client();
                         page4ClientExist = false;
 
 
@@ -533,7 +534,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card3card = new DiscountCard();
                         //page3Card = false;
                         page3Items = new List<ShopModel>();
-                        page3Client = new ClientModel();
+                        page3Client = new Client();
                         page3ClientExist = false;
 
                         l = 2;
@@ -558,7 +559,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card2card = new DiscountCard();
                         //page2Card = false;
                         page2Items = new List<ShopModel>();
-                        page2Client = new ClientModel();
+                        page2Client = new Client();
                         page2ClientExist = false;
 
                         l = 1;
@@ -578,7 +579,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card1card = new DiscountCard();
                         //page1Card = false;
                         page1Items = new List<ShopModel>();
-                        page1Client = new ClientModel();
+                        page1Client = new Client();
                         page1ClientExist = false;
 
                         ChooseBtn(1);
@@ -612,7 +613,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                     //card5card = new DiscountCard();
                     //page5Card = false;
                     page5Items = new List<ShopModel>();
-                    page5Client = new ClientModel();
+                    page5Client = new Client();
                     page5ClientExist = false;
 
                     l = 4;
@@ -643,7 +644,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card4card = new DiscountCard();
                         //page4Card = false;
                         page4Items = new List<ShopModel>();
-                        page4Client = new ClientModel();
+                        page4Client = new Client();
                         page4ClientExist = false;
 
 
@@ -676,7 +677,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card3card = new DiscountCard();
                         //page3Card = false;
                         page3Items = new List<ShopModel>();
-                        page3Client = new ClientModel();
+                        page3Client = new Client();
                         page3ClientExist = false;
 
                         l = 2;
@@ -696,7 +697,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card2card = new DiscountCard();
                         //page2Card = false;
                         page2Items = new List<ShopModel>();
-                        page2Client = new ClientModel();
+                        page2Client = new Client();
                         page2ClientExist = false;
 
                         l = 1;
@@ -731,7 +732,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                     //card5card = new DiscountCard();
                     //page5Card = false;
                     page5Items = new List<ShopModel>();
-                    page5Client = new ClientModel();
+                    page5Client = new Client();
                     page5ClientExist = false;
 
                     l = 4;
@@ -756,7 +757,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card4card = new DiscountCard();
                         //page4Card = false;
                         page4Items = new List<ShopModel>();
-                        page4Client = new ClientModel();
+                        page4Client = new Client();
                         page4ClientExist = false;
 
 
@@ -776,7 +777,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card3card = new DiscountCard();
                         //page3Card = false;
                         page3Items = new List<ShopModel>();
-                        page3Client = new ClientModel();
+                        page3Client = new Client();
                         page3ClientExist = false;
 
                         l = 2;
@@ -804,7 +805,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                     ////card5card = new DiscountCard();
                     ////page5Card = false;
                     page5Items = new List<ShopModel>();
-                    page5Client = new ClientModel();
+                    page5Client = new Client();
                     page5ClientExist = false;
 
                     l = 4;
@@ -823,7 +824,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                         //card4card = new DiscountCard();
                         //page4Card = false;
                         page4Items = new List<ShopModel>();
-                        page4Client = new ClientModel();
+                        page4Client = new Client();
                         page4ClientExist = false;
 
 
@@ -844,7 +845,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
                 //card5card = new DiscountCard();
                 //page5Card = false;
                 page5Items = new List<ShopModel>();
-                page5Client = new ClientModel();
+                page5Client = new Client();
                 page5ClientExist = false;
 
                 l = 4;
@@ -882,34 +883,34 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
             if (currentPage == 1)
             {
                 page1ClientExist = false;
-                page1Client = new ClientModel();
+                page1Client = new Client();
             }
             else if (currentPage == 2)
             {
                 page2ClientExist = false;
-                page2Client = new ClientModel();
+                page2Client = new Client();
             }
             else if (currentPage == 3)
             {
                 page3ClientExist = false;
-                page3Client = new ClientModel();
+                page3Client = new Client();
             }
             else if (currentPage == 4)
             {
                 page4ClientExist = false;
-                page4Client = new ClientModel();
+                page4Client = new Client();
             }
             else if (currentPage == 5)
             {
                 page5ClientExist = false;
-                page5Client = new ClientModel();
+                page5Client = new Client();
             }
 
             ChooseBtn(currentPage);
 
         }
 
-        public void AddClient(ClientModel client)
+        public void AddClient(Client client)
         {
             if (client != null)
             {

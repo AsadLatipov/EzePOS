@@ -11,6 +11,8 @@ namespace EzePOS.Infrastructure.IRepositories
         ICategoryRepository Categories { get; }
         IProductRepository Products { get; }
         IUserRepository Users { get; }
+        IClientRepository Clients { get; }
+
 
 
         Task SaveChangesAsync();

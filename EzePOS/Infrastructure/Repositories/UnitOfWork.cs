@@ -20,6 +20,8 @@ namespace EzePOS.Infrastructure.Repositories
         public IProductRepository Products { get; private set; }
         public ICategoryRepository Categories { get; private set; }
         public IUserRepository Users { get; private set; }
+        public IClientRepository Clients { get; private set; }
+
 
 
         public void Dispose()
