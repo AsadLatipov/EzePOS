@@ -21,7 +21,7 @@
                                     HorizontalAlignment="Center"
                                     FontSize="22"
                                     Foreground="White"
-                                    Text="To'lov"/>
+                                    Text="Saqlash"/>
                             </Border>
                             <ControlTemplate.Triggers>
                             </ControlTemplate.Triggers>
@@ -73,7 +73,7 @@
                     <Border Height="50" CornerRadius="10"
                             Margin="0 20 0 0"
                             BorderBrush="#969B99" BorderThickness="1">
-                        <TextBox BorderThickness="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
+                        <TextBox x:Name="nameBox" GotFocus="nameBox_GotFocus" BorderThickness="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
                     </Border>
 
                     <TextBlock Text="Telfon raqami" FontSize="20" Margin="0 20 0 0"
@@ -81,7 +81,7 @@
                     <Border Height="50" CornerRadius="10"
                             Margin="0 20 0 0"
                             BorderBrush="#969B99" BorderThickness="1">
-                        <TextBox BorderThickness="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
+                        <TextBox x:Name="phoneBox" GotFocus="phoneBox_GotFocus" BorderThickness="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
                     </Border>
 
                     <TextBlock Text="Qarzi" FontSize="20" Margin="0 20 0 0"
@@ -89,7 +89,7 @@
                     <Border Height="50" CornerRadius="10"
                             Margin="0 20 0 0"
                             BorderBrush="#969B99" BorderThickness="1">
-                        <TextBox BorderThickness="0" Text="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
+                        <TextBox x:Name="debtBox" GotFocus="debtBox_GotFocus" BorderThickness="0" Text="0" VerticalContentAlignment="Center" Margin="3" FontSize="20" />
                     </Border>
                 </StackPanel>
 

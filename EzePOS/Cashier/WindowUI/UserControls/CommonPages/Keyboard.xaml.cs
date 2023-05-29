@@ -1,4 +1,5 @@
-﻿using EzePOS.Cashier.WindowUI.Windows;
+﻿using EzePOS.Business.Helper;
+using EzePOS.Cashier.WindowUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -228,205 +229,292 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         public void Write(Button button)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
-            //{
-            //    targetWindow.dashboard.searchpart.search_txt.Text += button.Content.ToString();
-            //    targetWindow.dashboard.searchpart.search_txt.Focus();
-
-            //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
-            //}
-            
-            //Payment Clients
-            if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
+            try
             {
-                if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
-                {
-                    targetWindow.dashboard.paymentpart.client_name.Text += button.Content.ToString();
-                    targetWindow.dashboard.paymentpart.client_name.Focus();
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
+                //{
+                //    targetWindow.dashboard.searchpart.search_txt.Text += button.Content.ToString();
+                //    targetWindow.dashboard.searchpart.search_txt.Focus();
 
-                    targetWindow.dashboard.paymentpart.client_name.CaretIndex = targetWindow.dashboard.paymentpart.client_name.Text.Length;
-                }
-                else if (targetWindow.dashboard.paymentpart.clientNumberGotFocus)
-                {
-                    targetWindow.dashboard.paymentpart.client_number.Text += button.Content.ToString();
-                    targetWindow.dashboard.paymentpart.client_number.Focus();
+                //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
+                //}
 
-                    targetWindow.dashboard.paymentpart.client_number.CaretIndex = targetWindow.dashboard.paymentpart.client_number.Text.Length;
+                //Payment Clients
+                if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
+                    {
+                        targetWindow.dashboard.paymentpart.client_name.Text += button.Content.ToString();
+                        targetWindow.dashboard.paymentpart.client_name.Focus();
+
+                        targetWindow.dashboard.paymentpart.client_name.CaretIndex = targetWindow.dashboard.paymentpart.client_name.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.paymentpart.clientNumberGotFocus)
+                    {
+                        Regex regex = new Regex("[^0-9^]");
+                        bool temp = regex.IsMatch(button.Content.ToString());
+                        if (temp == false)
+                        {
+                            targetWindow.dashboard.paymentpart.client_number.Text += button.Content.ToString();
+                        }
+
+                        targetWindow.dashboard.paymentpart.client_number.Focus();
+                        targetWindow.dashboard.paymentpart.client_number.CaretIndex = targetWindow.dashboard.paymentpart.client_number.Text.Length;
+                    }
                 }
+                //Add Clients
+                if (targetWindow.dashboard.addclient.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.addclient.nameBoxGotFocus)
+                    {
+                        targetWindow.dashboard.addclient.nameBox.Text += button.Content.ToString();
+                        targetWindow.dashboard.addclient.nameBox.Focus();
+
+                        targetWindow.dashboard.addclient.nameBox.CaretIndex = targetWindow.dashboard.addclient.nameBox.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.addclient.phoneBoxGotFocus)
+                    {
+                        targetWindow.dashboard.addclient.phoneBox.Text += button.Content.ToString();
+                        targetWindow.dashboard.addclient.phoneBox.Focus();
+
+                        targetWindow.dashboard.addclient.phoneBox.CaretIndex = targetWindow.dashboard.addclient.phoneBox.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.addclient.debtBoxGotFocus)
+                    {
+                        Regex regex = new Regex("[^0-9^]");
+                        bool temp = regex.IsMatch(button.Content.ToString());
+                        if (temp == false)
+                        {
+                            targetWindow.dashboard.addclient.debtBox.Text += button.Content.ToString();
+                            double temp2 = double.Parse(targetWindow.dashboard.addclient.debtBox.Text.ToString().Replace(" ", ""));
+                            targetWindow.dashboard.addclient.debtBox.Text = temp2.Amount();
+                        }
+                        targetWindow.dashboard.addclient.debtBox.Focus();
+
+                        targetWindow.dashboard.addclient.debtBox.CaretIndex = targetWindow.dashboard.addclient.debtBox.Text.Length;
+                    }
+                }
+
+                //Payment Discount
+                else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
+                {
+                    Regex regex = new Regex("[^0-9^]");
+                    bool temp = regex.IsMatch(button.Content.ToString());
+                    if (temp == false)
+                    {
+                        targetWindow.dashboard.addDiscountToShop.textBox.Text += button.Content.ToString();
+                    }
+                    targetWindow.dashboard.addDiscountToShop.textBox.Focus();
+
+                    targetWindow.dashboard.addDiscountToShop.textBox.CaretIndex = targetWindow.dashboard.addDiscountToShop.textBox.Text.Length;
+
+                }
+                //NewPassword
+                //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.newPassword.New)
+                //    {
+                //        targetWindow.dashboard.newPassword.textBoxNew.Text += button.Content.ToString();
+                //        targetWindow.dashboard.newPassword.textBoxNew.Focus();
+
+                //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.newPassword.Again)
+                //    {
+                //        targetWindow.dashboard.newPassword.textBoxAgain.Text += button.Content.ToString();
+                //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
+
+                //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
+                //    }
+
+                //}
+                ////OldPassword
+                //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
+                //{
+                //    targetWindow.dashboard.oldPassword.textBox.Text += button.Content.ToString();
+                //    targetWindow.dashboard.oldPassword.textBox.Focus();
+
+                //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
+                //}
+
+                ////EditProductAndExchange
+                //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
+                //    {
+                //        targetWindow.dashboard.product_edit_exchange.product_name.Text += button.Content.ToString();
+                //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
+
+                //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
+                //    {
+                //        targetWindow.dashboard.product_edit_exchange.product_cost.Text += button.Content.ToString();
+                //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
+
+                //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
+                //    {
+                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Text += button.Content.ToString();
+                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
+
+                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
+                //    }
+                //}
             }
-            //Payment Discount
-            else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
+            catch
             {
-                Regex regex = new Regex("[^0-9^]");
-                bool temp = regex.IsMatch(button.Content.ToString());
-                if (temp == false)
-                {
-                    targetWindow.dashboard.addDiscountToShop.textBox.Text += button.Content.ToString();
-                }
-                targetWindow.dashboard.addDiscountToShop.textBox.Focus();
-
-                targetWindow.dashboard.addDiscountToShop.textBox.CaretIndex = targetWindow.dashboard.addDiscountToShop.textBox.Text.Length;
 
             }
-            //NewPassword
-            //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.newPassword.New)
-            //    {
-            //        targetWindow.dashboard.newPassword.textBoxNew.Text += button.Content.ToString();
-            //        targetWindow.dashboard.newPassword.textBoxNew.Focus();
-
-            //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.newPassword.Again)
-            //    {
-            //        targetWindow.dashboard.newPassword.textBoxAgain.Text += button.Content.ToString();
-            //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
-
-            //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
-            //    }
-
-            //}
-            ////OldPassword
-            //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
-            //{
-            //    targetWindow.dashboard.oldPassword.textBox.Text += button.Content.ToString();
-            //    targetWindow.dashboard.oldPassword.textBox.Focus();
-
-            //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
-            //}
-
-            ////EditProductAndExchange
-            //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
-            //    {
-            //        targetWindow.dashboard.product_edit_exchange.product_name.Text += button.Content.ToString();
-            //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
-
-            //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
-            //    {
-            //        targetWindow.dashboard.product_edit_exchange.product_cost.Text += button.Content.ToString();
-            //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
-
-            //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
-            //    {
-            //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Text += button.Content.ToString();
-            //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
-
-            //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
-            //    }
-            //}
         }
 
         private void btnBackspace_Click(object sender, RoutedEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.searchpart.search_txt.Text != "" && targetWindow.dashboard.searchpart.search_txt.Text != null)
-            //        targetWindow.dashboard.searchpart.search_txt.Text = targetWindow.dashboard.searchpart.search_txt.Text.Remove(targetWindow.dashboard.searchpart.search_txt.Text.Length - 1);
-
-            //    targetWindow.dashboard.searchpart.search_txt.Focus();
-            //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
-            //}
-            
-            //NewPassword
-            //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.newPassword.New)
-            //    {
-            //        if (targetWindow.dashboard.newPassword.textBoxNew.Text != "" && targetWindow.dashboard.newPassword.textBoxNew.Text != null)
-            //            targetWindow.dashboard.newPassword.textBoxNew.Text = targetWindow.dashboard.newPassword.textBoxNew.Text.Remove(targetWindow.dashboard.newPassword.textBoxNew.Text.Length - 1);
-
-            //        targetWindow.dashboard.newPassword.textBoxNew.Focus();
-            //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.newPassword.Again)
-            //    {
-            //        if (targetWindow.dashboard.newPassword.textBoxAgain.Text != "" && targetWindow.dashboard.newPassword.textBoxAgain.Text != null)
-            //            targetWindow.dashboard.newPassword.textBoxAgain.Text = targetWindow.dashboard.newPassword.textBoxAgain.Text.Remove(targetWindow.dashboard.newPassword.textBoxAgain.Text.Length - 1);
-
-            //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
-            //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
-            //    }
-
-            //}
-            //OldPasword
-            //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.oldPassword.textBox.Text != "" && targetWindow.dashboard.oldPassword.textBox.Text != null)
-            //        targetWindow.dashboard.oldPassword.textBox.Text = targetWindow.dashboard.oldPassword.textBox.Text.Remove(targetWindow.dashboard.oldPassword.textBox.Text.Length - 1);
-
-            //    targetWindow.dashboard.oldPassword.textBox.Focus();
-            //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
-
-            //}
-            //Payment Clients
-            if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
+            try
             {
-                if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.searchpart.search_txt.Text != "" && targetWindow.dashboard.searchpart.search_txt.Text != null)
+                //        targetWindow.dashboard.searchpart.search_txt.Text = targetWindow.dashboard.searchpart.search_txt.Text.Remove(targetWindow.dashboard.searchpart.search_txt.Text.Length - 1);
+
+                //    targetWindow.dashboard.searchpart.search_txt.Focus();
+                //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
+                //}
+
+                //NewPassword
+                //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.newPassword.New)
+                //    {
+                //        if (targetWindow.dashboard.newPassword.textBoxNew.Text != "" && targetWindow.dashboard.newPassword.textBoxNew.Text != null)
+                //            targetWindow.dashboard.newPassword.textBoxNew.Text = targetWindow.dashboard.newPassword.textBoxNew.Text.Remove(targetWindow.dashboard.newPassword.textBoxNew.Text.Length - 1);
+
+                //        targetWindow.dashboard.newPassword.textBoxNew.Focus();
+                //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.newPassword.Again)
+                //    {
+                //        if (targetWindow.dashboard.newPassword.textBoxAgain.Text != "" && targetWindow.dashboard.newPassword.textBoxAgain.Text != null)
+                //            targetWindow.dashboard.newPassword.textBoxAgain.Text = targetWindow.dashboard.newPassword.textBoxAgain.Text.Remove(targetWindow.dashboard.newPassword.textBoxAgain.Text.Length - 1);
+
+                //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
+                //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
+                //    }
+
+                //}
+                //OldPasword
+                //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.oldPassword.textBox.Text != "" && targetWindow.dashboard.oldPassword.textBox.Text != null)
+                //        targetWindow.dashboard.oldPassword.textBox.Text = targetWindow.dashboard.oldPassword.textBox.Text.Remove(targetWindow.dashboard.oldPassword.textBox.Text.Length - 1);
+
+                //    targetWindow.dashboard.oldPassword.textBox.Focus();
+                //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
+
+                //}
+                //Payment Clients
+                if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
                 {
-                    if (targetWindow.dashboard.paymentpart.client_name.Text != "" && targetWindow.dashboard.paymentpart.client_name.Text != null)
-                        targetWindow.dashboard.paymentpart.client_name.Text = targetWindow.dashboard.paymentpart.client_name.Text.Remove(targetWindow.dashboard.paymentpart.client_name.Text.Length - 1);
+                    if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
+                    {
+                        if (targetWindow.dashboard.paymentpart.client_name.Text != "" && targetWindow.dashboard.paymentpart.client_name.Text != null)
+                            targetWindow.dashboard.paymentpart.client_name.Text = targetWindow.dashboard.paymentpart.client_name.Text.Remove(targetWindow.dashboard.paymentpart.client_name.Text.Length - 1);
 
 
-                    targetWindow.dashboard.paymentpart.client_name.Focus();
-                    targetWindow.dashboard.paymentpart.client_name.CaretIndex = targetWindow.dashboard.paymentpart.client_name.Text.Length;
+                        targetWindow.dashboard.paymentpart.client_name.Focus();
+                        targetWindow.dashboard.paymentpart.client_name.CaretIndex = targetWindow.dashboard.paymentpart.client_name.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.paymentpart.clientNumberGotFocus)
+                    {
+                        if (targetWindow.dashboard.paymentpart.client_number.Text != "" && targetWindow.dashboard.paymentpart.client_number.Text != null)
+                            targetWindow.dashboard.paymentpart.client_number.Text = targetWindow.dashboard.paymentpart.client_number.Text.Remove(targetWindow.dashboard.paymentpart.client_number.Text.Length - 1);
+
+                        targetWindow.dashboard.paymentpart.client_number.Focus();
+                        targetWindow.dashboard.paymentpart.client_number.CaretIndex = targetWindow.dashboard.paymentpart.client_number.Text.Length;
+                    }
                 }
-                else if (targetWindow.dashboard.paymentpart.clientNumberGotFocus)
+
+                //Add Clients
+                if (targetWindow.dashboard.addclient.Visibility == Visibility.Visible)
                 {
-                    if (targetWindow.dashboard.paymentpart.client_number.Text != "" && targetWindow.dashboard.paymentpart.client_number.Text != null)
-                        targetWindow.dashboard.paymentpart.client_number.Text = targetWindow.dashboard.paymentpart.client_number.Text.Remove(targetWindow.dashboard.paymentpart.client_number.Text.Length - 1);
+                    if (targetWindow.dashboard.addclient.nameBoxGotFocus)
+                    {
+                        if (targetWindow.dashboard.addclient.nameBox.Text != "" && targetWindow.dashboard.addclient.nameBox.Text != null)
+                            targetWindow.dashboard.addclient.nameBox.Text = targetWindow.dashboard.addclient.nameBox.Text.Remove(targetWindow.dashboard.addclient.nameBox.Text.Length - 1);
 
-                    targetWindow.dashboard.paymentpart.client_number.Focus();
-                    targetWindow.dashboard.paymentpart.client_number.CaretIndex = targetWindow.dashboard.paymentpart.client_number.Text.Length;
+
+                        targetWindow.dashboard.addclient.nameBox.Focus();
+                        targetWindow.dashboard.addclient.nameBox.CaretIndex = targetWindow.dashboard.addclient.nameBox.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.addclient.phoneBoxGotFocus)
+                    {
+                        if (targetWindow.dashboard.addclient.phoneBox.Text != "" && targetWindow.dashboard.addclient.phoneBox.Text != null)
+                            targetWindow.dashboard.addclient.phoneBox.Text = targetWindow.dashboard.addclient.phoneBox.Text.Remove(targetWindow.dashboard.addclient.phoneBox.Text.Length - 1);
+
+                        targetWindow.dashboard.addclient.phoneBox.Focus();
+                        targetWindow.dashboard.addclient.phoneBox.CaretIndex = targetWindow.dashboard.addclient.phoneBox.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.addclient.debtBoxGotFocus)
+                    {
+                        if (targetWindow.dashboard.addclient.debtBox.Text != "" && targetWindow.dashboard.addclient.debtBox.Text != null)
+                        {
+                            targetWindow.dashboard.addclient.debtBox.Text = targetWindow.dashboard.addclient.debtBox.Text.Remove(targetWindow.dashboard.addclient.debtBox.Text.Length - 1);
+                            double temp2 = double.Parse(targetWindow.dashboard.addclient.debtBox.Text.ToString().Replace(" ", ""));
+                            targetWindow.dashboard.addclient.debtBox.Text = temp2.Amount();
+                        }
+
+
+                        targetWindow.dashboard.addclient.debtBox.Focus();
+                        targetWindow.dashboard.addclient.debtBox.CaretIndex = targetWindow.dashboard.addclient.debtBox.Text.Length;
+                    }
                 }
+
+                //Payment Discount
+                else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.addDiscountToShop.textBox.Text != "" && targetWindow.dashboard.addDiscountToShop.textBox.Text != null)
+                        targetWindow.dashboard.addDiscountToShop.textBox.Text = targetWindow.dashboard.addDiscountToShop.textBox.Text.Remove(targetWindow.dashboard.addDiscountToShop.textBox.Text.Length - 1);
+
+                    targetWindow.dashboard.addDiscountToShop.textBox.Focus();
+                    targetWindow.dashboard.addDiscountToShop.textBox.CaretIndex = targetWindow.dashboard.addDiscountToShop.textBox.Text.Length;
+
+                }
+                //EditProductAndExchange
+                //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
+                //{
+                //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
+                //    {
+                //        if (targetWindow.dashboard.product_edit_exchange.product_name.Text != "" && targetWindow.dashboard.product_edit_exchange.product_name.Text != null)
+                //            targetWindow.dashboard.product_edit_exchange.product_name.Text = targetWindow.dashboard.product_edit_exchange.product_name.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_name.Text.Length - 1);
+
+                //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
+                //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
+                //    {
+                //        if (targetWindow.dashboard.product_edit_exchange.product_cost.Text != "" && targetWindow.dashboard.product_edit_exchange.product_cost.Text != null)
+                //            targetWindow.dashboard.product_edit_exchange.product_cost.Text = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length - 1);
+
+                //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
+                //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
+                //    }
+                //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
+                //    {
+                //        if (targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != "" && targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != null)
+                //            targetWindow.dashboard.product_edit_exchange.product_qauntity.Text = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length - 1);
+
+                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
+                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
+                //    }
+                //}
             }
-
-            //Payment Discount
-            else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
+            catch
             {
-                if (targetWindow.dashboard.addDiscountToShop.textBox.Text != "" && targetWindow.dashboard.addDiscountToShop.textBox.Text != null)
-                    targetWindow.dashboard.addDiscountToShop.textBox.Text = targetWindow.dashboard.addDiscountToShop.textBox.Text.Remove(targetWindow.dashboard.addDiscountToShop.textBox.Text.Length - 1);
-
-                targetWindow.dashboard.addDiscountToShop.textBox.Focus();
-                targetWindow.dashboard.addDiscountToShop.textBox.CaretIndex = targetWindow.dashboard.addDiscountToShop.textBox.Text.Length;
 
             }
-            //EditProductAndExchange
-            //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
-            //{
-            //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
-            //    {
-            //        if (targetWindow.dashboard.product_edit_exchange.product_name.Text != "" && targetWindow.dashboard.product_edit_exchange.product_name.Text != null)
-            //            targetWindow.dashboard.product_edit_exchange.product_name.Text = targetWindow.dashboard.product_edit_exchange.product_name.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_name.Text.Length - 1);
-
-            //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
-            //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
-            //    {
-            //        if (targetWindow.dashboard.product_edit_exchange.product_cost.Text != "" && targetWindow.dashboard.product_edit_exchange.product_cost.Text != null)
-            //            targetWindow.dashboard.product_edit_exchange.product_cost.Text = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length - 1);
-
-            //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
-            //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
-            //    }
-            //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
-            //    {
-            //        if (targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != "" && targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != null)
-            //            targetWindow.dashboard.product_edit_exchange.product_qauntity.Text = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length - 1);
-
-            //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
-            //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
-            //    }
-            //}
         }
 
         bool checker = false;

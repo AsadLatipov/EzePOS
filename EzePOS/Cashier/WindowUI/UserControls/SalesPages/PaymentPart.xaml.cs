@@ -306,7 +306,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         }
 
 
-        private void ClientsList_Click(object sender, RoutedEventArgs e)
+        private async void ClientsList_Click(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
@@ -315,12 +315,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
             List<Client> clients = new List<Client>();
 
-            clients.Add(new Client { Id = 1, FullName = "Asadbek Latipov", PhoneNumber = "+998913561310" });
-            clients.Add(new Client { Id = 2, FullName = "Ahmadjon Sirojiddinov", PhoneNumber = "+998913561310" });
-            clients.Add(new Client { Id = 3, FullName = "Qosim Qosimov", PhoneNumber = "+998913561310" });
-            clients.Add(new Client { Id = 4, FullName = "Umar Fozilov", PhoneNumber = "+998913561310" });
-            clients.Add(new Client { Id = 5, FullName = "Madina Abdullayeva", PhoneNumber = "+998913561310" });
+            var aa = await targetWindow._clientService.GetAllAsync();
 
+            clients = aa.Data.ToList();
 
             dataGrid.ItemsSource = clients;
             dataGrid.Items.Refresh();
@@ -882,6 +879,40 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         {
             withMainCashGotFocus = true;
             withDebtGotFocus = false;
+        }
+
+        private async void add_client_btn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (client_name.Text != "" && client_name.Text != null)
+                {
+                    if (client_number.Text != "" && client_number.Text != null)
+                    {
+
+                        Client client = new Client() { FullName = client_name.Text, PhoneNumber = client_name.Text, Debt = 0 };
+
+                        var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                        var result = await targetWindow._clientService.CreateAsync(client, targetWindow.dashboard.user);
+
+                        if(result.Data != null)
+                        {
+                            client_grid.Visibility = Visibility.Hidden;
+                            client_name.Text = "";
+                            client_number.Text = "";
+
+                            targetWindow.dashboard.cash_navbar.AddClient(result.Data);
+                            debt_btn.Visibility = Visibility.Visible;
+                            removeClient_btn.Visibility = Visibility.Visible;
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

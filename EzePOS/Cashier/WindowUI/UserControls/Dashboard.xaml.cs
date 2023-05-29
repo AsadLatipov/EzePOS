@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EzePOS.Infrastructure.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls
         {
             InitializeComponent();
         }
+
+        public User user = new User() { Id = 1, FirstName = "Asadbek", LastName ="Latipov"};
 
         private void btn_menu_click(object sender, RoutedEventArgs e)
         {

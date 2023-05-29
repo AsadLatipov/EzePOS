@@ -84,7 +84,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             BackgrounColorChangeButtonRight(6);
             //ChangePage(1.6);
         }
-        public void ChangePage(double pageId)
+        public async void  ChangePage(double pageId)
         {
             var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
@@ -163,6 +163,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 case 4:
                     targetWindow.dashboard.page_name.Text = "Klientlar";
                     targetWindow.dashboard.clients.Visibility = Visibility.Visible;
+                    await targetWindow.dashboard.clients.SetClientsAsync();
                     CurrentPage = 4;
                     ChangeNavBar(3);
                     break;

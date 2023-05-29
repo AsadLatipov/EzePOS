@@ -23,13 +23,17 @@ namespace EzePOS.Cashier.WindowUI.Windows
         public IUserService _userService;
         public ICategoryService _categoryService;
         public IProductService _productService;
+        public IClientService _clientService;
+
         //public ISeedData _seedData;
 
         public Layout(
             IUserService userService,
             ICategoryService categoryService,
+            IClientService clientService,
             IProductService productService)
         {
+            _clientService = clientService;
             _userService = userService;
             _productService = productService;
             _categoryService = categoryService;

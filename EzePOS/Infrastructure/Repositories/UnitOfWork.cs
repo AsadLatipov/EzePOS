@@ -16,6 +16,10 @@ namespace EzePOS.Infrastructure.Repositories
             this.context = context;
             Products = new ProductRepository(context);
             Categories = new CategoryRepository(context);
+            Clients = new ClientRepository(context);
+            Users = new UserRepository(context);
+
+
         }
         public IProductRepository Products { get; private set; }
         public ICategoryRepository Categories { get; private set; }
