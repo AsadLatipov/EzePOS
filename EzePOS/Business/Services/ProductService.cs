@@ -91,7 +91,11 @@ namespace EzePOS.Business.Services
                 baseResponse.Error = new ErrorModel(400, "Product not found");
                 return baseResponse;
             }
-
+            else
+            {
+                await _unitOfWork.Products.DeleteAsync(expression);
+            }
+            
             await _unitOfWork.SaveChangesAsync();
 
             baseResponse.Data = true;

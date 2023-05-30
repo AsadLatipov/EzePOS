@@ -89,6 +89,10 @@ namespace EzePOS.Business.Services
                 baseResponse.Error = new ErrorModel(400, "Client not found");
                 return baseResponse;
             }
+            else
+            {
+                await _unitOfWork.Clients.DeleteAsync(expression);
+            }
 
             await _unitOfWork.SaveChangesAsync();
 

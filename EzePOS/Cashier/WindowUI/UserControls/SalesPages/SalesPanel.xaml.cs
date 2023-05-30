@@ -353,6 +353,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 {
                     //targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
                     targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.warningStack.informText.Text = "O'chirish tugmasini bosdingiz";
                 }
                 else
                 {

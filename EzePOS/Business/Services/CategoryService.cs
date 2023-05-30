@@ -113,6 +113,10 @@ namespace EzePOS.Business.Services
                 baseResponse.Error = new ErrorModel(400, "Category not found");
                 return baseResponse;
             }
+            else
+            {
+                await _unitOfWork.Categories.DeleteAsync(expression);
+            }
 
             await _unitOfWork.SaveChangesAsync();
 

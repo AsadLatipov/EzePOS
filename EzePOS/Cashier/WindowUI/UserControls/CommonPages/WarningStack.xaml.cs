@@ -1,4 +1,5 @@
 ﻿using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             InitializeComponent();
         }
 
+        public Client client = new Client();
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
@@ -33,12 +35,22 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
         }
 
-        private void Button_Click_Ok(object sender, RoutedEventArgs e)
+        private async void Button_Click_Ok(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-            targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+            if (targetWindow.dashboard.salesPanel.Visibility == Visibility.Visible)
+            {
+                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+            }
+            else if (targetWindow.dashboard.clients.Visibility == Visibility.Visible)
+            {
+                var result = await targetWindow._clientService.DeleteAsync(obj => obj.Id == client.Id);
+                await targetWindow.dashboard.clients.SetClientsAsync();
+                targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+
+            }
         }
     }
 }

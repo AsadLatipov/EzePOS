@@ -49,12 +49,44 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
 
         private void edit_btn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Client client = datagrid.SelectedItem as Client;
+                if (client != null)
+                {
+                    var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
 
+                    targetWindow.dashboard.addclient.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.addclient.Edit = true;
+                    targetWindow.dashboard.addclient.Add = false;
+
+                    targetWindow.dashboard.addclient.SetClient(client);
+                }
+            }
+            catch
+            {
+
+            }
         }
 
-        private void delete_btn_Click(object sender, RoutedEventArgs e)
+        private async void delete_btn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Client client = datagrid.SelectedItem as Client;
+                if (client != null)
+                {
+                    var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
 
+                    targetWindow.dashboard.warningStack.informText.Text = "O'chirish tugmasini bosdingiz";
+                    targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.warningStack.client = client;
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -62,6 +94,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
 
             targetWindow.dashboard.addclient.Visibility = Visibility.Visible;
+            targetWindow.dashboard.addclient.Add = true;
+            targetWindow.dashboard.addclient.Edit = false;
+
         }
     }
 }

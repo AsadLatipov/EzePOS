@@ -82,6 +82,10 @@ namespace EzePOS.Business.Services
                 baseResponse.Error = new ErrorModel(400, "User not found");
                 return baseResponse;
             }
+            else
+            {
+                await _unitOfWork.Users.DeleteAsync(expression);
+            }
 
             await _unitOfWork.SaveChangesAsync();
 

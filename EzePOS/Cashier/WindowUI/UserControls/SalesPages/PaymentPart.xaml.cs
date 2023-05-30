@@ -890,7 +890,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                     if (client_number.Text != "" && client_number.Text != null)
                     {
 
-                        Client client = new Client() { FullName = client_name.Text, PhoneNumber = client_name.Text, Debt = 0 };
+                        Client client = new Client() { FullName = client_name.Text, PhoneNumber = client_number.Text, Debt = 0 };
 
                         var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                         var result = await targetWindow._clientService.CreateAsync(client, targetWindow.dashboard.user);
