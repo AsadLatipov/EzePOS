@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="400">
+             d:DesignHeight="768" d:DesignWidth="1366">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
@@ -50,20 +50,27 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border Background="White" CornerRadius="10" BorderBrush="#D2D7D5" BorderThickness="1">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="30" Opacity="1"/>
-        </Border.Effect>
-        <Grid>
-            <StackPanel>
-                <Image Source="/Cashier/Assets/Icons/warning.png"  Width="100" Margin="20"/>
-                <TextBlock Text="Ishonchingiz komilmi?" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="montserrat"></TextBlock>
-                <TextBlock x:Name="informText" Text="You clicked the button" FontSize="25" HorizontalAlignment="Center" FontFamily="montserrat" Margin="0,5,0,0"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="15">
-                    <Button Click="Button_Click_Cancel" Foreground="White" Margin="5 0 0 0" Style="{StaticResource btn_cancel}"></Button>
-                    <Button Click="Button_Click_Ok" Foreground="Wheat" Margin="35 0 0 0" Style="{StaticResource btn_ok}"></Button>
-                </StackPanel>
-            </StackPanel>
+    <Grid>
+        <Grid Opacity="0.1" Background="Black">
+
         </Grid>
-    </Border>
+        <Border Height="350" Width="400" Background="White" CornerRadius="10" BorderBrush="#D2D7D5" BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Opacity="1"/>
+            </Border.Effect>
+            <Grid>
+                <StackPanel>
+                    <Image Source="/Cashier/Assets/Icons/warning.png"  Width="100" Margin="20"/>
+                    <TextBlock Text="Ishonchingiz komilmi?" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30" FontFamily="montserrat"></TextBlock>
+                    <TextBlock x:Name="informText" Text="You clicked the button" FontSize="25" HorizontalAlignment="Center" FontFamily="montserrat" Margin="0,5,0,0"></TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="15">
+                        <Button Click="Button_Click_Cancel" Foreground="White" Margin="5 0 0 0" Style="{StaticResource btn_cancel}"></Button>
+                        <Button Click="Button_Click_Ok" Foreground="Wheat" Margin="35 0 0 0" Style="{StaticResource btn_ok}"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+
+    
 </UserControl>

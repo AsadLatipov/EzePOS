@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.ClientsPages"
-             
-             Height="700" Width="1370">
+             d:DesignHeight="700" d:DesignWidth="1366">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
@@ -114,6 +113,7 @@
                         CanUserAddRows="False"
                         FontSize="20"
                         IsReadOnly="True"
+                        MouseDoubleClick="datagrid_MouseDoubleClick"
                         FontWeight="Medium"
                         VerticalGridLinesBrush="Transparent">
                 <DataGrid.Columns>

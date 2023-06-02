@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="EzePOS.Cashier.WindowUI.UserControls.Products.EditAndChange"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.Products"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1366">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#E7F2F2"/>
+                <Setter Property="Height" Value="44"/>
+                <Setter Property="Width" Value="44"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <Image Source="/Cashier/Assets/Icons/X.png"
+                                   Width="20"
+                                   Height="20"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="submit_btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#09C5A3"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" x:Name="Border" Background="{TemplateBinding Background}">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    Foreground="White"
+                                    Text="Saqlash"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Opacity="0.1" Background="Black">
+
+        </Grid>
+        <Border Margin="0 0 0 40" CornerRadius="10" Height="668" Width="550" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Opacity="1"/>
+            </Border.Effect>
+            <Grid>
+                <Button Style="{StaticResource btn_cancel}" VerticalAlignment="Top" Click="Button_Click"
+                    Margin="0 20 20 0"/>
+
+                <Grid Margin="50 30" x:Name="edit_grid" Visibility="Hidden">
+                    <StackPanel>
+                        <TextBlock Text="Mahsulotni tahrirlash" FontSize="27" FontWeight="SemiBold"
+                               Foreground="#434A5E"/>
+
+                        <TextBlock Text="Mahsulot nomi" Margin="0 20 0 0"
+                               Foreground="#969B99" FontSize="17"/>
+
+                        <Border Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5" BorderThickness="2"
+                                CornerRadius="10">
+                            <TextBox Margin="2" GotFocus="product_name_GotFocus" BorderThickness="0"
+                                  x:Name="product_name" VerticalContentAlignment="Center"
+                                 FontSize="17" Foreground="#434A5E" Padding="10 0 0 0"/>
+                        </Border>
+
+                        <TextBlock Text="Olish Narxi" Margin="0 20 0 0"
+                               Foreground="#969B99" FontSize="17"/>
+
+                        <Border Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5" BorderThickness="2"
+                                CornerRadius="10">
+                            <TextBox  TextChanged="product_income_cost_TextChanged"  GotFocus="product_income_cost_GotFocus" 
+                                 BorderThickness="0" x:Name="product_income_cost" Text="" VerticalContentAlignment="Center"
+                                 FontSize="17" Foreground="#434A5E" Padding="10 0 0 0" Margin="2"/>
+                        </Border>
+
+                        <TextBlock Text="Sotish Narxi" Margin="0 20 0 0"
+                               Foreground="#969B99" FontSize="17"/>
+
+                        <Border Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5" BorderThickness="2"
+                                CornerRadius="10">
+                            <TextBox  TextChanged="product_selling_cost_TextChanged"  GotFocus="product_selling_cost_GotFocus" 
+                                 BorderThickness="0" x:Name="product_selling_cost" Text="" VerticalContentAlignment="Center"
+                                 FontSize="17" Foreground="#434A5E" Padding="10 0 0 0" Margin="2"/>
+                        </Border>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                <TextBlock Text="Soni" Margin="0 20 0 0"
+                                   Foreground="#969B99" FontSize="17"/>
+
+                                <Border Margin="0 10 0 0" CornerRadius="10"
+                                        Height="50" BorderThickness="2" BorderBrush="#D2D7D5">
+                                    <TextBox  GotFocus="product_qauntity_GotFocus" 
+                                             x:Name="product_qauntity" Text="0" VerticalContentAlignment="Center"
+                                             FontSize="17" Foreground="#434A5E" Margin="2" BorderThickness="0" Padding="10 0 0 0"/>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                                <TextBlock Text="O'lchami" Margin="0 20 0 0"
+                                   Foreground="#969B99" FontSize="17"/>
+
+                                <Border Background="#F0F0F0" Margin="0 10 0 0" Height="50" CornerRadius="10" BorderBrush="#D2D7D5"
+                                 BorderThickness="2" Padding="0 0 0 0" >
+                                    <ComboBox BorderThickness="0" Margin="2" FontSize="20" HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center" x:Name="measure_combobox">
+                                        <ComboBoxItem Background="Transparent" Content="Dona" IsSelected="True"/>
+                                        <ComboBoxItem Background="Transparent" Content="Kilogram"/>
+                                        <ComboBoxItem Background="Transparent" Content="Litr"/>
+                                    </ComboBox>
+                                </Border>
+
+                            </StackPanel>
+                        </Grid>
+                        <Button Margin="0 30 0 0" Style="{StaticResource submit_btn}" x:Name="submit_btn" Click="submit_btn_Click" Content="Saqlash"
+                            FontSize="22" Foreground="white" Height="50"/>
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="exchange_grid" Margin="50 60" Visibility="Visible">
+                    <StackPanel>
+                        <TextBlock Text="Kategoriyani almashtirish" FontSize="27" FontWeight="SemiBold"
+                               Foreground="#434A5E"/>
+
+                        <TextBlock Text="Ayni damdagi kategoriya nomi" Margin="0 20 0 0"
+                               Foreground="#969B99" FontSize="17"/>
+
+                        <Border Background="#F0F0F0" CornerRadius="10" Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5"
+                                 BorderThickness="2" Padding="0 0 0 0" >
+                            <ComboBox FontSize="20" MaxDropDownHeight="300" BorderThickness="0" Margin="2" x:Name="current_combo" HorizontalContentAlignment="Left"
+                                          VerticalContentAlignment="Center" IsEnabled="False">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Border>
+                        <Image Source="/Cashier/Assets/Icons/change.png" Width="20"
+                               Margin="0 20 0 20"/>
+
+                        <TextBlock Text="Yangi kategoriya" Margin="0 0 0 0"
+                               Foreground="#969B99" FontSize="17"/>
+
+                        <Border Background="#F0F0F0" CornerRadius="10" Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5"
+                                 BorderThickness="2" Padding="0 0 0 0" >
+                            <ComboBox FontSize="20" MaxDropDownHeight="300" x:Name="chosen_combo" HorizontalContentAlignment="Left"
+                                      BorderThickness="0" Margin="2" VerticalContentAlignment="Center">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Border>
+
+                        <Button Margin="0 30 0 0" Style="{StaticResource submit_btn}"
+                                x:Name="submit_category_btn" Click="submit_category_btn_Click"
+                            FontSize="22" Foreground="white" Height="50"/>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

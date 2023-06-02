@@ -232,16 +232,18 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             try
             {
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-                //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
-                //{
-                //    targetWindow.dashboard.searchpart.search_txt.Text += button.Content.ToString();
-                //    targetWindow.dashboard.searchpart.search_txt.Focus();
 
-                //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
-                //}
+                //SearchPart
+                if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
+                {
+                    targetWindow.dashboard.searchpart.search_txt.Text += button.Content.ToString();
+                    targetWindow.dashboard.searchpart.search_txt.Focus();
+
+                    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
+                }
 
                 //Payment Clients
-                if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
+                else if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
                 {
                     if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
                     {
@@ -262,6 +264,19 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.paymentpart.client_number.Focus();
                         targetWindow.dashboard.paymentpart.client_number.CaretIndex = targetWindow.dashboard.paymentpart.client_number.Text.Length;
                     }
+                }
+                //DebtRepaymnet
+                if (targetWindow.dashboard.debtRepayment.Visibility == Visibility.Visible)
+                {
+                    Regex regex = new Regex("[^0-9^]");
+                    bool temp = regex.IsMatch(button.Content.ToString());
+                    if (temp == false)
+                    {
+                        targetWindow.dashboard.debtRepayment.debtBox.Text += button.Content.ToString();
+                    }
+
+                    targetWindow.dashboard.debtRepayment.debtBox.Focus();
+                    targetWindow.dashboard.debtRepayment.debtBox.CaretIndex = targetWindow.dashboard.debtRepayment.debtBox.Text.Length;
                 }
                 //Add Clients
                 if (targetWindow.dashboard.addclient.Visibility == Visibility.Visible)
@@ -338,31 +353,50 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
                 //}
 
-                ////EditProductAndExchange
-                //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
-                //{
-                //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
-                //    {
-                //        targetWindow.dashboard.product_edit_exchange.product_name.Text += button.Content.ToString();
-                //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
+                //EditProductAndExchange
+                else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
+                    {
+                        targetWindow.dashboard.product_edit_exchange.product_name.Text += button.Content.ToString();
+                        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
 
-                //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
-                //    }
-                //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
-                //    {
-                //        targetWindow.dashboard.product_edit_exchange.product_cost.Text += button.Content.ToString();
-                //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
-
-                //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
-                //    }
-                //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
-                //    {
-                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Text += button.Content.ToString();
-                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
-
-                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
-                //    }
-                //}
+                        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productSellingPriceGorFocus)
+                    {
+                        Regex regex = new Regex("[^0-9^]");
+                        bool temp = regex.IsMatch(button.Content.ToString());
+                        if (temp == false)
+                        {
+                            targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text += button.Content.ToString();
+                        }
+                        targetWindow.dashboard.product_edit_exchange.product_selling_cost.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_selling_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productIncomePriceGorFocus)
+                    {
+                        Regex regex = new Regex("[^0-9^]");
+                        bool temp = regex.IsMatch(button.Content.ToString());
+                        if (temp == false)
+                        {
+                            targetWindow.dashboard.product_edit_exchange.product_income_cost.Text += button.Content.ToString();
+                        }
+                        targetWindow.dashboard.product_edit_exchange.product_income_cost.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_income_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_income_cost.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
+                    {
+                        Regex regex = new Regex("[^0-9^]");
+                        bool temp = regex.IsMatch(button.Content.ToString());
+                        if (temp == false)
+                        {
+                            targetWindow.dashboard.product_edit_exchange.product_qauntity.Text += button.Content.ToString();
+                        }
+                        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
+                    }
+                }
             }
             catch
             {
@@ -375,14 +409,16 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             try
             {
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-                //if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
-                //{
-                //    if (targetWindow.dashboard.searchpart.search_txt.Text != "" && targetWindow.dashboard.searchpart.search_txt.Text != null)
-                //        targetWindow.dashboard.searchpart.search_txt.Text = targetWindow.dashboard.searchpart.search_txt.Text.Remove(targetWindow.dashboard.searchpart.search_txt.Text.Length - 1);
 
-                //    targetWindow.dashboard.searchpart.search_txt.Focus();
-                //    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
-                //}
+                //SearchPart
+                if (targetWindow.dashboard.searchpartgrid.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.searchpart.search_txt.Text != "" && targetWindow.dashboard.searchpart.search_txt.Text != null)
+                        targetWindow.dashboard.searchpart.search_txt.Text = targetWindow.dashboard.searchpart.search_txt.Text.Remove(targetWindow.dashboard.searchpart.search_txt.Text.Length - 1);
+
+                    targetWindow.dashboard.searchpart.search_txt.Focus();
+                    targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
+                }
 
                 //NewPassword
                 //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
@@ -416,7 +452,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                 //}
                 //Payment Clients
-                if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
+                else if (targetWindow.dashboard.paymentpart.client_grid.Visibility == Visibility.Visible)
                 {
                     if (targetWindow.dashboard.paymentpart.clientNameGotFocus)
                     {
@@ -472,6 +508,17 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     }
                 }
 
+                //Debt Repayment
+                else if (targetWindow.dashboard.debtRepayment.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.debtRepayment.debtBox.Text != "" && targetWindow.dashboard.debtRepayment.debtBox.Text != null)
+                        targetWindow.dashboard.debtRepayment.debtBox.Text = targetWindow.dashboard.debtRepayment.debtBox.Text.Remove(targetWindow.dashboard.debtRepayment.debtBox.Text.Length - 1);
+
+                    targetWindow.dashboard.debtRepayment.debtBox.Focus();
+                    targetWindow.dashboard.debtRepayment.debtBox.CaretIndex = targetWindow.dashboard.debtRepayment.debtBox.Text.Length;
+
+                }
+
                 //Payment Discount
                 else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
                 {
@@ -483,33 +530,41 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                 }
                 //EditProductAndExchange
-                //else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
-                //{
-                //    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
-                //    {
-                //        if (targetWindow.dashboard.product_edit_exchange.product_name.Text != "" && targetWindow.dashboard.product_edit_exchange.product_name.Text != null)
-                //            targetWindow.dashboard.product_edit_exchange.product_name.Text = targetWindow.dashboard.product_edit_exchange.product_name.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_name.Text.Length - 1);
+                else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.product_name.Text != "" && targetWindow.dashboard.product_edit_exchange.product_name.Text != null)
+                            targetWindow.dashboard.product_edit_exchange.product_name.Text = targetWindow.dashboard.product_edit_exchange.product_name.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_name.Text.Length - 1);
 
-                //        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
-                //        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
-                //    }
-                //    else if (targetWindow.dashboard.product_edit_exchange.productPriceGorFocus)
-                //    {
-                //        if (targetWindow.dashboard.product_edit_exchange.product_cost.Text != "" && targetWindow.dashboard.product_edit_exchange.product_cost.Text != null)
-                //            targetWindow.dashboard.product_edit_exchange.product_cost.Text = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length - 1);
+                        targetWindow.dashboard.product_edit_exchange.product_name.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_name.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_name.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productSellingPriceGorFocus)
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text != "" && targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text != null)
+                            targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text = targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text.Length - 1);
 
-                //        targetWindow.dashboard.product_edit_exchange.product_cost.Focus();
-                //        targetWindow.dashboard.product_edit_exchange.product_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_cost.Text.Length;
-                //    }
-                //    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
-                //    {
-                //        if (targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != "" && targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != null)
-                //            targetWindow.dashboard.product_edit_exchange.product_qauntity.Text = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length - 1);
+                        targetWindow.dashboard.product_edit_exchange.product_selling_cost.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_selling_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_selling_cost.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productIncomePriceGorFocus)
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.product_income_cost.Text != "" && targetWindow.dashboard.product_edit_exchange.product_income_cost.Text != null)
+                            targetWindow.dashboard.product_edit_exchange.product_income_cost.Text = targetWindow.dashboard.product_edit_exchange.product_income_cost.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_income_cost.Text.Length - 1);
 
-                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
-                //        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
-                //    }
-                //}
+                        targetWindow.dashboard.product_edit_exchange.product_income_cost.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_income_cost.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_income_cost.Text.Length;
+                    }
+                    else if (targetWindow.dashboard.product_edit_exchange.productQuantityGorFocus)
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != "" && targetWindow.dashboard.product_edit_exchange.product_qauntity.Text != null)
+                            targetWindow.dashboard.product_edit_exchange.product_qauntity.Text = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Remove(targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length - 1);
+
+                        targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
+                        targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
+                    }
+                }
             }
             catch
             {

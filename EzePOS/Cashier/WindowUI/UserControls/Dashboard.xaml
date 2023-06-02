@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls"
              xmlns:navs="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.Navs"
              xmlns:sales="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.SalesPages"
+             xmlns:products="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.Products"
              xmlns:clients="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.ClientsPages"
              xmlns:commonpages="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
              mc:Ignorable="d"
@@ -104,19 +105,34 @@
         <Grid Grid.Row="1">
             <sales:SalesPanel Grid.Row="0" Visibility="Visible" Grid.RowSpan="2" x:Name="salesPanel" ></sales:SalesPanel>
             <clients:Clients Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="clients"/>
+            <products:Products Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="products"/>
         </Grid>
         
         
         
         <commonpages:LoginPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="login" ></commonpages:LoginPage>
         <commonpages:LeftMenu Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="leftMenu" ></commonpages:LeftMenu>
-        <commonpages:WarningStack  Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="warningStack" HorizontalAlignment="Center" VerticalAlignment="Center"></commonpages:WarningStack>
         <sales:RightEditControl Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="rightEdit" ></sales:RightEditControl>
         <sales:PaymentPart Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="paymentpart" ></sales:PaymentPart>
         <sales:AddDiscountToShop Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addDiscountToShop" ></sales:AddDiscountToShop>
         <clients:AddClientPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addclient"/>
+        <clients:DebtRepayment Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="debtRepayment"/>
+
+        <products:EditAndChange Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="product_edit_exchange"/>
+
+        <Grid x:Name="searchpartgrid" Grid.Row="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0 -10 50 0"
+                        Visibility="Hidden">
+            <StackPanel>
+                <commonpages:SearchPart x:Name="searchpart"/>
+                <sales:SearchDatagrid Visibility="Hidden" x:Name="search_datagrid" Margin="0 10 0 0"/>
+            </StackPanel>
+        </Grid>
         <commonpages:Keyboard Grid.Row="0" VerticalAlignment="Bottom" Visibility="Hidden" Grid.RowSpan="2" x:Name="keyboard"></commonpages:Keyboard>
         <commonpages:PrintCheck Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="printCheck"></commonpages:PrintCheck>
+        <commonpages:WarningStack  Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="warningStack"></commonpages:WarningStack>
 
 
 

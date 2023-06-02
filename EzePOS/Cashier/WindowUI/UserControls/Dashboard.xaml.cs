@@ -32,10 +32,44 @@ namespace EzePOS.Cashier.WindowUI.UserControls
         {
             leftMenu.Visibility = Visibility.Visible;
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            GetTrueMethod(leftMenu.CurrentPage);
+        }
 
+        public void GetTrueMethod(double pageNumber)
+        {
+            switch (pageNumber)
+            {
+                case 1:
+                    break;
+                case 2:
+                    products.BackButton();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 1.1:
+                    break;
+                case 1.2:
+                    break;
+                case 1.3:
+                    break;
+                case 1.4:
+                    break;
+                case 1.5:
+                    break;
+                case 1.6:
+                    break;
+                default:
+                    break;
+
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

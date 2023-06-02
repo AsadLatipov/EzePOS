@@ -17,6 +17,7 @@
     <None Remove="Cashier\Assets\Icons\client_image.png" />
     <None Remove="Cashier\Assets\Icons\client_list.png" />
     <None Remove="Cashier\Assets\Icons\edit.png" />
+    <None Remove="Cashier\Assets\Icons\exchange.png" />
     <None Remove="Cashier\Assets\Icons\exchange_image.png" />
     <None Remove="Cashier\Assets\Icons\exit_image.png" />
     <None Remove="Cashier\Assets\Icons\filter.png" />
@@ -33,11 +34,13 @@
     <None Remove="Cashier\Assets\Icons\red_X.png" />
     <None Remove="Cashier\Assets\Icons\return_image.png" />
     <None Remove="Cashier\Assets\Icons\search.png" />
+    <None Remove="Cashier\Assets\Icons\search_grey.png" />
     <None Remove="Cashier\Assets\Icons\setting_image.png" />
     <None Remove="Cashier\Assets\Icons\surface.png" />
     <None Remove="Cashier\Assets\Icons\trash.png" />
     <None Remove="Cashier\Assets\Icons\User.png" />
     <None Remove="Cashier\Assets\Icons\Vector.png" />
+    <None Remove="Cashier\Assets\Icons\warning.png" />
     <None Remove="Cashier\Assets\Icons\X.png" />
   </ItemGroup>
 
@@ -70,6 +73,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\edit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\exchange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\exchange_image.png">
@@ -120,6 +126,9 @@
     <Content Include="Cashier\Assets\Icons\search.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Cashier\Assets\Icons\search_grey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cashier\Assets\Icons\setting_image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -133,6 +142,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\Vector.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\warning.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\X.png">

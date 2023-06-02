@@ -37,7 +37,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         private void btn_2_click(object sender, RoutedEventArgs e)
         {
             BackgrounColorChangeButton(2);
-            //ChangePage(2);
+            ChangePage(2);
         }
      
         private void btn_4_click(object sender, RoutedEventArgs e)
@@ -93,6 +93,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             //targetWindow.dashboard.debts.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.returnPage.Visibility = Visibility.Hidden;
             targetWindow.dashboard.clients.Visibility = Visibility.Hidden;
+            targetWindow.dashboard.products.Visibility = Visibility.Hidden;
+
             //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.history.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
@@ -143,12 +145,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     ChangeNavBar(2);
                     CurrentPage = 1.6;
                     break;
-
-
-
                 case 2:
                     targetWindow.dashboard.page_name.Text = "Mahsulotlar";
-                    //targetWindow.dashboard.products.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.products.Visibility = Visibility.Visible;
                     CurrentPage = 2;
                     ChangeNavBar(1);
                     break;

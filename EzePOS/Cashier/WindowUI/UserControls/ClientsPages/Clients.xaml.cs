@@ -69,7 +69,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             }
         }
 
-        private async void delete_btn_Click(object sender, RoutedEventArgs e)
+        private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -97,6 +97,28 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             targetWindow.dashboard.addclient.Add = true;
             targetWindow.dashboard.addclient.Edit = false;
 
+        }
+
+        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Client client = datagrid.SelectedItem as Client;
+                if (client != null)
+                {
+                    if (client.Debt > 0)
+                    {
+                        var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+                        targetWindow.dashboard.debtRepayment.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.debtRepayment.SetClient(client);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

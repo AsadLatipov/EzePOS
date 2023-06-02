@@ -976,11 +976,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
 
         public void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //targetWindow.dashboard.searchpartgrid.Visibility = Visibility.Visible;
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            targetWindow.dashboard.searchpartgrid.Visibility = Visibility.Visible;
 
-            //targetWindow.dashboard.keyboard.Visibility = Visibility.Visible;
-            //targetWindow.dashboard.searchpart.search_txt.Focus();
+            targetWindow.dashboard.keyboard.Visibility = Visibility.Visible;
+            targetWindow.dashboard.searchpart.search_txt.Focus();
         }
     }
 }
