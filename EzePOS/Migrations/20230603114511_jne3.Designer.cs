@@ -3,6 +3,7 @@ using System;
 using EzePOS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EzePOS.Migrations
 {
     [DbContext(typeof(EzeposContext))]
-    partial class EzeposContextModelSnapshot : ModelSnapshot
+    [Migration("20230603114511_jne3")]
+    partial class jne3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -104,9 +107,6 @@ namespace EzePOS.Migrations
 
                     b.Property<double>("IncomePrice")
                         .HasColumnType("REAL");
-
-                    b.Property<int>("Measure")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");

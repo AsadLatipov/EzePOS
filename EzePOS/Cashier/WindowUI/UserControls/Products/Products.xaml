@@ -225,7 +225,7 @@
                         FontWeight="Medium"
                         VerticalGridLinesBrush="Transparent">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="4*" Header="Mahsulotlar">
+                    <DataGridTemplateColumn Width="3*" Header="Mahsulotlar">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
@@ -235,6 +235,17 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
+                    <DataGridTemplateColumn Width="*" Header="Barcode">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Barcode}" Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    
                     <DataGridTemplateColumn Width="*" Header="Olish narxi">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -244,7 +255,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
+
+
                     <DataGridTemplateColumn Width="*" Header="Sotish narxi">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -254,6 +266,28 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*" Header="O'lchovi">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Measure}" Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="2*" Header="Saqlash muddati">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding ExprirationDateShow}" Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
 
                     <DataGridTemplateColumn Width="1*">
                         <DataGridTemplateColumn.CellTemplate>

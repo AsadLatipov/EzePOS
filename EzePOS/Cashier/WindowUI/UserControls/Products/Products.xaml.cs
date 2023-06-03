@@ -30,7 +30,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
         {
             InitializeComponent();
             setCategories();
-
         }
 
 
@@ -161,9 +160,23 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
         private void delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            delete_window.Visibility = Visibility.Visible;
+            try
+            {
+                Product product = dataGrid_products.SelectedItem as Product;
+                if (product != null)
+                {
+                    var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+                    targetWindow.dashboard.warningStack.informText.Text = "O'chirish tugmasini bosdingiz";
+                    targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.warningStack.product = product;
+                }
+            }
+            catch
+            {
+
+            }
 
         }
     }

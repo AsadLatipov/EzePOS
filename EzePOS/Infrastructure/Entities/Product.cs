@@ -18,7 +18,15 @@ namespace EzePOS.Infrastructure.Entities
         public int CategoryId { get; set; }
         public double IncomePrice { get; set; }
         public double SellingPrice { get; set;}
-        public Measure Measure = Measure.pcs;
+        public string Barcode { get; set; }
+        public DateTime ExprirationDate { get; set; }
+        public Measure Measure { get; set; }
+
+
+        public string ExprirationDateShow
+        {
+            get { return ExprirationDate.ToString("mm dd yyyy");}
+        }
 
 
         [NotMapped]

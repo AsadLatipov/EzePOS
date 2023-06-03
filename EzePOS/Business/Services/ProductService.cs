@@ -47,7 +47,7 @@ namespace EzePOS.Business.Services
         {
             BaseResponse<Product> baseResponse = new BaseResponse<Product>();
 
-            var entity = await _unitOfWork.Users.GetAsync(obj => obj.Id == model.Id);
+            var entity = await _unitOfWork.Products.GetAsync(obj => obj.Id == model.Id);
             if (entity is null)
             {
                 baseResponse.Error = new ErrorModel(404, "Product not found");

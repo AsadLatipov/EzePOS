@@ -40,13 +40,18 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             product_selling_cost.Text = product.SellingPrice.Amount();
             product_income_cost.Text = product.IncomePrice.Amount();
             product_name.Text = product.Name;
-            if (product.Measure == Infrastructure.Enums.Measure.pcs)
+            if (product.Measure == Infrastructure.Enums.Measure.dona)
             {
                 measure_combobox.SelectedIndex = 0;
             }
-            else if (product.Measure == Infrastructure.Enums.Measure.kg)
+            else if (product.Measure == Infrastructure.Enums.Measure.kilogramm)
             {
                 measure_combobox.SelectedIndex = 1;
+            }
+
+            else if (product.Measure == Infrastructure.Enums.Measure.litr)
+            {
+                measure_combobox.SelectedIndex = 2;
             }
             product_qauntity.Text = "0";
         }
@@ -99,21 +104,27 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
                 if (measure_combobox.SelectedIndex == 0)
                 {
-                    product.Measure = Infrastructure.Enums.Measure.pcs;
+                    product.Measure = Infrastructure.Enums.Measure.dona;
                 }
                 else if (measure_combobox.SelectedIndex == 1)
                 {
-                    product.Measure = Infrastructure.Enums.Measure.kg;
+                    product.Measure = Infrastructure.Enums.Measure.kilogramm;
+                }
+                else if (measure_combobox.SelectedIndex == 2)
+                {
+                    product.Measure = Infrastructure.Enums.Measure.litr;
                 }
                 else
                 {
 
                 }
-                await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
-
-                targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
-                targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+                var result = await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
+                if (result.Data != null)
+                {
+                    targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
+                    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                    targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+                }
             }
             catch
             {
