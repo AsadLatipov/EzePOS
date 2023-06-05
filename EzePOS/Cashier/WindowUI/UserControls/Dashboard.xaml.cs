@@ -1,4 +1,5 @@
-﻿using EzePOS.Infrastructure.Entities;
+﻿using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,22 @@ namespace EzePOS.Cashier.WindowUI.UserControls
 
         private void btn_menu_click(object sender, RoutedEventArgs e)
         {
+            var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
             leftMenu.Visibility = Visibility.Visible;
+
+            object aa = new object();
+            RoutedEventArgs aaa = new RoutedEventArgs();
+            targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             GetTrueMethod(leftMenu.CurrentPage);
+
+
+            var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+            object aa = new object();
+            RoutedEventArgs aaa = new RoutedEventArgs();
+            targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
         }
 
         public void GetTrueMethod(double pageNumber)

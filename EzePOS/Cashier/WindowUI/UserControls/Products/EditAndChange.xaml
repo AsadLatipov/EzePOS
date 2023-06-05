@@ -52,6 +52,28 @@
                 </Setter>
 
             </Style>
+            <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Calendar}">
+                            <Viewbox Height="300" Width="300">
+                                <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="White"
+                                  BorderThickness="0"/>
+                            </Viewbox>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type DatePickerTextBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <TextBox BorderThickness="0" IsReadOnly="True" x:Name="PART_TextBox" Text="{Binding Path=SelectedDate, StringFormat='dd-MM-yyyy', RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -122,8 +144,8 @@
 
                                 <Border Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5" BorderThickness="2"
                                         CornerRadius="10">
-                                    <TextBox GotFocus="product_income_cost_GotFocus" 
-                                             BorderThickness="0" x:Name="barcode_txt" Text="" VerticalContentAlignment="Center"
+                                    <TextBox GotFocus="barcode_txt_GotFocus" 
+                                             BorderThickness="0" x:Name="barcode_txt" VerticalContentAlignment="Center"
                                              FontSize="17" Foreground="#434A5E" Padding="10 0 0 0" Margin="2"/>
                                 </Border>
                             </StackPanel>
@@ -134,15 +156,13 @@
 
                                 <Border Margin="0 10 0 0" Height="50" BorderBrush="#D2D7D5" BorderThickness="2"
                                         CornerRadius="10">
-                                    <DatePicker>
+                                    <DatePicker Margin="2" x:Name="datapicker" BorderThickness="0" VerticalAlignment="Center"
+                                                FontSize="20" CalendarStyle="{StaticResource styleCalendar}">
                                         
                                     </DatePicker>
                                 </Border>
                             </StackPanel>
                         </Grid>
-
-
-
 
 
                         <Grid>

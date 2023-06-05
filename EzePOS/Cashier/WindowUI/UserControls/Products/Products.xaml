@@ -206,9 +206,9 @@
 
         <Grid x:Name="products_grid" Visibility="Hidden">
             <DataGrid x:Name="dataGrid_products"
-                      VerticalAlignment="Top"
-                      AutoGenerateColumns="False"
-                      ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+                        VerticalAlignment="Top"
+                        AutoGenerateColumns="False"
+                        ColumnHeaderStyle="{StaticResource HeaderStyle}"  
                         Foreground="#434A5E"
                         RowStyle="{StaticResource datagridrow}"
                         VerticalScrollBarVisibility="Hidden"

@@ -396,6 +396,15 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
                         targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
                     }
+
+                    else if (targetWindow.dashboard.product_edit_exchange.productBarcodeGorFocus)
+                    {
+                        targetWindow.dashboard.product_edit_exchange.barcode_txt.Text += button.Content.ToString();
+                        targetWindow.dashboard.product_edit_exchange.barcode_txt.Focus();
+                        targetWindow.dashboard.product_edit_exchange.barcode_txt.CaretIndex = targetWindow.dashboard.product_edit_exchange.barcode_txt.Text.Length;
+                    }
+
+                    
                 }
             }
             catch
@@ -564,6 +573,16 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.product_edit_exchange.product_qauntity.Focus();
                         targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
                     }
+                    else if (targetWindow.dashboard.product_edit_exchange.productBarcodeGorFocus)
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.barcode_txt.Text != "" && targetWindow.dashboard.product_edit_exchange.barcode_txt.Text != null)
+                            targetWindow.dashboard.product_edit_exchange.barcode_txt.Text = targetWindow.dashboard.product_edit_exchange.barcode_txt.Text.Remove(targetWindow.dashboard.product_edit_exchange.barcode_txt.Text.Length - 1);
+
+                        targetWindow.dashboard.product_edit_exchange.barcode_txt.Focus();
+                        targetWindow.dashboard.product_edit_exchange.barcode_txt.CaretIndex = targetWindow.dashboard.product_edit_exchange.barcode_txt.Text.Length;
+                    }
+
+                    
                 }
             }
             catch

@@ -107,18 +107,8 @@
             <clients:Clients Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="clients"/>
             <products:Products Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="products"/>
         </Grid>
-        
-        
-        
-        <commonpages:LoginPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="login" ></commonpages:LoginPage>
-        <commonpages:LeftMenu Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="leftMenu" ></commonpages:LeftMenu>
-        <sales:RightEditControl Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="rightEdit" ></sales:RightEditControl>
-        <sales:PaymentPart Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="paymentpart" ></sales:PaymentPart>
-        <sales:AddDiscountToShop Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addDiscountToShop" ></sales:AddDiscountToShop>
-        <clients:AddClientPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addclient"/>
-        <clients:DebtRepayment Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="debtRepayment"/>
 
-        <products:EditAndChange Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="product_edit_exchange"/>
+
 
         <Grid x:Name="searchpartgrid" Grid.Row="1"
                         VerticalAlignment="Top"
@@ -130,6 +120,17 @@
                 <sales:SearchDatagrid Visibility="Hidden" x:Name="search_datagrid" Margin="0 10 0 0"/>
             </StackPanel>
         </Grid>
+        <commonpages:LoginPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="login" ></commonpages:LoginPage>
+        <commonpages:LeftMenu Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="leftMenu" ></commonpages:LeftMenu>
+        <sales:RightEditControl Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="rightEdit" ></sales:RightEditControl>
+        <sales:PaymentPart Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="paymentpart" ></sales:PaymentPart>
+        <sales:AddDiscountToShop Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addDiscountToShop" ></sales:AddDiscountToShop>
+        <clients:AddClientPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addclient"/>
+        <clients:DebtRepayment Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="debtRepayment"/>
+
+        <products:EditAndChange Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="product_edit_exchange"/>
+
+        
         <commonpages:Keyboard Grid.Row="0" VerticalAlignment="Bottom" Visibility="Hidden" Grid.RowSpan="2" x:Name="keyboard"></commonpages:Keyboard>
         <commonpages:PrintCheck Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="printCheck"></commonpages:PrintCheck>
         <commonpages:WarningStack  Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="warningStack"></commonpages:WarningStack>

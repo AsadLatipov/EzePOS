@@ -94,7 +94,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             //targetWindow.dashboard.returnPage.Visibility = Visibility.Hidden;
             targetWindow.dashboard.clients.Visibility = Visibility.Hidden;
             targetWindow.dashboard.products.Visibility = Visibility.Hidden;
-
+            targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Visible;
+            targetWindow.dashboard.products.products_grid.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.history.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
@@ -149,7 +150,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     targetWindow.dashboard.page_name.Text = "Mahsulotlar";
                     targetWindow.dashboard.products.Visibility = Visibility.Visible;
                     CurrentPage = 2;
-                    ChangeNavBar(1);
+                    ChangeNavBar(2);
                     break;
 
                 case 3:

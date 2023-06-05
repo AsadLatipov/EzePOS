@@ -34,12 +34,16 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             try
             {
                 var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
-                var aa = await targetWindow._clientService.GetAllAsync();
+                var temp = await targetWindow._clientService.GetAllAsync();
 
-                clients = aa.Data.ToList();
+                clients = temp.Data.ToList();
 
                 datagrid.ItemsSource = clients;
                 datagrid.Items.Refresh();
+
+                object aa = new object();
+                RoutedEventArgs aaa = new RoutedEventArgs();
+                targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
             }
             catch
             {
@@ -97,6 +101,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             targetWindow.dashboard.addclient.Add = true;
             targetWindow.dashboard.addclient.Edit = false;
 
+            object aa = new object();
+            RoutedEventArgs aaa = new RoutedEventArgs();
+            targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
+
         }
 
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -119,6 +127,15 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ClientsPages
             {
 
             }
+        }
+
+        private void datagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+            object aa = new object();
+            RoutedEventArgs aaa = new RoutedEventArgs();
+            targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
         }
     }
 }

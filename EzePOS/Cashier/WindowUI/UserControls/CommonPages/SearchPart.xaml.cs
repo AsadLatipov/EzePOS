@@ -72,20 +72,20 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         public void SearchCategoryOnProducts(string text)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //if (text != "")
-            //{
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            if (text != "")
+            {
 
-            //    var temp = targetWindow.dashboard.products.categories.Where(obj => obj.Name.ToLower().Contains(text.ToLower()));
+                var temp = targetWindow.dashboard.products.categories.Where(obj => obj.Name.ToLower().Contains(text.ToLower()));
 
-            //    targetWindow.dashboard.products.dataGrid_categories.ItemsSource = temp;
-            //    targetWindow.dashboard.products.dataGrid_categories.Items.Refresh();
-            //}
-            //else
-            //{
-            //    targetWindow.dashboard.products.dataGrid_categories.ItemsSource = targetWindow.dashboard.products.categories;
-            //    targetWindow.dashboard.products.dataGrid_categories.Items.Refresh();
-            //}
+                targetWindow.dashboard.products.dataGrid_categories.ItemsSource = temp;
+                targetWindow.dashboard.products.dataGrid_categories.Items.Refresh();
+            }
+            else
+            {
+                targetWindow.dashboard.products.dataGrid_categories.ItemsSource = targetWindow.dashboard.products.categories;
+                targetWindow.dashboard.products.dataGrid_categories.Items.Refresh();
+            }
         }
 
         public void SearchDebtors(string text)
@@ -108,20 +108,20 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         public void SearchClients(string text)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //if (text != "")
-            //{
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            if (text != "")
+            {
 
-            //    var temp = targetWindow.dashboard.clients.clients.Where(obj => obj.Fullname.ToLower().Contains(text.ToLower()));
+                var temp = targetWindow.dashboard.clients.clients.Where(obj => obj.FullName.ToLower().Contains(text.ToLower()));
 
-            //    targetWindow.dashboard.clients.datagrid.ItemsSource = temp;
-            //    targetWindow.dashboard.clients.datagrid.Items.Refresh();
-            //}
-            //else
-            //{
-            //    targetWindow.dashboard.clients.datagrid.ItemsSource = targetWindow.dashboard.clients.clients;
-            //    targetWindow.dashboard.clients.datagrid.Items.Refresh();
-            //}
+                targetWindow.dashboard.clients.datagrid.ItemsSource = temp;
+                targetWindow.dashboard.clients.datagrid.Items.Refresh();
+            }
+            else
+            {
+                targetWindow.dashboard.clients.datagrid.ItemsSource = targetWindow.dashboard.clients.clients;
+                targetWindow.dashboard.clients.datagrid.Items.Refresh();
+            }
         }
 
         public void SearchDiscounts(string text)
@@ -145,20 +145,20 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         public void SearchProductOnProducts(string text)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //if (text != "")
-            //{
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            if (text != "")
+            {
 
-            //    var temp = targetWindow.dashboard.products.products.Where(obj => obj.Name.ToLower().Contains(text.ToLower()));
+                var temp = targetWindow.dashboard.products.products.Where(obj => obj.Name.ToLower().Contains(text.ToLower()));
 
-            //    targetWindow.dashboard.products.dataGrid_products.ItemsSource = temp;
-            //    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-            //}
-            //else
-            //{
-            //    targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
-            //    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-            //}
+                targetWindow.dashboard.products.dataGrid_products.ItemsSource = temp;
+                targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+            }
+            else
+            {
+                targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
+                targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+            }
         }
         public async void SearchPotoductOnSale(string text)
         {
@@ -200,47 +200,51 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         private void search_txt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //try
-            //{
-            //    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            //    if (targetWindow.dashboard.products.Visibility == Visibility.Visible)
-            //    {
-            //        if (targetWindow.dashboard.products.categories_grid.Visibility == Visibility.Visible)
-            //        {
-            //            SearchCategoryOnProducts(search_txt.Text);
-            //        }
-            //        else
-            //        {
-            //            SearchProductOnProducts(search_txt.Text);
-            //        }
-            //    }
-            //    else if (targetWindow.dashboard.debts.Visibility == Visibility.Visible)
-            //    {
-            //        SearchDebtors(search_txt.Text);
-            //    }
-            //    else if (targetWindow.dashboard.clients.Visibility == Visibility.Visible)
-            //    {
-            //        SearchClients(search_txt.Text);
-            //    }
-            //    else if (targetWindow.dashboard.discount.Visibility == Visibility.Visible)
-            //    {
-            //        SearchDiscounts(search_txt.Text);
-            //    }
-            //    else
-            //    {
-            //        SearchPotoductOnSale(search_txt.Text);
-            //    }
+                if (targetWindow.dashboard.products.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.products.categories_grid.Visibility == Visibility.Visible)
+                    {
+                        SearchCategoryOnProducts(search_txt.Text);
+                    }
+                    else
+                    {
+                        if (targetWindow.dashboard.product_edit_exchange.Visibility != Visibility.Visible)
+                        {
+                            SearchProductOnProducts(search_txt.Text);
+                        }
+                    }
+                }
+                //else if (targetWindow.dashboard.debts.Visibility == Visibility.Visible)
+                //{
+                //    SearchDebtors(search_txt.Text);
+                //}
+                else if (targetWindow.dashboard.clients.Visibility == Visibility.Visible)
+                {
+                    if(targetWindow.dashboard.addclient.Visibility != Visibility.Visible)
+                    {
+                        SearchClients(search_txt.Text);
+                    }
+                }
+                //else if (targetWindow.dashboard.discount.Visibility == Visibility.Visible)
+                //{
+                //    SearchDiscounts(search_txt.Text);
+                //}
+                else
+                {
+                    SearchPotoductOnSale(search_txt.Text);
+                }
 
-            //}
-            //catch
-            //{
+            }
+            catch
+            {
 
-            //}
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            }
 
-            if (targetWindow.dashboard.salesPanel.Visibility == Visibility.Visible)
-            SearchPotoductOnSale(search_txt.Text);
+            
         }
     }
 }
