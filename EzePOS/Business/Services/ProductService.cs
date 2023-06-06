@@ -28,7 +28,8 @@ namespace EzePOS.Business.Services
             BaseResponse<Product> baseResponse = new BaseResponse<Product>();
             var entity = await _unitOfWork.Products.GetAsync(obj => obj.Id == model.Id);
 
-            if (entity is not null)
+            var temp = await _unitOfWork.Products.GetAsync(obj => obj.Name.ToLower() == model.Name.ToLower() || obj.Barcode.ToLower() == model.Barcode.ToLower());
+            if (entity != null || temp != null)
             {
                 baseResponse.Error = new ErrorModel(400, "Product is exist");
                 return baseResponse;
@@ -51,6 +52,13 @@ namespace EzePOS.Business.Services
             if (entity is null)
             {
                 baseResponse.Error = new ErrorModel(404, "Product not found");
+                return baseResponse;
+            }
+
+            var temp = await _unitOfWork.Products.GetAsync(obj => obj.Name.ToLower() == model.Name.ToLower() || obj.Barcode.ToLower() == model.Barcode.ToLower() && obj.Id != model.Id);
+            if (temp != null)
+            {
+                baseResponse.Error = new ErrorModel(400, "This kind of Barcode or Name exist");
                 return baseResponse;
             }
 

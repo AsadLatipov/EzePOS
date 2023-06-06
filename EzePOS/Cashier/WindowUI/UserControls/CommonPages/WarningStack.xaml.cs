@@ -29,6 +29,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
         public Client client = new Client();
         public Product product = new Product();
+        public Category category = new Category();
+
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
@@ -53,10 +55,17 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
 
             }
-            else if (targetWindow.dashboard.products.Visibility == Visibility.Visible)
+            else if (targetWindow.dashboard.products.products_grid.Visibility == Visibility.Visible)
             {
                 var result = await targetWindow._productService.DeleteAsync(obj => obj.Id == product.Id);
                 targetWindow.dashboard.products.AfterchangeCategory();
+                targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+            }
+            else if (targetWindow.dashboard.products.categories_grid.Visibility == Visibility.Visible)
+            {
+                var result = await targetWindow._categoryService.DeleteAsync(obj => obj.Id == category.Id);
+                await targetWindow._productService.DeleteAsync(obj => obj.CategoryId == category.Id);
+                targetWindow.dashboard.products.setCategories();
                 targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
             }
         }

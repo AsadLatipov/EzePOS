@@ -3,6 +3,7 @@ using EzePOS.Cashier.WindowUI.Windows;
 using EzePOS.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
         public bool productIncomePriceGorFocus = false;
         public bool productQuantityGorFocus = false;
         public bool productBarcodeGorFocus = false;
+
+        public bool IsUpdate = false;
+        public bool IsCreate = false;
 
 
 
@@ -69,6 +73,12 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             chosen_combo.ItemsSource = new List<Category>();
             chosen_combo.Items.Refresh();
 
+            product_name.Text = "";
+            product_income_cost.Text = "";
+            product_selling_cost.Text = "";
+            barcode_txt.Text = "";
+            datapicker.SelectedDate = DateTime.Now;
+            product_qauntity.Text = "";
         }
 
         private void product_name_GotFocus(object sender, RoutedEventArgs e)
@@ -113,11 +123,20 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
                             {
                                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
+                                Product temp = new Product();
+                                temp = product;
                                 product.Name = product_name.Text;
                                 product.SellingPrice = double.Parse(product_selling_cost.Text.Replace(" ", ""));
                                 product.IncomePrice = double.Parse(product_income_cost.Text.Replace(" ", ""));
                                 product.Barcode = barcode_txt.Text;
-                                product.ExprirationDate = datapicker.SelectedDate.Value;
+                                try
+                                {
+                                    product.ExprirationDate = datapicker.SelectedDate.Value;
+                                }
+                                catch
+                                {
+                                    product.ExprirationDate = null;
+                                }
 
                                 if (measure_combobox.SelectedIndex == 0)
                                 {
@@ -135,17 +154,52 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
                                 {
 
                                 }
-                                var result = await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
-                                if (result.Data != null)
+                                if (IsUpdate)
                                 {
-                                    targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
-                                    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                                    targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+                                    var result = await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
+                                    if (result.Data != null)
+                                    {
+                                        targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
+                                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                                        targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+
+
+                                        product_name.Text = "";
+                                        product_income_cost.Text = "";
+                                        product_selling_cost.Text = "";
+                                        barcode_txt.Text = "";
+                                        datapicker.SelectedDate = DateTime.Now;
+                                        product_qauntity.Text = "";
+                                    }
+                                }
+                                else
+                                {
+
+                                    product.CategoryId = targetWindow.dashboard.products.currentCategory.Id;
+                                    var result = await targetWindow._productService.CreateAsync(product, targetWindow.dashboard.user);
+
+                                    if (result.Data != null)
+                                    {
+                                        targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
+                                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                                        targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+
+                                        product_name.Text = "";
+                                        product_income_cost.Text = "";
+                                        product_selling_cost.Text = "";
+                                        barcode_txt.Text = "";
+                                        datapicker.SelectedDate = DateTime.Now;
+                                        product_qauntity.Text = "";
+
+                                        targetWindow.dashboard.products.addborder.Visibility = Visibility.Collapsed;
+                                        targetWindow.dashboard.products.isopen = false;
+                                    }
                                 }
 
                                 object aa = new object();
                                 RoutedEventArgs aaa = new RoutedEventArgs();
                                 targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
+                                product = temp;
                             }
                         }
                     }

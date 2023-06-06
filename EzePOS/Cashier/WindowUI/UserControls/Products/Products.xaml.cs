@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EzePOS.Cashier.WindowUI.UserControls.Products
 {
@@ -24,7 +25,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
     {
         public List<Category> categories = new List<Category>();
         public List<Product> products = new List<Product>();
-        Category currentCategory = new Category();
+        public Category currentCategory = new Category();
 
         public Products()
         {
@@ -101,16 +102,19 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
         private void edit_btn_Click(object sender, RoutedEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Visible;
-
-            targetWindow.dashboard.product_edit_exchange.edit_grid.Visibility = Visibility.Visible;
-            targetWindow.dashboard.product_edit_exchange.exchange_grid.Visibility = Visibility.Hidden;
-
             Product product = dataGrid_products.SelectedItem as Product;
-
             if (product != null)
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Visible;
+                targetWindow.dashboard.product_edit_exchange.subName.Text = "Mahsulotni tahrir qilish";
+                targetWindow.dashboard.product_edit_exchange.edit_grid.Visibility = Visibility.Visible;
+                targetWindow.dashboard.product_edit_exchange.exchange_grid.Visibility = Visibility.Hidden;
+
                 targetWindow.dashboard.product_edit_exchange.SetProductToEdit(product);
+                targetWindow.dashboard.product_edit_exchange.IsUpdate = true;
+                targetWindow.dashboard.product_edit_exchange.IsCreate = false;
+            }
         }
 
         private void exchange_btn_Click(object sender, RoutedEventArgs e)
@@ -127,6 +131,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
                 }
 
                 targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Visible;
+                targetWindow.dashboard.product_edit_exchange.subName.Text = "Mahsulotni tahrir qilish";
                 targetWindow.dashboard.product_edit_exchange.exchange_grid.Visibility = Visibility.Visible;
                 targetWindow.dashboard.product_edit_exchange.edit_grid.Visibility = Visibility.Hidden;
 
@@ -178,6 +183,58 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
             }
 
+        }
+
+        private void delete_category_btn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Category category = dataGrid_categories.SelectedItem as Category;
+                if (category != null)
+                {
+                    var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+                    targetWindow.dashboard.warningStack.informText.Text = "O'chirish tugmasini bosdingiz";
+                    targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.warningStack.category = category;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+            targetWindow.dashboard.addCategory.Visibility = Visibility.Visible;
+        }
+
+        public bool isopen = false;
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (isopen == false)
+            {
+                addborder.Visibility = Visibility.Visible;
+                isopen = true;
+            }
+            else
+            {
+                addborder.Visibility = Visibility.Collapsed;
+                isopen = false;
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
+
+            targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Visible;
+            targetWindow.dashboard.product_edit_exchange.subName.Text = "Mahsulot qo'shish";
+            targetWindow.dashboard.product_edit_exchange.IsCreate = true;
+            targetWindow.dashboard.product_edit_exchange.IsUpdate = false;
         }
     }
 }

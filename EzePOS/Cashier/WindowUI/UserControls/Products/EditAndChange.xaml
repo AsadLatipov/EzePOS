@@ -90,7 +90,7 @@
 
                 <Grid Margin="50 30" x:Name="edit_grid" Visibility="Visible">
                     <StackPanel>
-                        <TextBlock Text="Mahsulotni tahrirlash" FontSize="27" FontWeight="SemiBold"
+                        <TextBlock Text="Mahsulotni tahrirlash" x:Name="subName"  FontSize="27" FontWeight="SemiBold"
                                Foreground="#434A5E"/>
 
                         <TextBlock Text="Mahsulot nomi" Margin="0 20 0 0"

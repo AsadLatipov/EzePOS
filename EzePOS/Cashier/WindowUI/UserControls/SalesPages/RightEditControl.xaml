@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.SalesPages"
              mc:Ignorable="d" 
-             Width="1366" Height="768">
+             d:DesignHeight="768" d:DesignWidth="1366">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="btn_cancel" TargetType="{x:Type Button}">
@@ -16,7 +16,6 @@
                 <Setter Property="Margin" Value="0 25 25 0"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Cursor" Value="Hand"/>
-
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">

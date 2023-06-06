@@ -325,6 +325,15 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     targetWindow.dashboard.addDiscountToShop.textBox.CaretIndex = targetWindow.dashboard.addDiscountToShop.textBox.Text.Length;
 
                 }
+                //AddCategory
+                else if (targetWindow.dashboard.addCategory.Visibility == Visibility.Visible)
+                {
+                    
+                    targetWindow.dashboard.addCategory.category_name.Text += button.Content.ToString();
+                    targetWindow.dashboard.addCategory.category_name.Focus();
+
+                    targetWindow.dashboard.addCategory.category_name.CaretIndex = targetWindow.dashboard.addCategory.category_name.Text.Length;
+                }
                 //NewPassword
                 //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
                 //{
@@ -403,8 +412,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.product_edit_exchange.barcode_txt.Focus();
                         targetWindow.dashboard.product_edit_exchange.barcode_txt.CaretIndex = targetWindow.dashboard.product_edit_exchange.barcode_txt.Text.Length;
                     }
-
-                    
                 }
             }
             catch
@@ -527,7 +534,15 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     targetWindow.dashboard.debtRepayment.debtBox.CaretIndex = targetWindow.dashboard.debtRepayment.debtBox.Text.Length;
 
                 }
+                //AddCategory
+                else if (targetWindow.dashboard.addCategory.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.addCategory.category_name.Text != "" && targetWindow.dashboard.addCategory.category_name.Text != null)
+                        targetWindow.dashboard.addCategory.category_name.Text = targetWindow.dashboard.addCategory.category_name.Text.Remove(targetWindow.dashboard.addCategory.category_name.Text.Length - 1);
 
+                    targetWindow.dashboard.addCategory.category_name.Focus();   
+                    targetWindow.dashboard.addCategory.category_name.CaretIndex = targetWindow.dashboard.addCategory.category_name.Text.Length;
+                }
                 //Payment Discount
                 else if (targetWindow.dashboard.addDiscountToShop.Visibility == Visibility.Visible)
                 {
