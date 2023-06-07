@@ -176,6 +176,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
                                 {
 
                                     product.CategoryId = targetWindow.dashboard.products.currentCategory.Id;
+                                    product.Id = 0;
                                     var result = await targetWindow._productService.CreateAsync(product, targetWindow.dashboard.user);
 
                                     if (result.Data != null)

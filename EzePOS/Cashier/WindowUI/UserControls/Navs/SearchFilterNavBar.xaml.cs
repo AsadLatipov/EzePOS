@@ -36,10 +36,17 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            //targetWindow.dashboard.debts.filter_grid.Visibility = Visibility.Visible;
-            //targetWindow.dashboard.debts.chosen_combo.ItemsSource = targetWindow.dashboard.debts.debts;
-            //targetWindow.dashboard.debts.chosen_combo.Items.Refresh();
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            targetWindow.dashboard.filter.Visibility = Visibility.Visible;
+            if (targetWindow.dashboard.products.products_grid.Visibility == Visibility.Visible)
+            {
+                targetWindow.dashboard.filter.product_filter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                targetWindow.dashboard.filter.product_filter.Visibility = Visibility.Hidden;
+
+            }
         }
     }
 }

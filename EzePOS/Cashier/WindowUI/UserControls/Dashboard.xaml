@@ -127,7 +127,7 @@
         <sales:AddDiscountToShop Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addDiscountToShop" ></sales:AddDiscountToShop>
         <clients:AddClientPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addclient"/>
         <clients:DebtRepayment Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="debtRepayment"/>
-        
+        <commonpages:Filter Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="filter" />
         <products:EditAndChange Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="product_edit_exchange"/>
         <products:AddCategory Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addCategory" />
 
