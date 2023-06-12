@@ -37,6 +37,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls
             object aa = new object();
             RoutedEventArgs aaa = new RoutedEventArgs();
             targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
+
+            targetWindow.dashboard.products.addborder.Visibility = Visibility.Collapsed;
+            targetWindow.dashboard.products.isopen = false;
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

@@ -55,12 +55,16 @@ namespace EzePOS.Business.Services
                 return baseResponse;
             }
 
-            var temp = await _unitOfWork.Products.GetAsync(obj => obj.Name.ToLower() == model.Name.ToLower() || obj.Barcode.ToLower() == model.Barcode.ToLower() && obj.Id != model.Id);
-            if (temp != null)
+            var temp = await _unitOfWork.Products.GetAllAsync(obj => obj.Name.ToLower() == model.Name.ToLower() || obj.Barcode.ToLower() == model.Barcode.ToLower());
+            foreach(var item in temp)
             {
-                baseResponse.Error = new ErrorModel(400, "This kind of Barcode or Name exist");
-                return baseResponse;
+                if(item.Id != model.Id)
+                {
+                    baseResponse.Error = new ErrorModel(400, "This kind of Barcode or Name exist");
+                    return baseResponse;
+                }
             }
+           
 
             model.UpdatedUserId = user.Id;
             model.UpdatedAt = DateTime.Now;

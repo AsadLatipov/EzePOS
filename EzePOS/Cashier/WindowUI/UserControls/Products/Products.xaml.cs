@@ -44,6 +44,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             {
                 products_grid.Visibility = Visibility.Hidden;
                 categories_grid.Visibility = Visibility.Visible;
+                addborder.Visibility = Visibility.Collapsed;
+                isopen = false;
             }
         }
         public async void setCategories()

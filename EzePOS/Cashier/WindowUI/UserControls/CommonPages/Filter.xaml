@@ -86,6 +86,7 @@
                                 <ComboBox BorderThickness="0" Margin="2" FontSize="20" HorizontalContentAlignment="Center"
                                           VerticalContentAlignment="Center" x:Name="product_checkbox">
                                     <ComboBoxItem Background="Transparent" Content="Barchasi" IsSelected="True"/>
+                                    <ComboBoxItem Background="Transparent" Content="Tugagan" IsSelected="True"/>
                                     <ComboBoxItem Background="Transparent" Content="Muddati oshganlari"/>
                                     <ComboBoxItem Background="Transparent" Content="Muddati yaqinlari"/>
                                 </ComboBox>

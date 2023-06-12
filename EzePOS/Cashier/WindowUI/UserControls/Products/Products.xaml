@@ -264,7 +264,7 @@
                         FontWeight="Medium"
                         VerticalGridLinesBrush="Transparent">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="3*" Header="Mahsulotlar">
+                    <DataGridTemplateColumn Width="2*" Header="Mahsulotlar">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
@@ -316,7 +316,17 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="2*" Header="Saqlash muddati">
+                    <DataGridTemplateColumn Width="*" Header="Miqdori">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Quantity}" Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="1.5*" Header="Saqlash muddati">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
@@ -328,7 +338,7 @@
 
 
 
-                    <DataGridTemplateColumn Width="1*">
+                    <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">

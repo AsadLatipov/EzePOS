@@ -48,6 +48,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             product_name.Text = product.Name;
             datapicker.SelectedDate = product.ExprirationDate;
             barcode_txt.Text = product.Barcode;
+            product_qauntity.Text = product.Quantity.ToString();
             if (product.Measure == Infrastructure.Enums.Measure.dona)
             {
                 measure_combobox.SelectedIndex = 0;
@@ -61,7 +62,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             {
                 measure_combobox.SelectedIndex = 2;
             }
-            product_qauntity.Text = "0";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -121,86 +121,90 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
                         {
                             if (!string.IsNullOrWhiteSpace(barcode_txt.Text))
                             {
-                                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                                if (!string.IsNullOrWhiteSpace(product_qauntity.Text))
+                                {
+                                    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-                                Product temp = new Product();
-                                temp = product;
-                                product.Name = product_name.Text;
-                                product.SellingPrice = double.Parse(product_selling_cost.Text.Replace(" ", ""));
-                                product.IncomePrice = double.Parse(product_income_cost.Text.Replace(" ", ""));
-                                product.Barcode = barcode_txt.Text;
-                                try
-                                {
-                                    product.ExprirationDate = datapicker.SelectedDate.Value;
-                                }
-                                catch
-                                {
-                                    product.ExprirationDate = null;
-                                }
-
-                                if (measure_combobox.SelectedIndex == 0)
-                                {
-                                    product.Measure = Infrastructure.Enums.Measure.dona;
-                                }
-                                else if (measure_combobox.SelectedIndex == 1)
-                                {
-                                    product.Measure = Infrastructure.Enums.Measure.kilogramm;
-                                }
-                                else if (measure_combobox.SelectedIndex == 2)
-                                {
-                                    product.Measure = Infrastructure.Enums.Measure.litr;
-                                }
-                                else
-                                {
-
-                                }
-                                if (IsUpdate)
-                                {
-                                    var result = await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
-                                    if (result.Data != null)
+                                    Product temp = new Product();
+                                    temp = product;
+                                    product.Name = product_name.Text;
+                                    product.SellingPrice = double.Parse(product_selling_cost.Text.Replace(" ", ""));
+                                    product.IncomePrice = double.Parse(product_income_cost.Text.Replace(" ", ""));
+                                    product.Barcode = barcode_txt.Text;
+                                    product.Quantity = double.Parse(product_qauntity.Text);
+                                    try
                                     {
-                                        targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
-                                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                                        targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
-
-
-                                        product_name.Text = "";
-                                        product_income_cost.Text = "";
-                                        product_selling_cost.Text = "";
-                                        barcode_txt.Text = "";
-                                        datapicker.SelectedDate = DateTime.Now;
-                                        product_qauntity.Text = "";
+                                        product.ExprirationDate = datapicker.SelectedDate.Value;
                                     }
-                                }
-                                else
-                                {
-
-                                    product.CategoryId = targetWindow.dashboard.products.currentCategory.Id;
-                                    product.Id = 0;
-                                    var result = await targetWindow._productService.CreateAsync(product, targetWindow.dashboard.user);
-
-                                    if (result.Data != null)
+                                    catch
                                     {
-                                        targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
-                                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                                        targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
-
-                                        product_name.Text = "";
-                                        product_income_cost.Text = "";
-                                        product_selling_cost.Text = "";
-                                        barcode_txt.Text = "";
-                                        datapicker.SelectedDate = DateTime.Now;
-                                        product_qauntity.Text = "";
-
-                                        targetWindow.dashboard.products.addborder.Visibility = Visibility.Collapsed;
-                                        targetWindow.dashboard.products.isopen = false;
+                                        product.ExprirationDate = null;
                                     }
-                                }
 
-                                object aa = new object();
-                                RoutedEventArgs aaa = new RoutedEventArgs();
-                                targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
-                                product = temp;
+                                    if (measure_combobox.SelectedIndex == 0)
+                                    {
+                                        product.Measure = Infrastructure.Enums.Measure.dona;
+                                    }
+                                    else if (measure_combobox.SelectedIndex == 1)
+                                    {
+                                        product.Measure = Infrastructure.Enums.Measure.kilogramm;
+                                    }
+                                    else if (measure_combobox.SelectedIndex == 2)
+                                    {
+                                        product.Measure = Infrastructure.Enums.Measure.litr;
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                    if (IsUpdate)
+                                    {
+                                        var result = await targetWindow._productService.UpdateAsync(product, targetWindow.dashboard.user);
+                                        if (result.Data != null)
+                                        {
+                                            targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
+                                            targetWindow.dashboard.products.AfterchangeCategory();
+                                            targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+
+
+                                            product_name.Text = "";
+                                            product_income_cost.Text = "";
+                                            product_selling_cost.Text = "";
+                                            barcode_txt.Text = "";
+                                            datapicker.SelectedDate = DateTime.Now;
+                                            product_qauntity.Text = "";
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        product.CategoryId = targetWindow.dashboard.products.currentCategory.Id;
+                                        product.Id = 0;
+                                        var result = await targetWindow._productService.CreateAsync(product, targetWindow.dashboard.user);
+
+                                        if (result.Data != null)
+                                        {
+                                            targetWindow.dashboard.product_edit_exchange.Visibility = Visibility.Hidden;
+                                            targetWindow.dashboard.products.AfterchangeCategory();
+                                            targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+
+                                            product_name.Text = "";
+                                            product_income_cost.Text = "";
+                                            product_selling_cost.Text = "";
+                                            barcode_txt.Text = "";
+                                            datapicker.SelectedDate = DateTime.Now;
+                                            product_qauntity.Text = "";
+
+                                            targetWindow.dashboard.products.addborder.Visibility = Visibility.Collapsed;
+                                            targetWindow.dashboard.products.isopen = false;
+                                        }
+                                    }
+
+                                    object aa = new object();
+                                    RoutedEventArgs aaa = new RoutedEventArgs();
+                                    targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
+                                    product = temp;
+                                }
                             }
                         }
                     }
@@ -300,6 +304,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
         private void barcode_txt_GotFocus(object sender, RoutedEventArgs e)
         {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+            targetWindow.dashboard.keyboard.Visibility = Visibility.Visible;
+
             productBarcodeGorFocus = true;
             productIncomePriceGorFocus = false;
             productSellingPriceGorFocus = false;

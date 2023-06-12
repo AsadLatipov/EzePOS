@@ -20,6 +20,7 @@ namespace EzePOS.Infrastructure.Entities
         public double IncomePrice { get; set; }
         public double SellingPrice { get; set;}
         public string Barcode { get; set; }
+        public double Quantity { get; set; }
         public DateTime? ExprirationDate { get; set; }
         public Measure Measure { get; set; }
 

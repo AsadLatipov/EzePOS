@@ -31,15 +31,30 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         {
             try
             {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                 if (product_checkbox.SelectedIndex == 0)
                 {
-                    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
                     var temp = await targetWindow._productService.GetAllAsync();
                     targetWindow.dashboard.products.products = temp.Data.ToList();
                     targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
                     targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
                     targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
+
+                    targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
+                }
+                else if(product_checkbox.SelectedIndex == 1)
+                {
+                    var temp = await targetWindow._productService.GetAllAsync(obj => obj.Quantity == 0);
+                    //temp.Data.Count();
+                    targetWindow.dashboard.products.products = temp.Data.ToList();
+                    targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
+                    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                    targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
+
+                    targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
                 }
                 else
                 {
