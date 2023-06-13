@@ -27,13 +27,13 @@ namespace EzePOS.Business.Models
                 return (Product.SellingPrice * Count).Amount();
             }
         }
-        public string CountShow
-        {
-            get
-            {
-                return Count.Amount();
-            }
-        }
+        //public string CountShow
+        //{
+        //    get
+        //    {
+        //        return Count.Amount();
+        //    }
+        //}
         public Visibility Visibility { get; set; } = Visibility.Hidden;
         public Thickness Margin { get; set; } = new Thickness(0, 0, 10, 0);
         public bool DeleteStatus { get; set; } = false;

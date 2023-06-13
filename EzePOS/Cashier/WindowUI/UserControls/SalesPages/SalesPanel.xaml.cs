@@ -34,10 +34,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             InitializeComponent();
             //Refresh();
             SetCategory();
-            ChangingCategories();
+            //ChangingCategories();
         }
-
-
 
         public async void SetCategory()
         {
@@ -54,8 +52,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
             }
         }
-
-
 
         public async void ChangeCategory(int ButtonId)
         {
@@ -79,7 +75,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 }
                 result.Color = "#09C5A3";
                 result.Foreground = "#FFFFFF";
-                var temp = await targetWindow._productService.GetAllAsync(obj => obj.CategoryId == result.Id);
+                var temp = await targetWindow._productService.GetAllAsync(obj => obj.CategoryId == result.Id && obj.Quantity > 0);
 
                 products = temp.Data.ToList();
                 categoryControl.ItemsSource = categories;
@@ -165,12 +161,17 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
                 if (result != null)
                 {
-                    result.Count += 1;
-                    //targetWindow.dashboard.productname_txt.Text = result.Name;
-                    //targetWindow.dashboard.calculate_txt.Text = result.Count.ToString() + " x " + result.Cost.Amount() + " = " + result.ItemTotal.Amount();
-
-                    Refresh();
-                    return;
+                    if(result.Product.Quantity - (result.Count + 1) >= 0)
+                    {
+                        result.Count += 1;
+                        Refresh();
+                        return;
+                    }
+                    else
+                    {
+                        targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.warningStack.informText.Text = "Mahsulot yetarli emas";
+                    }
                 }
                 else
                 {
@@ -179,8 +180,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                         Count = 1,
                         Product = product.Data
                     };
-                    //targetWindow.dashboard.productname_txt.Text = product.Name;
-                    //targetWindow.dashboard.calculate_txt.Text = "1" + " x " + product.RetailPrice.Amount() + " = " + (1 * product.RetailPrice).Amount();
+                  
                     Items.Add(shop);
                     Refresh();
                 }
@@ -429,10 +429,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 OnClickButton = DateTime.Now;
 
                 ShopModel shop = shopdatagrid.SelectedItem as ShopModel;
-
-                shop.Count += 1;
-
-                Refresh();
+                AddProduct(shop.Product.Id);
             }
             catch
             {

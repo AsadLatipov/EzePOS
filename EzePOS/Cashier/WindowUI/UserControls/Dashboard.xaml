@@ -8,6 +8,8 @@
              xmlns:sales="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.SalesPages"
              xmlns:products="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.Products"
              xmlns:clients="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.ClientsPages"
+             xmlns:historyPages="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.HistoryPages"
+             
              xmlns:commonpages="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.CommonPages"
              mc:Ignorable="d"
              d:DesignHeight="768" d:DesignWidth="1366" Background="#FFFFFF">
@@ -92,6 +94,7 @@
                     <navs:CashNavBar HorizontalAlignment="Right" x:Name="cash_navbar" Visibility="Visible"></navs:CashNavBar>
                     <navs:SearchFilterNavBar HorizontalAlignment="Right" x:Name="search_filter_navbar" Visibility="Hidden"></navs:SearchFilterNavBar>
                     <navs:SearchNavBar HorizontalAlignment="Right" x:Name="search_navbar" Visibility="Hidden" ></navs:SearchNavBar>
+                    <navs:FilterNavBar HorizontalAlignment="Right" x:Name="filter_navbar" Visibility="Hidden" ></navs:FilterNavBar>
                 </Grid>
                 <Button Margin="13 0 24 0" Width="38" Height="38" Style="{StaticResource right_btn}" Click="Button_Click"  Background="#D9D9D9" VerticalAlignment="Center"/>
             </StackPanel>
@@ -106,6 +109,7 @@
             <sales:SalesPanel Grid.Row="0" Visibility="Visible" Grid.RowSpan="2" x:Name="salesPanel" ></sales:SalesPanel>
             <clients:Clients Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="clients"/>
             <products:Products Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="products"/>
+            <historyPages:History Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="history"/>
         </Grid>
 
 

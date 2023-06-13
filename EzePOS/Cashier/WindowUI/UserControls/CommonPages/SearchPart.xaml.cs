@@ -167,8 +167,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                 if (text != "")
                 {
-
-                    var temp = await targetWindow._productService.GetAllAsync(obj => obj.Name.ToLower().Contains(text.ToLower()));
+                    var temp = await targetWindow._productService.GetAllAsync(obj => obj.Name.ToLower().Contains(text.ToLower()) && obj.Quantity > 0);
 
                     if (temp.Data.Count() > 0)
                     {

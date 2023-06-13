@@ -11,11 +11,13 @@
     <None Remove="Cashier\Assets\Icons\arrow_left.png" />
     <None Remove="Cashier\Assets\Icons\backX.png" />
     <None Remove="Cashier\Assets\Icons\card_card.png" />
+    <None Remove="Cashier\Assets\Icons\cash.png" />
     <None Remove="Cashier\Assets\Icons\cashier.jpg" />
     <None Remove="Cashier\Assets\Icons\cashier_image.png" />
     <None Remove="Cashier\Assets\Icons\cashier_panel_image.png" />
     <None Remove="Cashier\Assets\Icons\client_image.png" />
     <None Remove="Cashier\Assets\Icons\client_list.png" />
+    <None Remove="Cashier\Assets\Icons\clock_image.png" />
     <None Remove="Cashier\Assets\Icons\edit.png" />
     <None Remove="Cashier\Assets\Icons\exchange.png" />
     <None Remove="Cashier\Assets\Icons\exchange_image.png" />
@@ -25,6 +27,7 @@
     <None Remove="Cashier\Assets\Icons\globe.png" />
     <None Remove="Cashier\Assets\Icons\history_of_sale_image.png" />
     <None Remove="Cashier\Assets\Icons\icon.ico" />
+    <None Remove="Cashier\Assets\Icons\mixed.png" />
     <None Remove="Cashier\Assets\Icons\percent.png" />
     <None Remove="Cashier\Assets\Icons\phone.png" />
     <None Remove="Cashier\Assets\Icons\plus.png" />
@@ -37,8 +40,10 @@
     <None Remove="Cashier\Assets\Icons\search_grey.png" />
     <None Remove="Cashier\Assets\Icons\setting_image.png" />
     <None Remove="Cashier\Assets\Icons\surface.png" />
+    <None Remove="Cashier\Assets\Icons\total_shop.png" />
     <None Remove="Cashier\Assets\Icons\trash.png" />
     <None Remove="Cashier\Assets\Icons\User.png" />
+    <None Remove="Cashier\Assets\Icons\user_transparent.png" />
     <None Remove="Cashier\Assets\Icons\Vector.png" />
     <None Remove="Cashier\Assets\Icons\warning.png" />
     <None Remove="Cashier\Assets\Icons\X.png" />
@@ -57,6 +62,9 @@
     <Content Include="Cashier\Assets\Icons\card_card.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Cashier\Assets\Icons\cash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cashier\Assets\Icons\cashier.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -70,6 +78,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\client_list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\clock_image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\edit.png">
@@ -97,6 +108,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\mixed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\percent.png">
@@ -135,10 +149,16 @@
     <Content Include="Cashier\Assets\Icons\surface.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Cashier\Assets\Icons\total_shop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cashier\Assets\Icons\trash.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\User.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\user_transparent.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\Vector.png">

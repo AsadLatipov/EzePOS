@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EzePOS.Cashier.WindowUI.UserControls.Products"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1366">
+             d:DesignHeight="700" d:DesignWidth="1366">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="HeaderStyle1" TargetType="DataGridColumnHeader">

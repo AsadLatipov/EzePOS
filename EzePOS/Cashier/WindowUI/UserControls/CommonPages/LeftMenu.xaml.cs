@@ -1,4 +1,5 @@
-﻿using EzePOS.Cashier.WindowUI.Windows;
+﻿using EzePOS.Cashier.WindowUI.UserControls.Navs;
+using EzePOS.Cashier.WindowUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,8 +53,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         }
         private void btn_6_click(object sender, RoutedEventArgs e)
         {
-            BackgrounColorChangeButton(6);
-            //CurrentPage = 6;
+            var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+            targetWindow.dashboard.warningStack.informText.Text = "Dasturdan chiqishni xoxlaysimi?";
+            targetWindow.dashboard.warningStack.Visibility = Visibility.Visible;
         }
 
         private void btn_right_1_click(object sender, RoutedEventArgs e)
@@ -64,7 +67,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         private void btn_right_2_click(object sender, RoutedEventArgs e)
         {
             BackgrounColorChangeButtonRight(2);
-            //ChangePage(1.2);
+            ChangePage(1.2);
         }
         private void btn_right_3_click(object sender, RoutedEventArgs e)
         {
@@ -96,8 +99,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             targetWindow.dashboard.products.Visibility = Visibility.Hidden;
             targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Visible;
             targetWindow.dashboard.products.products_grid.Visibility = Visibility.Hidden;
+            targetWindow.dashboard.history.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.history.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
             //targetWindow.dashboard.discount.Visibility = Visibility.Hidden;
 
@@ -112,9 +115,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                 case 1.2:
                     targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
-                    //targetWindow.dashboard.history.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.history.Visibility = Visibility.Visible;
                     CurrentPage = 1.2;
-                    ChangeNavBar(5);
+                    ChangeNavBar(4);
                     break;
 
                 case 1.3:
@@ -202,6 +205,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.cash_navbar.Visibility = Visibility.Visible;
                 targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.filter_navbar.Visibility = Visibility.Hidden;
+
                 //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
             }
             else if (id == 2)
@@ -209,6 +214,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Visible;
                 targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.filter_navbar.Visibility = Visibility.Hidden;
+
                 //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
 
             }
@@ -217,18 +224,24 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.search_navbar.Visibility = Visibility.Visible;
                 targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.filter_navbar.Visibility = Visibility.Hidden;
+
                 //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
             }
             else if (id == 4)
             {
                 //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Visible;
+                targetWindow.dashboard.filter_navbar.Visibility = Visibility.Visible;
                 targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;
+
+                
             }
             else if (id == 5)
             {
                 //targetWindow.dashboard.close_the_shift_navBar.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.filter_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.cash_navbar.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.search_filter_navbar.Visibility = Visibility.Hidden;

@@ -45,7 +45,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 ProductId = shop.Product.Id;
                 product_name.Text = shop.Product.Name;
                 product_cost.Text = shop.Product.SellingPrice.ToString();
-                product_count.Text = shop.CountShow.ToString();
+                product_count.Text = shop.ToString();
                 product_total.Text = shop.TotalPrice.ToString();
                 product_discount1.Text = shop.Discount.ToString();
                 price = shop.Product.SellingPrice;

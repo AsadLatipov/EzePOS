@@ -37,7 +37,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 var selected = dataGrid.SelectedItem as Product;
                 if (selected != null)
                 {
-
                     targetWindow.dashboard.salesPanel.AddProduct(selected.Id);
                     targetWindow.dashboard.searchpart.cancel_Click(sender, new RoutedEventArgs());
                 }

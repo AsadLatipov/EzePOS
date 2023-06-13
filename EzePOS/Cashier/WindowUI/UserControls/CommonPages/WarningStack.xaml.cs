@@ -30,6 +30,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         public Client client = new Client();
         public Product product = new Product();
         public Category category = new Category();
+        public bool IsProduct = false;
 
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
@@ -43,10 +44,23 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            if (targetWindow.dashboard.salesPanel.Visibility == Visibility.Visible)
+            if(targetWindow.dashboard.leftMenu.Visibility == Visibility.Visible)
             {
-                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-                targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+                App.Current.Shutdown();
+            }
+            else if (targetWindow.dashboard.salesPanel.Visibility == Visibility.Visible)
+            {
+                if (IsProduct)
+                {
+                    targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+                    IsProduct = false;
+                }
+                else
+                {
+                    targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                    targetWindow.dashboard.warningStack.Visibility = Visibility.Hidden;
+                }
+                
             }
             else if (targetWindow.dashboard.clients.Visibility == Visibility.Visible)
             {

@@ -643,7 +643,7 @@
                                                 <Button Style="{StaticResource plus_btn}"
                                                     x:Name="Plus_button" Click="Plus_button_Click">
                                                 </Button>
-                                                <TextBlock FontSize="16" Foreground="Black" VerticalAlignment="Center" Margin="10 0 10 0" Text="{Binding CountShow}"/>
+                                                <TextBlock FontSize="16" Foreground="Black" VerticalAlignment="Center" Margin="10 0 10 0" Text="{Binding Count}"/>
                                                 <Button Style="{StaticResource minus_btn}"
                                                     Name="Minus_button" Click="Minus_button_Click">
                                                 </Button>
