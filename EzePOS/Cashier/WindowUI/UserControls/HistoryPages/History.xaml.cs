@@ -112,6 +112,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         public string Products { get; set; }
         public string Cost { get; set; }
         public string Discount { get; set; }
-        public string Image { get; set; } = "/Cashier/Assets/Icons/coin.png";
+        public string Image { get; set; } = "/Cashier/Assets/Icons/cash.png";
     }
 }

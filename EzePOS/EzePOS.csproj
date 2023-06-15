@@ -10,6 +10,7 @@
     <None Remove="Cashier\Assets\Icons\arrow.png" />
     <None Remove="Cashier\Assets\Icons\arrow_left.png" />
     <None Remove="Cashier\Assets\Icons\backX.png" />
+    <None Remove="Cashier\Assets\Icons\calendar.png" />
     <None Remove="Cashier\Assets\Icons\card_card.png" />
     <None Remove="Cashier\Assets\Icons\cash.png" />
     <None Remove="Cashier\Assets\Icons\cashier.jpg" />
@@ -57,6 +58,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\backX.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cashier\Assets\Icons\calendar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Cashier\Assets\Icons\card_card.png">

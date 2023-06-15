@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EzePOS.Cashier.WindowUI.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,12 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
+            targetWindow.dashboard.filter.Visibility = Visibility.Visible;
+            targetWindow.dashboard.filter.hisotry_filter.Visibility = Visibility.Visible;
+            targetWindow.dashboard.filter.product_filter.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

@@ -72,5 +72,39 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
             targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
         }
+
+        private void from_btn_Click(object sender, RoutedEventArgs e)
+        {
+            from_date.IsDropDownOpen = true;
+        }
+
+        private void to_btn_Click(object sender, RoutedEventArgs e)
+        {
+            to_date.IsDropDownOpen = true;
+        }
+
+        private void from_date_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (from_btn.Template.FindName("from_txt", from_btn) is TextBlock textBlock)
+                textBlock.Text = from_date.SelectedDate?.ToString("dd-MM-yyyy");
+        }
+
+        private void to_date_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (to_btn.Template.FindName("to_txt", to_btn) is TextBlock textBlock)
+                textBlock.Text = to_date.SelectedDate?.ToString("dd-MM-yyyy");
+        }
+
+        private void from_date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (from_btn.Template.FindName("from_txt", from_btn) is TextBlock textBlock)
+                textBlock.Text = from_date.SelectedDate?.ToString("dd-MM-yyyy");
+        }
+
+        private void to_date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (to_btn.Template.FindName("to_txt", to_btn) is TextBlock textBlock)
+                textBlock.Text = to_date.SelectedDate?.ToString("dd-MM-yyyy");
+        }
     }
 }

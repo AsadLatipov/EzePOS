@@ -43,6 +43,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
             targetWindow.dashboard.filter.Visibility = Visibility.Visible;
             if (targetWindow.dashboard.products.Visibility == Visibility.Visible)
             {
+
+                targetWindow.dashboard.filter.hisotry_filter.Visibility = Visibility.Collapsed;
                 targetWindow.dashboard.filter.product_filter.Visibility = Visibility.Visible;
                 targetWindow.dashboard.products.addborder.Visibility = Visibility.Collapsed;
                 targetWindow.dashboard.products.isopen = false;
