@@ -32,34 +32,43 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             try
             {
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-                if (product_checkbox.SelectedIndex == 0)
+                
+                if(targetWindow.dashboard.products.Visibility == Visibility.Visible)
+                {
+                    if (product_checkbox.SelectedIndex == 0)
+                    {
+
+                        var temp = await targetWindow._productService.GetAllAsync();
+                        targetWindow.dashboard.products.products = temp.Data.ToList();
+                        targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
+                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                        targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
+
+                        targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
+                    }
+                    else if(product_checkbox.SelectedIndex == 1)
+                    {
+                        var temp = await targetWindow._productService.GetAllAsync(obj => obj.Quantity == 0);
+                        //temp.Data.Count();
+                        targetWindow.dashboard.products.products = temp.Data.ToList();
+                        targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
+                        targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
+                        targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
+
+                        targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else if(targetWindow.dashboard.history.Visibility == Visibility.Visible)
                 {
 
-                    var temp = await targetWindow._productService.GetAllAsync();
-                    targetWindow.dashboard.products.products = temp.Data.ToList();
-                    targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
-                    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                    targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
-
-                    targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
-                    targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
                 }
-                else if(product_checkbox.SelectedIndex == 1)
-                {
-                    var temp = await targetWindow._productService.GetAllAsync(obj => obj.Quantity == 0);
-                    //temp.Data.Count();
-                    targetWindow.dashboard.products.products = temp.Data.ToList();
-                    targetWindow.dashboard.products.dataGrid_products.ItemsSource = targetWindow.dashboard.products.products;
-                    targetWindow.dashboard.products.dataGrid_products.Items.Refresh();
-                    targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
 
-                    targetWindow.dashboard.products.products_grid.Visibility = Visibility.Visible;
-                    targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-
-                }
             }
             catch
             {
@@ -83,17 +92,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
             to_date.IsDropDownOpen = true;
         }
 
-        private void from_date_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (from_btn.Template.FindName("from_txt", from_btn) is TextBlock textBlock)
-                textBlock.Text = from_date.SelectedDate?.ToString("dd-MM-yyyy");
-        }
-
-        private void to_date_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (to_btn.Template.FindName("to_txt", to_btn) is TextBlock textBlock)
-                textBlock.Text = to_date.SelectedDate?.ToString("dd-MM-yyyy");
-        }
+      
 
         private void from_date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {

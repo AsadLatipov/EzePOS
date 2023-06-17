@@ -12,6 +12,10 @@ namespace EzePOS.Infrastructure.IRepositories
         IProductRepository Products { get; }
         IUserRepository Users { get; }
         IClientRepository Clients { get; }
+        IShopRepository Shops { get; }
+        IShopItemRepository ShopItems { get; }
+
+
 
 
 

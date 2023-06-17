@@ -1,5 +1,6 @@
 ﻿using EzePOS.Business.Models;
 using EzePOS.Infrastructure.Entities;
+using EzePOS.Infrastructure.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

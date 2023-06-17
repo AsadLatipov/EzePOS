@@ -41,6 +41,9 @@ namespace EzePOS.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<ShopItem> ShopItems { get; set; }
+
         //public DbSet<Order> Orders { get; set; }
         //public DbSet<OrderItem> OrderItems { get; set; }
 

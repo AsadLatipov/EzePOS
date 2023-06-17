@@ -24,6 +24,9 @@ namespace EzePOS.Cashier.WindowUI.Windows
         public ICategoryService _categoryService;
         public IProductService _productService;
         public IClientService _clientService;
+        public IShopService _shopService;
+        public IShopItemService _shopItemService;
+
 
         //public ISeedData _seedData;
 
@@ -31,12 +34,16 @@ namespace EzePOS.Cashier.WindowUI.Windows
             IUserService userService,
             ICategoryService categoryService,
             IClientService clientService,
-            IProductService productService)
+            IProductService productService,
+            IShopService shopService,
+            IShopItemService shopItemService)
         {
             _clientService = clientService;
             _userService = userService;
             _productService = productService;
             _categoryService = categoryService;
+            _shopService = shopService;
+            _shopItemService = shopItemService;
             
 
 

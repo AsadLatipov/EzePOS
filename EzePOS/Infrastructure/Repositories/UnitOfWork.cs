@@ -18,6 +18,10 @@ namespace EzePOS.Infrastructure.Repositories
             Categories = new CategoryRepository(context);
             Clients = new ClientRepository(context);
             Users = new UserRepository(context);
+            Shops = new ShopRepository(context);
+            ShopItems = new ShopItemRepository(context);
+
+
 
 
         }
@@ -25,6 +29,10 @@ namespace EzePOS.Infrastructure.Repositories
         public ICategoryRepository Categories { get; private set; }
         public IUserRepository Users { get; private set; }
         public IClientRepository Clients { get; private set; }
+        public IShopRepository Shops { get; private set; }
+        public IShopItemRepository ShopItems { get; private set; }
+
+
 
 
 

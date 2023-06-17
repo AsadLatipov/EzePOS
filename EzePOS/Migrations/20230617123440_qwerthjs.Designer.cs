@@ -3,6 +3,7 @@ using System;
 using EzePOS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,59 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EzePOS.Migrations
 {
     [DbContext(typeof(EzeposContext))]
-    partial class EzeposContextModelSnapshot : ModelSnapshot
+    [Migration("20230617123440_qwerthjs")]
+    partial class qwerthjs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
-
-            modelBuilder.Entity("EzePOS.Infrastructure.Entities.Base.ShopItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Count")
-                        .HasColumnType("REAL");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CreatedUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ProductBarcode")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("ProductIncomePrice")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("ProductSellingPrice")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("ShopId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Total")
-                        .HasColumnType("REAL");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("UpdatedUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShopItems");
-                });
 
             modelBuilder.Entity("EzePOS.Infrastructure.Entities.Category", b =>
                 {
@@ -178,50 +134,6 @@ namespace EzePOS.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("EzePOS.Infrastructure.Entities.Shop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Card")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("Cash")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("ClientId")
-                        .HasColumnType("REAL");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CreatedUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Debt")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("Discount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("REAL");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("UpdatedUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shops");
                 });
 
             modelBuilder.Entity("EzePOS.Infrastructure.Entities.User", b =>

@@ -876,6 +876,25 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
             }
         }
 
+        public Client GetClient()
+        {
+            switch (currentPage)
+            {
+                case 1:
+                    return page1Client;
+                case 2:
+                    return page2Client;
+                case 3:
+                    return page3Client;
+                case 4:
+                    return page4Client;
+                case 5:
+                    return page5Client;
+                default:
+                    return new Client();
+            }
+        }
+
 
         public void RemoveClient()
         {

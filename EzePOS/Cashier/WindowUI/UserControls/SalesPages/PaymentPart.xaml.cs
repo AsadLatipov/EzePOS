@@ -1,11 +1,26 @@
 ﻿using EzePOS.Business.Helper;
 using EzePOS.Business.Models;
 using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Data;
 using EzePOS.Infrastructure.Entities;
+using EzePOS.Infrastructure.Entities.Base;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
+using EzePOS.Business.IServices;
+using EzePOS.Business.Services;
+using EzePOS.Infrastructure.IRepositories;
+using EzePOS.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Configuration;
+using System.Data;
 
 namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 {
@@ -22,6 +37,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         public double TotalAmount = 0;
         public bool clientNameGotFocus = false;
         public bool clientNumberGotFocus = false;
+        public double Discount = 0;
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             Write(btn1);
@@ -245,6 +261,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 discounts_btn.Content = "Chegirma";
                 ChangeButtonText(TotalAmount.Amount());
                 btn_x.Visibility = Visibility.Hidden;
+                Discount = 0;
             }
             catch
             {
@@ -261,6 +278,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 discounts_grid.Visibility = Visibility.Hidden;
                 double temp = TotalAmount / 100;
                 double discount = temp * discount_percent;
+                Discount = discount;
                 ChangeButtonText((TotalAmount - discount).Amount());
             }
             catch
@@ -328,12 +346,49 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             clients_list_grid.Visibility = Visibility.Hidden;
         }
 
-        private void total_btn_Click(object sender, RoutedEventArgs e)
+        private async void total_btn_Click(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-            CloseAllPaymentStuffs();
-            targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-            targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+
+            Shop shop = new Shop();
+            shop.Cash = double.Parse(GetButtonText().Replace(" ", "")); ;
+            shop.TotalAmount = shop.Cash;
+            shop.Card = 0;
+            shop.Debt = 0;
+
+            Client client = targetWindow.dashboard.cash_navbar.GetClient();
+            if (client != null)
+                shop.ClientId = client.Id;
+
+            shop.Discount = Discount;
+
+            List<ShopItem> shopitems = new List<ShopItem>();
+
+            var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+            foreach (var items in shops)
+            {
+                ShopItem shopitem = new ShopItem();
+
+                shopitem.Total = items.TotalPrice;
+                shopitem.Count = items.Count;
+                shopitem.ShopId = shop.Id;
+                shopitem.ProductName = items.Product.Name;
+                shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                shopitem.ProductBarcode = items.Product.Barcode;
+
+                shopitems.Add(shopitem);
+
+            }
+
+            bool result = await ShopCreate(shopitems, shop);
+            if (result)
+            {
+                CloseAllPaymentStuffs();
+                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+            }
         }
 
         private void submit_btn_Click(object sender, RoutedEventArgs e)
@@ -385,6 +440,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
             withCard = false;
+            Discount = 0;
             TotalAmount = 0;
             discounts_grid.Visibility = Visibility.Hidden;
             clients_list_grid.Visibility = Visibility.Hidden;
@@ -498,13 +554,86 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
             card_confirmation.Visibility = Visibility.Hidden;
         }
 
-        private void submit_btn_withcard_Click(object sender, RoutedEventArgs e)
+        public async Task<bool> ShopCreate(List<ShopItem> shopitems, Shop shop)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            CloseAllPaymentStuffs();
-            targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-            targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+            var dbContext = App.ServiceProvider.GetRequiredService<EzeposContext>();
+
+            using (IDbContextTransaction transaction = dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var result = await targetWindow._shopService.CreateAsync(shop, targetWindow.dashboard.user);
+
+                    if (result.Data != null)
+                    {
+                        shopitems.ForEach(obj => obj.ShopId = result.Data.Id);
+
+                        foreach (ShopItem shopitem in shopitems)
+                        {
+                            await targetWindow._shopItemService.CreateAsync(shopitem, targetWindow.dashboard.user);
+                        }
+
+                        transaction.Commit();
+                        return true;
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
+        private async void submit_btn_withcard_Click(object sender, RoutedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+            Shop shop = new Shop();
+            shop.Card = double.Parse(GetButtonText().Replace(" ", ""));
+            shop.TotalAmount = shop.Card;
+            shop.Cash = 0;
+            shop.Debt = 0;
+
+            Client client = targetWindow.dashboard.cash_navbar.GetClient();
+            if(client != null)
+                shop.ClientId = client.Id;
+
+            shop.Discount = Discount;
+
+            List<ShopItem> shopitems = new List<ShopItem>();
+
+            var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+            foreach(var items in shops)
+            {
+                ShopItem shopitem = new ShopItem();
+
+                shopitem.Total = items.TotalPrice;
+                shopitem.Count = items.Count;
+                shopitem.ShopId = shop.Id;
+                shopitem.ProductName = items.Product.Name;
+                shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                shopitem.ProductBarcode = items.Product.Barcode;
+
+                shopitems.Add(shopitem);
+
+            }
+
+            bool result = await ShopCreate(shopitems, shop);
+            if (result)
+            {
+                CloseAllPaymentStuffs();
+                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+            }
         }
 
         private void withCard_cancel_btn_Click(object sender, RoutedEventArgs e)

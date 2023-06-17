@@ -15,7 +15,6 @@ namespace EzePOS.Business.Services
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
-        IList<Product> products = new List<Product>();
 
         public ProductService(
             IUnitOfWork unitOfWork)
