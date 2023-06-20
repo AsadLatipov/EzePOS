@@ -89,111 +89,119 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         }
         public async void  ChangePage(double pageId)
         {
-            var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-
-            targetWindow.dashboard.salesPanel.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.products.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.debts.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.returnPage.Visibility = Visibility.Hidden;
-            targetWindow.dashboard.clients.Visibility = Visibility.Hidden;
-            targetWindow.dashboard.products.Visibility = Visibility.Hidden;
-            targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Visible;
-            targetWindow.dashboard.products.products_grid.Visibility = Visibility.Hidden;
-            targetWindow.dashboard.history.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
-            //targetWindow.dashboard.discount.Visibility = Visibility.Hidden;
-
-            switch (pageId)
+            try
             {
-                case 1.1:
-                    targetWindow.dashboard.page_name.Text = "Kassa";
-                    targetWindow.dashboard.salesPanel.Visibility = Visibility.Visible;
-                    CurrentPage = 1.1;
-                    ChangeNavBar(1);
-                    break;
+                var targetWindow = Application.Current.Windows?.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-                case 1.2:
-                    targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
-                    targetWindow.dashboard.history.Visibility = Visibility.Visible;
-                    CurrentPage = 1.2;
-                    ChangeNavBar(4);
-                    break;
+                targetWindow.dashboard.salesPanel.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.products.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.debts.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.returnPage.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.clients.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.products.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Visible;
+                targetWindow.dashboard.products.products_grid.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.history.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
+                //targetWindow.dashboard.discount.Visibility = Visibility.Hidden;
 
-                case 1.3:
-                    targetWindow.dashboard.page_name.Text = "Qaytarish";
-                    //targetWindow.dashboard.returnPage.Visibility = Visibility.Visible;
-                    CurrentPage = 1.3;
-                    ChangeNavBar(3);
-                    break;
+                switch (pageId)
+                {
+                    case 1.1:
+                        targetWindow.dashboard.page_name.Text = "Kassa";
+                        targetWindow.dashboard.salesPanel.Visibility = Visibility.Visible;
+                        CurrentPage = 1.1;
+                        ChangeNavBar(1);
+                        break;
 
+                    case 1.2:
+                        targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
+                        targetWindow.dashboard.history.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.history.SetShops(DateTime.Now.Date, DateTime.Now.AddDays(1).Date);
+                        CurrentPage = 1.2;
+                        ChangeNavBar(4);
+                        break;
 
-                case 1.4:
-                    //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
-                    targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
-                    //targetWindow.dashboard.history.Visibility = Visibility.Visible;
-                    CurrentPage = 1.2;
-                    ChangeNavBar(5);
-                    //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
-                    BackgrounColorChangeButtonRight(2);
-                    break;
-
-                case 1.5:
-                    break;
-
-
-
-                case 1.6:
-                    targetWindow.dashboard.page_name.Text = "Nasiyalar";
-                    //targetWindow.dashboard.debts.Visibility = Visibility.Visible;
-                    ChangeNavBar(2);
-                    CurrentPage = 1.6;
-                    break;
-                case 2:
-                    targetWindow.dashboard.page_name.Text = "Mahsulotlar";
-                    targetWindow.dashboard.products.Visibility = Visibility.Visible;
-                    CurrentPage = 2;
-                    ChangeNavBar(2);
-                    break;
-
-                case 3:
-                    targetWindow.dashboard.page_name.Text = "Chegirma";
-                    //targetWindow.dashboard.discount.Visibility = Visibility.Visible;
-                    CurrentPage = 3;
-                    ChangeNavBar(2);
-                    break;
-
-                case 4:
-                    targetWindow.dashboard.page_name.Text = "Klientlar";
-                    targetWindow.dashboard.clients.Visibility = Visibility.Visible;
-                    await targetWindow.dashboard.clients.SetClientsAsync();
-                    CurrentPage = 4;
-                    ChangeNavBar(3);
-                    break;
+                    case 1.3:
+                        targetWindow.dashboard.page_name.Text = "Qaytarish";
+                        //targetWindow.dashboard.returnPage.Visibility = Visibility.Visible;
+                        CurrentPage = 1.3;
+                        ChangeNavBar(3);
+                        break;
 
 
-                case 5:
-                    break;
+                    case 1.4:
+                        //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.page_name.Text = "Sotuv tarixi";
+                        //targetWindow.dashboard.history.Visibility = Visibility.Visible;
+                        CurrentPage = 1.2;
+                        ChangeNavBar(5);
+                        //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Visible;
+                        BackgrounColorChangeButtonRight(2);
+                        break;
 
-                //CloseTheShift
-                case 6:
+                    case 1.5:
+                        break;
 
-                    targetWindow.dashboard.page_name.Text = "Smenani yopish";
-                    //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Visible;
-                    CurrentPage = 6;
-                    ChangeNavBar(4);
-                    break;
 
-                default:
-                    break;
+
+                    case 1.6:
+                        targetWindow.dashboard.page_name.Text = "Nasiyalar";
+                        //targetWindow.dashboard.debts.Visibility = Visibility.Visible;
+                        ChangeNavBar(2);
+                        CurrentPage = 1.6;
+                        break;
+                    case 2:
+                        targetWindow.dashboard.page_name.Text = "Mahsulotlar";
+                        targetWindow.dashboard.products.Visibility = Visibility.Visible;
+                        CurrentPage = 2;
+                        ChangeNavBar(2);
+                        break;
+
+                    case 3:
+                        targetWindow.dashboard.page_name.Text = "Chegirma";
+                        //targetWindow.dashboard.discount.Visibility = Visibility.Visible;
+                        CurrentPage = 3;
+                        ChangeNavBar(2);
+                        break;
+
+                    case 4:
+                        targetWindow.dashboard.page_name.Text = "Klientlar";
+                        targetWindow.dashboard.clients.Visibility = Visibility.Visible;
+                        await targetWindow.dashboard.clients.SetClientsAsync();
+                        CurrentPage = 4;
+                        ChangeNavBar(3);
+                        break;
+
+
+                    case 5:
+                        break;
+
+                    //CloseTheShift
+                    case 6:
+
+                        targetWindow.dashboard.page_name.Text = "Smenani yopish";
+                        //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Visible;
+                        CurrentPage = 6;
+                        ChangeNavBar(4);
+                        break;
+
+                    default:
+                        break;
+                }
+                targetWindow.dashboard.leftMenu.Visibility = Visibility.Hidden;
+                second_part.Visibility = Visibility.Hidden;
+                first_part.Visibility = Visibility.Visible;
+                cashButtonChecker = false;
+
+                cash_image_forward.Visibility = Visibility.Visible;
+                cash_image_back.Visibility = Visibility.Hidden;
             }
-            targetWindow.dashboard.leftMenu.Visibility = Visibility.Hidden;
-            second_part.Visibility = Visibility.Hidden;
-            first_part.Visibility = Visibility.Visible;
-            cashButtonChecker = false;
+            catch
+            {
 
-            cash_image_forward.Visibility = Visibility.Visible;
-            cash_image_back.Visibility = Visibility.Hidden;
+            }
         }
 
         public void ChangeNavBar(int id)

@@ -348,50 +348,57 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
         private async void total_btn_Click(object sender, RoutedEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-
-            Shop shop = new Shop();
-            shop.Cash = double.Parse(GetButtonText().Replace(" ", "")); ;
-            shop.TotalAmount = shop.Cash;
-            shop.Card = 0;
-            shop.Debt = 0;
-
-            Client client = targetWindow.dashboard.cash_navbar.GetClient();
-            if (client != null)
-                shop.ClientId = client.Id;
-
-            shop.Discount = Discount;
-
-            List<ShopItem> shopitems = new List<ShopItem>();
-
-            var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
-
-            foreach (var items in shops)
+            try
             {
-                ShopItem shopitem = new ShopItem();
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-                shopitem.Total = items.TotalPrice;
-                shopitem.Count = items.Count;
-                shopitem.ShopId = shop.Id;
-                shopitem.ProductName = items.Product.Name;
-                shopitem.ProductIncomePrice = items.Product.IncomePrice;
-                shopitem.ProductSellingPrice = items.Product.SellingPrice;
-                shopitem.ProductBarcode = items.Product.Barcode;
+                Shop shop = new Shop();
+                shop.Cash = double.Parse(GetButtonText().Replace(" ", "")); ;
+                shop.TotalAmount = shop.Cash;
+                shop.Card = 0;
+                shop.Debt = 0;
 
-                shopitems.Add(shopitem);
+                Client client = targetWindow.dashboard.cash_navbar.GetClient();
+                if (client != null)
+                    shop.ClientId = client.Id;
 
+                shop.Discount = Discount;
+
+                List<ShopItem> shopitems = new List<ShopItem>();
+
+                var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+                foreach (var items in shops)
+                {
+                    ShopItem shopitem = new ShopItem();
+
+                    shopitem.Total = items.TotalPrice;
+                    shopitem.Count = items.Count;
+                    shopitem.ShopId = shop.Id;
+                    shopitem.ProductName = items.Product.Name;
+                    shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                    shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                    shopitem.ProductBarcode = items.Product.Barcode;
+
+                    shopitems.Add(shopitem);
+
+                }
+
+                bool result = await ShopCreate(shopitems, shop);
+                if (result)
+                {
+                    CloseAllPaymentStuffs();
+                    targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                    targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+                }
             }
-
-            bool result = await ShopCreate(shopitems, shop);
-            if (result)
+            catch
             {
-                CloseAllPaymentStuffs();
-                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-                targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+
             }
         }
 
-        private void submit_btn_Click(object sender, RoutedEventArgs e)
+        private async void submit_btn_Click(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
@@ -408,9 +415,46 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                     double total = cash + card + debt;
                     if (total >= totalAmount)
                     {
-                        CloseAllPaymentStuffs();
-                        targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-                        targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+
+                        Shop shop = new Shop();
+                        shop.Cash = cash;
+                        shop.TotalAmount = totalAmount;
+                        shop.Card = card;
+                        shop.Debt = debt;
+
+                        Client client = targetWindow.dashboard.cash_navbar.GetClient();
+                        if (client != null)
+                            shop.ClientId = client.Id;
+
+                        shop.Discount = Discount;
+
+                        List<ShopItem> shopitems = new List<ShopItem>();
+
+                        var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+                        foreach (var items in shops)
+                        {
+                            ShopItem shopitem = new ShopItem();
+
+                            shopitem.Total = items.TotalPrice;
+                            shopitem.Count = items.Count;
+                            shopitem.ShopId = shop.Id;
+                            shopitem.ProductName = items.Product.Name;
+                            shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                            shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                            shopitem.ProductBarcode = items.Product.Barcode;
+
+                            shopitems.Add(shopitem);
+
+                        }
+
+                        bool result = await ShopCreate(shopitems, shop);
+                        if (result)
+                        {
+                            CloseAllPaymentStuffs();
+                            targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                            targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+                        }
                     }
                 }
                 else
@@ -424,9 +468,45 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                     double total = cash + debt;
                     if (total >= totalAmount)
                     {
-                        CloseAllPaymentStuffs();
-                        targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-                        targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+                        Shop shop = new Shop();
+                        shop.Cash = cash;
+                        shop.TotalAmount = totalAmount;
+                        shop.Card = 0;
+                        shop.Debt = debt;
+
+                        Client client = targetWindow.dashboard.cash_navbar.GetClient();
+                        if (client != null)
+                            shop.ClientId = client.Id;
+
+                        shop.Discount = Discount;
+
+                        List<ShopItem> shopitems = new List<ShopItem>();
+
+                        var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+                        foreach (var items in shops)
+                        {
+                            ShopItem shopitem = new ShopItem();
+
+                            shopitem.Total = items.TotalPrice;
+                            shopitem.Count = items.Count;
+                            shopitem.ShopId = shop.Id;
+                            shopitem.ProductName = items.Product.Name;
+                            shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                            shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                            shopitem.ProductBarcode = items.Product.Barcode;
+
+                            shopitems.Add(shopitem);
+
+                        }
+
+                        bool result = await ShopCreate(shopitems, shop);
+                        if (result)
+                        {
+                            CloseAllPaymentStuffs();
+                            targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                            targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+                        }
                     }
                 }
             }
@@ -577,7 +657,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
                         transaction.Commit();
                         return true;
-
                     }
                     else
                     {
@@ -593,46 +672,52 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
         }
         private async void submit_btn_withcard_Click(object sender, RoutedEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-
-            Shop shop = new Shop();
-            shop.Card = double.Parse(GetButtonText().Replace(" ", ""));
-            shop.TotalAmount = shop.Card;
-            shop.Cash = 0;
-            shop.Debt = 0;
-
-            Client client = targetWindow.dashboard.cash_navbar.GetClient();
-            if(client != null)
-                shop.ClientId = client.Id;
-
-            shop.Discount = Discount;
-
-            List<ShopItem> shopitems = new List<ShopItem>();
-
-            var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
-
-            foreach(var items in shops)
+            try
             {
-                ShopItem shopitem = new ShopItem();
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-                shopitem.Total = items.TotalPrice;
-                shopitem.Count = items.Count;
-                shopitem.ShopId = shop.Id;
-                shopitem.ProductName = items.Product.Name;
-                shopitem.ProductIncomePrice = items.Product.IncomePrice;
-                shopitem.ProductSellingPrice = items.Product.SellingPrice;
-                shopitem.ProductBarcode = items.Product.Barcode;
+                Shop shop = new Shop();
+                shop.Card = double.Parse(GetButtonText().Replace(" ", ""));
+                shop.TotalAmount = shop.Card;
+                shop.Cash = 0;
+                shop.Debt = 0;
 
-                shopitems.Add(shopitem);
+                Client client = targetWindow.dashboard.cash_navbar.GetClient();
+                if (client != null)
+                    shop.ClientId = client.Id;
 
+                shop.Discount = Discount;
+
+                List<ShopItem> shopitems = new List<ShopItem>();
+
+                var shops = targetWindow.dashboard.cash_navbar.GetPageItems();
+
+                foreach (var items in shops)
+                {
+                    ShopItem shopitem = new ShopItem();
+
+                    shopitem.Total = items.TotalPrice;
+                    shopitem.Count = items.Count;
+                    shopitem.ShopId = shop.Id;
+                    shopitem.ProductName = items.Product.Name;
+                    shopitem.ProductIncomePrice = items.Product.IncomePrice;
+                    shopitem.ProductSellingPrice = items.Product.SellingPrice;
+                    shopitem.ProductBarcode = items.Product.Barcode;
+
+                    shopitems.Add(shopitem);
+                }
+
+                bool result = await ShopCreate(shopitems, shop);
+                if (result)
+                {
+                    CloseAllPaymentStuffs();
+                    targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
+                    targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+                }
             }
-
-            bool result = await ShopCreate(shopitems, shop);
-            if (result)
+            catch
             {
-                CloseAllPaymentStuffs();
-                targetWindow.dashboard.cash_navbar.closeWindow(targetWindow.dashboard.cash_navbar.currentPage);
-                targetWindow.dashboard.printCheck.Visibility = Visibility.Visible;
+
             }
         }
 

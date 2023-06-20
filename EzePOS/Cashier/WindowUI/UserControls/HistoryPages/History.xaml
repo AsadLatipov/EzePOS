@@ -231,7 +231,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Discount}" Margin="0 0 0 0"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Shop.Discount}" Margin="0 0 0 0"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -247,7 +247,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Cost}" Margin="0 0 0 0"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Shop.TotalAmount}" Margin="0 0 0 0"/>
                                         <Image VerticalAlignment="Center" Source="/Cashier/Assets/Icons/forward.png" Margin="20 0 0 0" Width="8"/>
                                     </StackPanel>
                                 </DataTemplate>

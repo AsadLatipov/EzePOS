@@ -1,4 +1,6 @@
 ﻿using EzePOS.Cashier.WindowUI.Windows;
+using EzePOS.Infrastructure.Entities;
+using EzePOS.Infrastructure.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
     public partial class History : UserControl
     {
         List<Item> items = new List<Item>();
-        public List<Order> orders = new List<Order>();
+        //public List<Order> orders = new List<Order>();
 
         string card = "/Cashier/Assets/Icons/card_card.png";
         string mixed = "/Cashier/Assets/Icons/mixed.png";
@@ -42,15 +44,47 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
             itemsControl.ItemsSource = items;
             itemsControl.Items.Refresh();
 
-            orders.Add(new Order { Id = 1, Date = "09:08", Image = card, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 2, Date = "10:28", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 3, Date = "09:08", Image = mixed, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 4, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 5, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            datagrid.ItemsSource = orders;
-            datagrid.Items.Refresh();
+            //orders.Add(new Order { Id = 1, Date = "09:08", Image = card, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
+            //orders.Add(new Order { Id = 2, Date = "10:28", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
+            //orders.Add(new Order { Id = 3, Date = "09:08", Image = mixed, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
+            //orders.Add(new Order { Id = 4, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
+            //orders.Add(new Order { Id = 5, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
+            //datagrid.ItemsSource = orders;
+            //datagrid.Items.Refresh();
         }
 
+        public async void SetShops(DateTime from, DateTime to)
+        {
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
+
+                var result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt >= from && obj.CreatedAt < to);
+
+                if (result.Data != null)
+                {
+                    foreach (var item in result.Data)
+                    {
+                        shopWithItem.Add(new ShopWithItem { Shop = item });
+                    }
+
+                    foreach (var item in shopWithItem)
+                    {
+                        var items = await targetWindow._shopItemService.GetAllAsync(obj => obj.ShopId == item.Shop.Id);
+
+                        item.ShopItems = items.Data.ToList();
+                    }
+
+                    datagrid.ItemsSource = shopWithItem;
+                    datagrid.Items.Refresh();
+                }
+            }
+            catch
+            {
+
+            }
+        }
         private void item_btn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -105,13 +139,58 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         public Visibility Visibility { get; set; } = Visibility.Hidden;
     }
 
-    public class Order
+    public class ShopWithItem
     {
-        public int Id { get; set; }
-        public string Date { get; set; }
-        public string Products { get; set; }
-        public string Cost { get; set; }
-        public string Discount { get; set; }
-        public string Image { get; set; } = "/Cashier/Assets/Icons/cash.png";
+        public Shop Shop { get; set; }
+        public List<ShopItem> ShopItems { get; set; }
+        public string Date
+        {
+            get { return Shop.CreatedAt.ToString("HH : mm"); }
+        }
+        public string Products
+        {
+            get
+            {
+                string names = " ";
+                foreach(var item in ShopItems)
+                {
+                    names += " " + item.ProductName;
+                }
+                return names;
+            }
+        }
+        public string Image
+        {
+            get
+            {
+                if(Shop.Cash == 0 && Shop.Card > 0)
+                {
+                    return "/Cashier/Assets/Icons/card_card.png";
+                }
+                else if(Shop.Card == 0 && Shop.Cash > 0)
+                {
+                    return "/Cashier/Assets/Icons/cash.png";
+                }
+                else if(Shop.Card > 0 && Shop.Cash > 0)
+                {
+                    return "/Cashier/Assets/Icons/mixed.png";
+                }
+                else
+                {
+                    return "/Cashier/Assets/Icons/cash.png";
+                }
+            }
+        }
     }
+
+    
+    //public class Order
+    //{
+    //    public int Id { get; set; }
+    //    public string Date { get; set; }
+    //    public string Products { get; set; }
+    //    public string Cost { get; set; }
+    //    public string Discount { get; set; }
+    //    public string Image { get; set; } = "/Cashier/Assets/Icons/cash.png";
+    //}
 }
