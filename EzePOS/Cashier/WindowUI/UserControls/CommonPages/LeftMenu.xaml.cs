@@ -120,7 +120,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.history.Visibility = Visibility.Visible;
                         targetWindow.dashboard.history.SetShops(DateTime.Now.Date, DateTime.Now.AddDays(1).Date);
                         CurrentPage = 1.2;
-                        ChangeNavBar(4);
+                        ChangeNavBar(2);
                         break;
 
                     case 1.3:

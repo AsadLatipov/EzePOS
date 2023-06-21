@@ -169,7 +169,7 @@
                 </Border.Effect>
                 <StackPanel VerticalAlignment="Center" Margin="20 0 0 0">
                     <TextBlock Text="Kassada bo'lishi kerak" Foreground="#969B99" FontSize="17"/>
-                    <TextBlock Text="100 000 000" FontSize="25" Foreground="#0C7C80"/>
+                    <TextBlock x:Name="incash_txt" Text="100 000 000" FontSize="25" Foreground="#0C7C80"/>
                 </StackPanel>
             </Border>
         </Grid>

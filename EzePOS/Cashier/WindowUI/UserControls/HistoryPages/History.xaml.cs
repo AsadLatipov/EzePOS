@@ -1,4 +1,6 @@
-﻿using EzePOS.Cashier.WindowUI.Windows;
+﻿using EzePOS.Business.Helper;
+using EzePOS.Business.Models;
+using EzePOS.Cashier.WindowUI.Windows;
 using EzePOS.Infrastructure.Entities;
 using EzePOS.Infrastructure.Entities.Base;
 using System;
@@ -57,17 +59,56 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         {
             try
             {
+                double total = 0;
+                double card = 0;
+                double cash = 0;
+                double mixed = 0;
+                double debt = 0;
+                double incash = 0;
+
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                 List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
 
-                var result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt >= from && obj.CreatedAt < to);
+                BaseResponse<IEnumerable<Shop>> result = null;
 
+                if (from == to)
+                {
+                    result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt.Date == from.Date);
+                }
+
+                else if (from.Date < to.Date)
+                {
+                    result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt.Date >= from.Date && obj.CreatedAt.Date <= to.Date);
+
+                }
+                else
+                {
+                    result = null;
+                }
                 if (result.Data != null)
                 {
                     foreach (var item in result.Data)
                     {
                         shopWithItem.Add(new ShopWithItem { Shop = item });
+                        total += item.TotalAmount;
+                        card += item.Card;
+                        cash += item.Cash;
+                        debt += item.Debt;
                     }
+
+                    mixed = cash + card;
+                    incash = total - debt;
+
+                    items.FirstOrDefault(obj => obj.Id == 1).Amount = total.Amount(); // Umumiy savdo
+                    items.FirstOrDefault(obj => obj.Id == 2).Amount = card.Amount(); // Karta
+                    items.FirstOrDefault(obj => obj.Id == 3).Amount = cash.Amount(); // Naqd
+                    items.FirstOrDefault(obj => obj.Id == 4).Amount = mixed.Amount(); // Aralash
+                    items.FirstOrDefault(obj => obj.Id == 6).Amount = debt.Amount(); // Nasiya
+                    incash_txt.Text = incash.Amount(); // Kassada bo'lishi kerak
+
+                    itemsControl.ItemsSource = items;
+                    itemsControl.Items.Refresh();
+
 
                     foreach (var item in shopWithItem)
                     {
