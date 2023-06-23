@@ -151,24 +151,23 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
 
         private async void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //try
-            //{
-            //    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
-            //    targetWindow.dashboard.shopItems.Visibility = Visibility.Visible;
+                var result = datagrid.SelectedItem as ShopWithItem;
 
-            //    targetWindow.dashboard.shopItems.shopType.Text = items.Where(obj => obj.Visibility == Visibility.Visible).FirstOrDefault().Name;
+                if(result != null)
+                {
+                    targetWindow.dashboard.shopItems.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.shopItems.SetItems(result);
 
+                }
+            }
+            catch
+            {
 
-            //    var temp = await targetWindow._productService.GetAllAsync();
-
-            //    targetWindow.dashboard.shopItems.dataGrid_products.ItemsSource = temp.Data.ToList();
-            //    targetWindow.dashboard.shopItems.dataGrid_products.Items.Refresh();
-            //}
-            //catch
-            //{
-
-            //}
+            }
         }
     }
     public class Item
@@ -186,7 +185,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         public List<ShopItem> ShopItems { get; set; }
         public string Date
         {
-            get { return Shop.CreatedAt.ToString("HH : mm"); }
+            get { return Shop.CreatedAt.ToString("dd-MM-yyyy"); }
         }
         public string Products
         {

@@ -134,6 +134,7 @@
         <commonpages:Filter Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="filter" />
         <products:EditAndChange Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="product_edit_exchange"/>
         <products:AddCategory Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="addCategory" />
+        <historyPages:ShopItemsPage Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="shopItems" />
 
         <commonpages:Keyboard Grid.Row="0" VerticalAlignment="Bottom" Visibility="Hidden" Grid.RowSpan="2" x:Name="keyboard"></commonpages:Keyboard>
         <commonpages:PrintCheck Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="printCheck"></commonpages:PrintCheck>
