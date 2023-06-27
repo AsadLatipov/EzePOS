@@ -72,8 +72,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
         private void btn_right_3_click(object sender, RoutedEventArgs e)
         {
             BackgrounColorChangeButtonRight(3);
-            //CurrentPage = 1.3;
-            //ChangePage(1.3);
+            ChangePage(1.3);
 
         }
         private void btn_right_4_click(object sender, RoutedEventArgs e)
@@ -102,6 +101,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.products.categories_grid.Visibility = Visibility.Visible;
                 targetWindow.dashboard.products.products_grid.Visibility = Visibility.Hidden;
                 targetWindow.dashboard.history.Visibility = Visibility.Hidden;
+                targetWindow.dashboard.returnProduct.Visibility = Visibility.Hidden;
+
                 //targetWindow.dashboard.close_the_shift.Visibility = Visibility.Hidden;
                 //targetWindow.dashboard.puttingMoney.Visibility = Visibility.Hidden;
                 //targetWindow.dashboard.discount.Visibility = Visibility.Hidden;
@@ -125,7 +126,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                     case 1.3:
                         targetWindow.dashboard.page_name.Text = "Qaytarish";
-                        //targetWindow.dashboard.returnPage.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.returnProduct.Visibility = Visibility.Visible;
                         CurrentPage = 1.3;
                         ChangeNavBar(3);
                         break;

@@ -123,7 +123,24 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 targetWindow.dashboard.clients.datagrid.Items.Refresh();
             }
         }
+        public void SearchShops(string text)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            try
+            { 
+                if (text != "")
+                {
+                    int id = int.Parse(text);
 
+                    targetWindow.dashboard.history.SetShopsWithSearch(id);
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
         public void SearchDiscounts(string text)
         {
             //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
@@ -176,7 +193,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     else
                     {
                         targetWindow.dashboard.search_datagrid.Visibility = Visibility.Hidden;
-
                     }
                     targetWindow.dashboard.search_datagrid.dataGrid.ItemsSource = temp.Data;
                     targetWindow.dashboard.search_datagrid.dataGrid.Items.Refresh();
@@ -227,6 +243,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     {
                         SearchClients(search_txt.Text);
                     }
+                }
+                else if (targetWindow.dashboard.history.Visibility == Visibility.Visible)
+                {
+                    SearchShops(search_txt.Text);
                 }
                 //else if (targetWindow.dashboard.discount.Visibility == Visibility.Visible)
                 //{

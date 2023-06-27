@@ -126,6 +126,47 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
 
             }
         }
+
+        public async void SetShopsWithSearch(int id)
+        {
+            try
+            {
+                double total = 0;
+                double card = 0;
+                double cash = 0;
+                double mixed = 0;
+                double debt = 0;
+                double incash = 0;
+
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
+
+
+                var result = await targetWindow._shopService.GetAllAsync(obj => obj.Id == id);
+
+                if (result.Data != null)
+                {
+                    foreach (var item in result.Data)
+                    {
+                        shopWithItem.Add(new ShopWithItem { Shop = item });
+                    }
+
+                    foreach (var item in shopWithItem)
+                    {
+                        var items = await targetWindow._shopItemService.GetAllAsync(obj => obj.ShopId == item.Shop.Id);
+
+                        item.ShopItems = items.Data.ToList();
+                    }
+
+                    datagrid.ItemsSource = shopWithItem;
+                    datagrid.Items.Refresh();
+                }
+            }
+            catch
+            {
+
+            }
+        }
         private void item_btn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -148,8 +189,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
 
             }
         }
-
-        private async void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -167,6 +207,36 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
             catch
             {
 
+            }
+        }
+
+        private void datagrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+;
+            var result = datagrid.SelectedItem as ShopWithItem;
+
+            if (result != null)
+            {
+
+                object aa = new object();
+                RoutedEventArgs aaa = new RoutedEventArgs();
+                targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
+            }
+        }
+
+        private void datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            ;
+            var result = datagrid.SelectedItem as ShopWithItem;
+
+            if (result != null)
+            {
+
+                object aa = new object();
+                RoutedEventArgs aaa = new RoutedEventArgs();
+                targetWindow.dashboard.searchpart.cancel_Click(aa, aaa);
             }
         }
     }
