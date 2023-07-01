@@ -78,33 +78,7 @@
     </UserControl.Resources>
     
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="640*"/>
-        </Grid.RowDefinitions>
-
-        <Grid Background="#F0F5F3" Grid.Row="0">
-            <StackPanel  Margin="30 0 0 0" Orientation="Horizontal">
-                <Image Source="/Cashier/Assets/Icons/User.png" Width="40"/>
-                <TextBlock Text="Kassir:" Foreground="#647167" VerticalAlignment="Center"
-                           FontSize="23" Margin="15 0 0 0"/>
-
-                <TextBlock Text="Eshanov Faxriyor" FontWeight="SemiBold" Foreground="#647167" VerticalAlignment="Center"
-                           FontSize="23" Margin="5 0 0 0"/>
-
-                <Image Source="/Cashier/Assets/Icons/history_of_sale_image.png"
-                       Width="40" Margin="50 0 0 0"/>
-
-                <TextBlock Text="Ish vaqti:" Foreground="#647167" VerticalAlignment="Center"
-                           FontSize="23" Margin="5 0 0 0"/>
-
-                <TextBlock Text="09:00 - 23:00 (15 soat)" FontWeight="SemiBold" Foreground="#647167" VerticalAlignment="Center"
-                           FontSize="23" Margin="5 0 0 0"/>
-
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="1">
+        <Grid >
             <DataGrid x:Name="datagrid"
                       VerticalAlignment="Top"
                       AutoGenerateColumns="False"
@@ -130,8 +104,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Cashier/Assets/Icons/history_of_sale_image.png" Width="25"/>
-                                <TextBlock Text="Soat" Margin="10 0 0 0"/>
+                                <TextBlock Text="Chek raqam" Margin="0 0 0 0"/>
                             </StackPanel>
                         </DataGridTemplateColumn.Header>
 
@@ -139,12 +112,14 @@
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
                                     <Image Source="{Binding Image}" Width="25"/>
-                                    <TextBlock Text="{Binding Date}" VerticalAlignment="Center"  Margin="10 0 0 0"/>
+                                    <TextBlock Text="{Binding Shop.Id}" VerticalAlignment="Center" Margin="10 0 0 0"/>
                                 </StackPanel>
                             </DataTemplate>
 
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+
 
                     <DataGridTemplateColumn Width="2*" Header="Mahsulotlar">
                         <DataGridTemplateColumn.CellTemplate>
@@ -156,31 +131,39 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-
-
                     <DataGridTemplateColumn Width="*" Header="Chegirma">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center" Text="{Binding Discount}" Margin="0 0 0 0"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Shop.Discount}" Margin="0 0 0 0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
 
+                    <DataGridTemplateColumn Width="*" Header="Narxi">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Shop.TotalAmount}" Margin="0 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Narxi" Margin="0 0 0 0"/>
+                                <TextBlock Text="Vaqt" Margin="0 0 0 0"/>
                             </StackPanel>
                         </DataGridTemplateColumn.Header>
+
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center" Text="{Binding Cost}" Margin="0 0 0 0"/>
-                                    <Image VerticalAlignment="Center" Source="/Cashier/Assets/Icons/forward.png" Margin="20 0 0 0" Width="8"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Date}" Margin="0 0 0 0"/>
+                                    <Image VerticalAlignment="Center" Source="/Cashier/Assets/Icons/forward.png" Margin="10 0 0 0" Width="8"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

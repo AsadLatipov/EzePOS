@@ -242,7 +242,7 @@
                         </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn Width="*" Header="Vaqt">
+                        <DataGridTemplateColumn Width="*" Header="Narxi">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel HorizontalAlignment="Left"  Orientation="Horizontal">
@@ -255,7 +255,7 @@
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Narxi" Margin="0 0 0 0"/>
+                                    <TextBlock Text="Vaqt" Margin="0 0 0 0"/>
                                 </StackPanel>
                             </DataGridTemplateColumn.Header>
 

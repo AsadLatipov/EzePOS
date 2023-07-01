@@ -1,5 +1,9 @@
-﻿using EzePOS.Cashier.WindowUI.Windows;
+﻿using EzePOS.Business.Helper;
+using EzePOS.Business.Models;
+using EzePOS.Cashier.WindowUI.UserControls.HistoryPages;
+using EzePOS.Cashier.WindowUI.Windows;
 using EzePOS.Infrastructure.Entities;
+using EzePOS.Infrastructure.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +26,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
     /// </summary>
     public partial class ReturnPage : UserControl
     {
-        public List<Order> orders = new List<Order>();
 
         string card = "/Cashier/Assets/Icons/card.png";
         string mixed = "/Cashier/Assets/Icons/mixed.png";
@@ -30,53 +33,76 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
         public ReturnPage()
         {
             InitializeComponent();
-            orders.Add(new Order { Id = 1, Date = "09:08", Image = card, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 2, Date = "10:28", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 3, Date = "09:08", Image = mixed, Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 4, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            orders.Add(new Order { Id = 5, Date = "09:08", Products = "Coca-Cola, buhanka non", Discount = "10%", Cost = "100 000" });
-            datagrid.ItemsSource = orders;
-            datagrid.Items.Refresh();
         }
 
-        private async void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
+            var selected = datagrid.SelectedItem as ShopWithItem;
+            if(selected != null)
+            {
+                List<ReturnItem> items = new List<ReturnItem>();
+                foreach (var item in selected.ShopItems)
+                {
+                    items.Add(new ReturnItem { Item = item});
+                }
+                targetWindow.dashboard.returnEdit.Visibility = Visibility.Visible;
+                targetWindow.dashboard.returnEdit.items = items;
+                targetWindow.dashboard.returnEdit.shopdatagrid.ItemsSource = items;
+                targetWindow.dashboard.returnEdit.shopdatagrid.Items.Refresh();
+            }
+        }
 
-            //List<Product> products = new List<Product>();
-            //var temp = await targetWindow._productService.GetAllAsync();
-            //products = temp.Data.ToList();
+        public async void SetShops(DateTime from, DateTime to)
+        {
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
 
-            //List<ReturnItem> items = new List<ReturnItem>();
-            //foreach (var item in products)
-            //{
-            //    if (item.ProductId < 5)
-            //    {
-            //        items.Add(new ReturnItem { Product = item });
-            //    }
-            //}
+                BaseResponse<IEnumerable<Shop>> result = null;
 
-            //targetWindow.dashboard.returnEdit.Visibility = Visibility.Visible;
-            //targetWindow.dashboard.returnEdit.items = items;
-            //targetWindow.dashboard.returnEdit.shopdatagrid.ItemsSource = items;
-            //targetWindow.dashboard.returnEdit.shopdatagrid.Items.Refresh();
+                if (from == to)
+                {
+                    result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt.Date == from.Date);
+                }
+
+                else if (from.Date < to.Date)
+                {
+                    result = await targetWindow._shopService.GetAllAsync(obj => obj.CreatedAt.Date >= from.Date && obj.CreatedAt.Date <= to.Date);
+
+                }
+                else
+                {
+                    result = null;
+                }
+                if (result.Data != null)
+                {
+                    foreach (var item in result.Data)
+                    {
+                        shopWithItem.Add(new ShopWithItem { Shop = item });
+                    }
+
+                    foreach (var item in shopWithItem)
+                    {
+                        var items = await targetWindow._shopItemService.GetAllAsync(obj => obj.ShopId == item.Shop.Id);
+
+                        item.ShopItems = items.Data.ToList();
+                    }
+                    datagrid.ItemsSource = shopWithItem;
+                    datagrid.Items.Refresh();
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
-
-    public class Order
-    {
-        public int Id { get; set; }
-        public string Date { get; set; }
-        public string Products { get; set; }
-        public string Cost { get; set; }
-        public string Discount { get; set; }
-        public string Image { get; set; } = "/Cashier/Assets/Icons/coin.png";
-    }
-
     public class ReturnItem
     {
-        public Product Product { get; set; }
+        public ShopItem Item { get; set; }
         public Visibility Visibility { get; set; } = Visibility.Hidden;
         public Thickness Margin { get; set; } = new Thickness(0, 0, 10, 0);
         public bool DeleteStatus { get; set; } = false;

@@ -127,8 +127,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     case 1.3:
                         targetWindow.dashboard.page_name.Text = "Qaytarish";
                         targetWindow.dashboard.returnProduct.Visibility = Visibility.Visible;
+                        targetWindow.dashboard.returnProduct.SetShops(DateTime.Now.Date, DateTime.Now.AddDays(1).Date);
                         CurrentPage = 1.3;
-                        ChangeNavBar(3);
+                        ChangeNavBar(2);
                         break;
 
 
