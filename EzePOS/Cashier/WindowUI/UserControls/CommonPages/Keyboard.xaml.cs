@@ -334,6 +334,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                     targetWindow.dashboard.addCategory.category_name.CaretIndex = targetWindow.dashboard.addCategory.category_name.Text.Length;
                 }
+
+
+                //ReturnProduct
+                else if (targetWindow.dashboard.returnEdit.Visibility == Visibility.Visible)
+                {
+                    targetWindow.dashboard.returnEdit.WriteCount(button.Content.ToString());
+                }
+
                 //NewPassword
                 //else if (targetWindow.dashboard.newPassword.Visibility == Visibility.Visible)
                 //{
@@ -342,27 +350,27 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                 //        targetWindow.dashboard.newPassword.textBoxNew.Text += button.Content.ToString();
                 //        targetWindow.dashboard.newPassword.textBoxNew.Focus();
 
-                //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
-                //    }
-                //    else if (targetWindow.dashboard.newPassword.Again)
-                //    {
-                //        targetWindow.dashboard.newPassword.textBoxAgain.Text += button.Content.ToString();
-                //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
+                    //        targetWindow.dashboard.newPassword.textBoxNew.CaretIndex = targetWindow.dashboard.newPassword.textBoxNew.Text.Length;
+                    //    }
+                    //    else if (targetWindow.dashboard.newPassword.Again)
+                    //    {
+                    //        targetWindow.dashboard.newPassword.textBoxAgain.Text += button.Content.ToString();
+                    //        targetWindow.dashboard.newPassword.textBoxAgain.Focus();
 
-                //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
-                //    }
+                    //        targetWindow.dashboard.newPassword.textBoxAgain.CaretIndex = targetWindow.dashboard.newPassword.textBoxAgain.Text.Length;
+                    //    }
 
-                //}
-                ////OldPassword
-                //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
-                //{
-                //    targetWindow.dashboard.oldPassword.textBox.Text += button.Content.ToString();
-                //    targetWindow.dashboard.oldPassword.textBox.Focus();
+                    //}
+                    ////OldPassword
+                    //else if (targetWindow.dashboard.oldPassword.Visibility == Visibility.Visible)
+                    //{
+                    //    targetWindow.dashboard.oldPassword.textBox.Text += button.Content.ToString();
+                    //    targetWindow.dashboard.oldPassword.textBox.Focus();
 
-                //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
-                //}
+                    //    targetWindow.dashboard.oldPassword.textBox.CaretIndex = targetWindow.dashboard.oldPassword.textBox.Text.Length;
+                    //}
 
-                //EditProductAndExchange
+                    //EditProductAndExchange
                 else if (targetWindow.dashboard.product_edit_exchange.Visibility == Visibility.Visible)
                 {
                     if (targetWindow.dashboard.product_edit_exchange.productNameGorFocus)
@@ -406,6 +414,8 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                         targetWindow.dashboard.product_edit_exchange.product_qauntity.CaretIndex = targetWindow.dashboard.product_edit_exchange.product_qauntity.Text.Length;
                     }
 
+
+
                     else if (targetWindow.dashboard.product_edit_exchange.productBarcodeGorFocus)
                     {
                         targetWindow.dashboard.product_edit_exchange.barcode_txt.Text += button.Content.ToString();
@@ -434,6 +444,16 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
 
                     targetWindow.dashboard.searchpart.search_txt.Focus();
                     targetWindow.dashboard.searchpart.search_txt.CaretIndex = targetWindow.dashboard.searchpart.search_txt.Text.Length;
+                }
+
+                //ReturnEdit
+                if (targetWindow.dashboard.returnEdit.Visibility == Visibility.Visible)
+                {
+                    if (targetWindow.dashboard.returnEdit.return_count.Text != "" && targetWindow.dashboard.returnEdit.return_count.Text != null)
+                        targetWindow.dashboard.returnEdit.return_count.Text = targetWindow.dashboard.returnEdit.return_count.Text.Remove(targetWindow.dashboard.returnEdit.return_count.Text.Length - 1);
+
+                    targetWindow.dashboard.returnEdit.return_count.Focus();
+                    targetWindow.dashboard.returnEdit.return_count.CaretIndex = targetWindow.dashboard.returnEdit.return_count.Text.Length;
                 }
 
                 //NewPassword

@@ -35,25 +35,70 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
             InitializeComponent();
         }
 
+
+
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
-
-            var selected = datagrid.SelectedItem as ShopWithItem;
-            if(selected != null)
+            try
             {
-                List<ReturnItem> items = new List<ReturnItem>();
-                foreach (var item in selected.ShopItems)
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+                var selected = datagrid.SelectedItem as ShopWithItem;
+                if (selected != null)
                 {
-                    items.Add(new ReturnItem { Item = item});
+                    List<ReturnItem> items = new List<ReturnItem>();
+                    foreach (var item in selected.ShopItems)
+                    {
+                        items.Add(new ReturnItem { Item = item });
+                    }
+                    targetWindow.dashboard.returnEdit.Visibility = Visibility.Visible;
+                    targetWindow.dashboard.returnEdit.items = items;
+                    targetWindow.dashboard.returnEdit.shopdatagrid.ItemsSource = items;
+                    targetWindow.dashboard.returnEdit.shopdatagrid.Items.Refresh();
+                    targetWindow.dashboard.returnEdit.SetItems(selected);
+
                 }
-                targetWindow.dashboard.returnEdit.Visibility = Visibility.Visible;
-                targetWindow.dashboard.returnEdit.items = items;
-                targetWindow.dashboard.returnEdit.shopdatagrid.ItemsSource = items;
-                targetWindow.dashboard.returnEdit.shopdatagrid.Items.Refresh();
+            }
+            catch
+            {
+
+            }
+
+        }
+        public async void SetShopsWithSearch(int id)
+        {
+            try
+            {
+
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+                List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
+
+
+                var result = await targetWindow._shopService.GetAllAsync(obj => obj.Id == id);
+
+                if (result.Data != null)
+                {
+                    foreach (var item in result.Data)
+                    {
+                        shopWithItem.Add(new ShopWithItem { Shop = item });
+                    }
+
+                    foreach (var item in shopWithItem)
+                    {
+                        var items = await targetWindow._shopItemService.GetAllAsync(obj => obj.ShopId == item.Shop.Id);
+
+                        item.ShopItems = items.Data.ToList();
+                    }
+
+                    datagrid.ItemsSource = shopWithItem;
+                    datagrid.Items.Refresh();
+                }
+            }
+            catch
+            {
+
             }
         }
-
         public async void SetShops(DateTime from, DateTime to)
         {
             try

@@ -100,7 +100,6 @@
                         FontWeight="Medium"
                         VerticalGridLinesBrush="Transparent">
                 <DataGrid.Columns>
-
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.Header>
                             <StackPanel Orientation="Horizontal">

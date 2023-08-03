@@ -69,6 +69,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.CommonPages
                     targetWindow.dashboard.history.SetShops(from_date.SelectedDate.Value, to_date.SelectedDate.Value);
                     targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
                 }
+                else if (targetWindow.dashboard.returnProduct.Visibility == Visibility.Visible)
+                {
+                    targetWindow.dashboard.returnProduct.SetShops(from_date.SelectedDate.Value, to_date.SelectedDate.Value);
+                    targetWindow.dashboard.filter.Visibility = Visibility.Hidden;
+                }
 
             }
             catch

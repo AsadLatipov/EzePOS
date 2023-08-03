@@ -131,12 +131,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         {
             try
             {
-                double total = 0;
-                double card = 0;
-                double cash = 0;
-                double mixed = 0;
-                double debt = 0;
-                double incash = 0;
 
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                 List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
