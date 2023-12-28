@@ -138,6 +138,7 @@
         <commonpages:Keyboard Grid.Row="0" VerticalAlignment="Bottom" Visibility="Hidden" Grid.RowSpan="2" x:Name="keyboard"></commonpages:Keyboard>
         <commonpages:PrintCheck Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="printCheck"></commonpages:PrintCheck>
         <commonpages:WarningStack  Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="warningStack"></commonpages:WarningStack>
+        <commonpages:InfoPopup  Grid.Row="0" Visibility="Hidden" Grid.RowSpan="2" x:Name="infoPopup"></commonpages:InfoPopup>
 
 
 

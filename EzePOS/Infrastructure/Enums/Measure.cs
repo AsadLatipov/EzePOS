@@ -9,8 +9,8 @@ namespace EzePOS.Infrastructure.Enums
     
     public enum Measure
     {
-        dona = 0,
-        kilogramm,
+        item = 0,
+        kg,
         litr
     }
 }

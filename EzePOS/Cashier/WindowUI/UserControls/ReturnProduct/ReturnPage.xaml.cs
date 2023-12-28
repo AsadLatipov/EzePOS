@@ -30,12 +30,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
         string card = "/Cashier/Assets/Icons/card.png";
         string mixed = "/Cashier/Assets/Icons/mixed.png";
         string cash = "/Cashier/Assets/Icons/coin.png";
+
+        public DateTime _from;
+        public DateTime _to;
+
         public ReturnPage()
         {
             InitializeComponent();
         }
-
-
 
         private void datagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -124,6 +126,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
                 }
                 if (result.Data != null)
                 {
+                    _from = from;
+                    _to = to;
+
                     foreach (var item in result.Data)
                     {
                         shopWithItem.Add(new ShopWithItem { Shop = item });

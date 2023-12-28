@@ -48,9 +48,6 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
             targetWindow.dashboard.returnEdit.Visibility = Visibility.Hidden;
         }
 
-
-
-
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //try
@@ -118,18 +115,25 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
 
         private void shopdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var temp = shopdatagrid.SelectedItem as ReturnItem;
-
-            if(temp.Item != null)
+            try
             {
-                product_name.Text = temp.Item.ProductName;
-                product_cost.Text = temp.Item.ProductSellingPrice.Amount();
-                product_count.Text = temp.Item.Count.ToString();
-                return_count.Text = temp.Item.Count.ToString();
-                selectedItem = temp;
+                var temp = shopdatagrid.SelectedItem as ReturnItem;
+
+                if (temp.Item != null)
+                {
+                    product_name.Text = temp.Item.ProductName;
+                    product_cost.Text = temp.Item.ProductSellingPrice.Amount();
+                    product_count.Text = temp.Item.Count.ToString();
+                    return_count.Text = temp.Item.Count.ToString();
+                    selectedItem = temp;
+
+                }
+                edit_window.Visibility = Visibility.Visible;
+            }
+            catch
+            {
 
             }
-            edit_window.Visibility = Visibility.Visible;
         }
 
         private void return_count_GotFocus(object sender, RoutedEventArgs e)
@@ -168,11 +172,36 @@ namespace EzePOS.Cashier.WindowUI.UserControls.ReturnProduct
             }
         }
 
-        private void submit_btn_Click(object sender, RoutedEventArgs e)
+        private async void submit_btn_Click(object sender, RoutedEventArgs e)
         {
             var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
 
+
+            if (return_count.Text != "" && return_count.Text != null)
+            {
+                double returned = double.Parse(return_count.Text);
+                if(returned <= selectedItem.Item.Count && returned > 0)
+                {
+                    selectedItem.Item.Count -= returned;
+                    var result = await targetWindow._shopItemService.UpdateAsync(selectedItem.Item, targetWindow.dashboard.user);
+
+                    if(result.Data != null)
+                    {
+                        targetWindow.dashboard.returnProduct.SetShops(targetWindow.dashboard.returnProduct._from, targetWindow.dashboard.returnProduct._to);
+                    }
+                    else
+                    {
+                        selectedItem.Item.Count += returned;
+                    }
+
+
+                }
+            }
             targetWindow.dashboard.keyboard.Visibility = Visibility.Hidden;
+            edit_window.Visibility = Visibility.Hidden;
+            shopdatagrid.ItemsSource = items;
+            shopdatagrid.Items.Refresh();
+
         }
     }
 

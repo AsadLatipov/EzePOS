@@ -206,7 +206,6 @@
                     <Trigger Property="IsSelected" Value="True">
                         <Setter Property="Background" Value="#A6A6A6"/>
                         <Setter Property="BorderThickness" Value="0"/>
-
                     </Trigger>
 
                 </Style.Triggers>

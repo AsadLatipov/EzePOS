@@ -106,6 +106,7 @@
                     CanUserAddRows="False"
                     FontSize="15"
                     IsReadOnly="True"
+                    SelectedCellsChanged="dataGrid_SelectedCellsChanged"
                     FontWeight="Medium"
                     VerticalGridLinesBrush="Transparent">
                 <DataGrid.Columns>

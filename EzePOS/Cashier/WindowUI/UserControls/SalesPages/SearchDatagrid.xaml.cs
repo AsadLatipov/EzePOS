@@ -50,5 +50,29 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
 
             }
         }
+
+        private void dataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            try
+            {
+                var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
+                var selected = dataGrid.SelectedItem as Product;
+                if (selected != null)
+                {
+                    targetWindow.dashboard.salesPanel.AddProduct(selected.Id);
+                    targetWindow.dashboard.searchpart.cancel_Click(sender, new RoutedEventArgs());
+                }
+                else
+                {
+
+                }
+            }
+            catch
+            {
+
+            }
+        }
+       
     }
 }

@@ -429,6 +429,7 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 OnClickButton = DateTime.Now;
 
                 ShopModel shop = shopdatagrid.SelectedItem as ShopModel;
+                if(shop.Product.Measure != Infrastructure.Enums.Measure.kg)
                 AddProduct(shop.Product.Id);
             }
             catch
@@ -448,16 +449,19 @@ namespace EzePOS.Cashier.WindowUI.UserControls.SalesPages
                 OnClickButton = DateTime.Now;
 
                 ShopModel shop = shopdatagrid.SelectedItem as ShopModel;
+                if(shop.Product.Measure != Infrastructure.Enums.Measure.kg)
+                {
+                    if (shop.Count == 1 || shop.Count < 1)
+                    {
+                        shops.Remove(shop);
+                    }
+                    else
+                    {
+                        shop.Count -= 1;
+                    }
+                    Refresh();
+                }
 
-                if (shop.Count == 1 || shop.Count < 1)
-                {
-                    shops.Remove(shop);
-                }
-                else
-                {
-                    shop.Count -= 1;
-                }
-                Refresh();
 
             }
             catch

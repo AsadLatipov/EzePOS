@@ -49,11 +49,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
             datapicker.SelectedDate = product.ExprirationDate;
             barcode_txt.Text = product.Barcode;
             product_qauntity.Text = product.Quantity.ToString();
-            if (product.Measure == Infrastructure.Enums.Measure.dona)
+            if (product.Measure == Infrastructure.Enums.Measure.item)
             {
                 measure_combobox.SelectedIndex = 0;
             }
-            else if (product.Measure == Infrastructure.Enums.Measure.kilogramm)
+            else if (product.Measure == Infrastructure.Enums.Measure.kg)
             {
                 measure_combobox.SelectedIndex = 1;
             }
@@ -143,11 +143,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Products
 
                                     if (measure_combobox.SelectedIndex == 0)
                                     {
-                                        product.Measure = Infrastructure.Enums.Measure.dona;
+                                        product.Measure = Infrastructure.Enums.Measure.item;
                                     }
                                     else if (measure_combobox.SelectedIndex == 1)
                                     {
-                                        product.Measure = Infrastructure.Enums.Measure.kilogramm;
+                                        product.Measure = Infrastructure.Enums.Measure.kg;
                                     }
                                     else if (measure_combobox.SelectedIndex == 2)
                                     {

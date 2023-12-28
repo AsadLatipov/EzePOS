@@ -6,6 +6,7 @@ using EzePOS.Infrastructure.Entities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
     {
         List<Item> items = new List<Item>();
         //public List<Order> orders = new List<Order>();
+        DateTime _from;
+        DateTime _to;
+        BaseResponse<IEnumerable<Shop>> result = null;
+
+
 
         string card = "/Cashier/Assets/Icons/card_card.png";
         string mixed = "/Cashier/Assets/Icons/mixed.png";
@@ -34,14 +40,14 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
         public History()
         {
             InitializeComponent();
-            items.Add(new Item { Id = 1, Name = "Umumiy savdo", Amount = "100 000", Image = "/Cashier/Assets/Icons/total_shop.png", Visibility = Visibility.Visible });
-            items.Add(new Item { Id = 2, Name = "Kartaga", Amount = "100 000", Image = "/Cashier/Assets/Icons/card_card.png" });
-            items.Add(new Item { Id = 3, Name = "Naqd", Amount = "100 000", Image = "/Cashier/Assets/Icons/cash.png" });
-            items.Add(new Item { Id = 4, Name = "Aralash", Amount = "100 000", Image = "/Cashier/Assets/Icons/mixed.png" });
-            items.Add(new Item { Id = 5, Name = "Kassaga pul qo'yish/olish", Amount = "+100 000, -100 000", Image = "/Cashier/Assets/Icons/put_money_image.png" });
-            items.Add(new Item { Id = 6, Name = "Nasiya", Amount = "100 000", Image = "/Cashier/Assets/Icons/exchange_image.png" });
-            items.Add(new Item { Id = 7, Name = "Qaytarildi", Amount = "100 000", Image = "/Cashier/Assets/Icons/history_of_sale_image.png" });
-            items.Add(new Item { Id = 8, Name = "Nasiya qaytarildi", Amount = "100 000", Image = "/Cashier/Assets/Icons/exchange_image.png" });
+            items.Add(new Item { Id = 1, Name = "Umumiy savdo", Amount = "0", Image = "/Cashier/Assets/Icons/total_shop.png", Visibility = Visibility.Visible });
+            items.Add(new Item { Id = 2, Name = "Kartaga", Amount = "0", Image = "/Cashier/Assets/Icons/card_card.png" });
+            items.Add(new Item { Id = 3, Name = "Naqd", Amount = "0", Image = "/Cashier/Assets/Icons/cash.png" });
+            items.Add(new Item { Id = 4, Name = "Aralash", Amount = "0", Image = "/Cashier/Assets/Icons/mixed.png" });
+            items.Add(new Item { Id = 5, Name = "Kassaga pul qo'yish/olish", Amount = "+0, -0", Image = "/Cashier/Assets/Icons/put_money_image.png" });
+            items.Add(new Item { Id = 6, Name = "Nasiya", Amount = "0", Image = "/Cashier/Assets/Icons/exchange_image.png" });
+            items.Add(new Item { Id = 7, Name = "Qaytarildi", Amount = "0", Image = "/Cashier/Assets/Icons/history_of_sale_image.png" });
+            items.Add(new Item { Id = 8, Name = "Nasiya qaytarildi", Amount = "0", Image = "/Cashier/Assets/Icons/exchange_image.png" });
 
             itemsControl.ItemsSource = items;
             itemsControl.Items.Refresh();
@@ -55,8 +61,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
             //datagrid.Items.Refresh();
         }
 
+
         public async void SetShops(DateTime from, DateTime to)
         {
+            _from = from;
+            _to = to;
             try
             {
                 double total = 0;
@@ -65,11 +74,11 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
                 double mixed = 0;
                 double debt = 0;
                 double incash = 0;
+                double discount = 0;
 
                 var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
                 List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
 
-                BaseResponse<IEnumerable<Shop>> result = null;
 
                 if (from == to)
                 {
@@ -94,10 +103,18 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
                         card += item.Card;
                         cash += item.Cash;
                         debt += item.Debt;
+                        discount += item.Discount;
                     }
-
-                    mixed = cash + card;
-                    incash = total - debt;
+                    if(cash > 0 && card > 0)
+                    {
+                        mixed = cash + card;
+                    }
+                    else
+                    {
+                        mixed = 0;
+                    }
+                    incash = total - debt - discount;
+                    total = total - discount;
 
                     items.FirstOrDefault(obj => obj.Id == 1).Amount = total.Amount(); // Umumiy savdo
                     items.FirstOrDefault(obj => obj.Id == 2).Amount = card.Amount(); // Karta
@@ -161,8 +178,10 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
 
             }
         }
-        private void item_btn_Click(object sender, RoutedEventArgs e)
+        private async void item_btn_Click(object sender, RoutedEventArgs e)
         {
+            var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Layout) as Layout;
+
             try
             {
                 foreach (var item in items)
@@ -177,6 +196,47 @@ namespace EzePOS.Cashier.WindowUI.UserControls.HistoryPages
 
                 itemsControl.ItemsSource = items;
                 itemsControl.Items.Refresh();
+
+                List<Shop> shops = new List<Shop>();
+
+                if(buttonId == 1)
+                {
+                    shops = result.Data.ToList();
+                }
+                if (buttonId == 2)
+                {
+                    shops = result.Data.Where(obj => obj.Card > 0 && obj.Cash == 0).ToList();  
+                }
+                else if (buttonId == 3)
+                {
+                    shops = result.Data.Where(obj => obj.Cash > 0 && obj.Card == 0).ToList();
+                }
+                else if(buttonId == 4)
+                {
+                    shops = result.Data.Where(obj => obj.Cash > 0 && obj.Card > 0).ToList();
+                }
+                else if (buttonId == 5)
+                {
+                    shops = result.Data.Where(obj => obj.Debt > 0).ToList();
+                }
+
+
+                List<ShopWithItem> shopWithItem = new List<ShopWithItem>();
+
+                foreach (var item in shops)
+                {
+                    shopWithItem.Add(new ShopWithItem { Shop = item });
+                }
+
+                foreach (var item in shopWithItem)
+                {
+                    var items = await targetWindow._shopItemService.GetAllAsync(obj => obj.ShopId == item.Shop.Id);
+
+                    item.ShopItems = items.Data.ToList();
+                }
+                
+                datagrid.ItemsSource = shopWithItem;
+                datagrid.Items.Refresh();
             }
             catch
             {

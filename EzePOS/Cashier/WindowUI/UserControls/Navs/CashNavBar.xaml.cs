@@ -85,10 +85,9 @@ namespace EzePOS.Cashier.WindowUI.UserControls.Navs
             }
             if (l > 5)
             {
+                var targetWindow = Application.Current.Windows.Cast<Layout>().FirstOrDefault(window => window is Layout) as Layout;
 
-                //MessageBox.Show((string)FindResource("can_not_add"));
-                MessageBox.Show("can_not_add");
-                //targetWindow.dashboard.barcodeReader_txt.Focus();
+                targetWindow.dashboard.infoPopup.Visibility = Visibility.Visible;
             }
         }
 

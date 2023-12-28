@@ -300,7 +300,7 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Grid x:Name="edit_window" Visibility="Visible" Opacity="1" Background="Transparent"  Grid.Row="0" Grid.RowSpan="2">
+                <Grid x:Name="edit_window" Visibility="Hidden" Opacity="1" Background="Transparent"  Grid.Row="0" Grid.RowSpan="2">
                     <Border CornerRadius="10" Margin="110 0 110 80" Background="White" BorderBrush="#D2D7D5" BorderThickness="1">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="30" Opacity="1"/>
